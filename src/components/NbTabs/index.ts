@@ -1,2 +1,5 @@
 export { default as NbTabs } from './NbTabs.vue'
-export type { NbTabDefinition } from './NbTabs.vue'
+export { default as NbTabsContent } from './NbTabsContent.vue'
+export { default as NbTabsList } from './NbTabsList.vue'
+export { default as NbTabsTrigger } from './NbTabsTrigger.vue'
+export type { NbTabsOrientation } from './tabsContext'

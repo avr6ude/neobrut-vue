@@ -1,75 +1,44 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, provide, ref } from 'vue'
 import { useStableId } from '../../lib/ids'
+import { nbTabsKey, type NbTabsOrientation } from './tabsContext'
 
-export interface NbTabDefinition {
-  value: string
-  label: string
-  disabled?: boolean
-}
-
-const props = defineProps<{
-  tabs: NbTabDefinition[]
+const props = withDefaults(defineProps<{
   modelValue?: string
-}>()
+  defaultValue?: string
+  orientation?: NbTabsOrientation
+}>(), {
+  defaultValue: '',
+  orientation: 'horizontal',
+})
 
 const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
 const tabsId = useStableId('tabs')
-const activeValue = computed(() => props.modelValue ?? props.tabs[0]?.value ?? '')
+const internalValue = ref(props.defaultValue)
+const activeValue = computed(() => props.modelValue ?? internalValue.value)
+const orientation = computed(() => props.orientation)
+const idPart = (value: string) => encodeURIComponent(value)
 
 function select(value: string) {
+  if (props.modelValue === undefined) internalValue.value = value
   emit('update:modelValue', value)
 }
 
-function onKeydown(index: number, event: KeyboardEvent) {
-  if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
-  event.preventDefault()
-
-  const enabled = props.tabs.map((tab, tabIndex) => ({ tab, tabIndex })).filter(({ tab }) => !tab.disabled)
-  if (!enabled.length) return
-  const current = enabled.findIndex(({ tab }) => tab.value === props.tabs[index]?.value)
-  const nextIndex = event.key === 'Home'
-    ? 0
-    : event.key === 'End'
-      ? enabled.length - 1
-      : (current + (event.key === 'ArrowRight' ? 1 : -1) + enabled.length) % enabled.length
-  const next = enabled[nextIndex]
-
-  select(next.tab.value)
-  void Promise.resolve().then(() => document.querySelector<HTMLElement>(`[data-nb-tab="${next.tab.value}"]`)?.focus())
-}
+provide(nbTabsKey, {
+  activeValue,
+  orientation,
+  select,
+  triggerId: (value) => `${tabsId}-tab-${idPart(value)}`,
+  panelId: (value) => `${tabsId}-panel-${idPart(value)}`,
+})
 </script>
 
 <template>
-  <div class="nb-root nb-tabs">
-    <div class="nb-tabs__list" role="tablist" aria-orientation="horizontal">
-      <button
-        v-for="(tab, index) in tabs"
-        :key="tab.value"
-        class="nb-tabs__tab"
-        :class="{ 'is-active': tab.value === activeValue }"
-        :id="`${tabsId}-tab-${tab.value}`"
-        :data-nb-tab="tab.value"
-        type="button"
-        role="tab"
-        :aria-selected="tab.value === activeValue"
-        :aria-controls="`${tabsId}-panel-${tab.value}`"
-        :tabindex="tab.value === activeValue ? 0 : -1"
-        :disabled="tab.disabled"
-        @click="select(tab.value)"
-        @keydown="onKeydown(index, $event)"
-      >
-        {{ tab.label }}
-      </button>
-    </div>
-    <div
-      class="nb-tabs__panel"
-      role="tabpanel"
-      :id="`${tabsId}-panel-${activeValue}`"
-      :aria-labelledby="`${tabsId}-tab-${activeValue}`"
-      tabindex="0"
-    >
-      <slot :name="`panel-${activeValue}`" :value="activeValue" />
-    </div>
+  <div
+    class="nb-root nb-tabs"
+    :class="`nb-tabs--${orientation}`"
+    :data-orientation="orientation"
+  >
+    <slot />
   </div>
 </template>

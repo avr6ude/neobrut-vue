@@ -47,11 +47,48 @@
 .nb-dialog__body { padding: 1rem; }
 .nb-dialog__footer { border-top: var(--nb-border-width) solid var(--nb-color-ink); justify-content: flex-end; }
 
-.nb-tabs__list { display: flex; gap: 0.5rem; border-bottom: var(--nb-border-width) solid var(--nb-color-ink); }
-.nb-tabs__tab { border: var(--nb-border-width) solid var(--nb-color-ink); border-bottom: 0; border-radius: var(--nb-radius-sm) var(--nb-radius-sm) 0 0; background: var(--nb-color-muted); color: var(--nb-color-ink); cursor: pointer; padding: 0.7rem 1rem; font-family: var(--nb-font-display); font-weight: 800; }
-.nb-tabs__tab.is-active { background: var(--nb-color-primary); transform: translateY(3px); }
-.nb-tabs__tab:disabled { cursor: not-allowed; opacity: 0.5; }
-.nb-tabs__panel { border: var(--nb-border-width) solid var(--nb-color-ink); border-top: 0; padding: 1rem; }
+.nb-tabs { display: grid; gap: 0.65rem; }
+.nb-tabs__list {
+  display: flex;
+  gap: 0.3rem;
+  border: var(--nb-border-width) solid var(--nb-color-ink);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-color-muted);
+  padding: 0.3rem;
+}
+.nb-tabs__trigger {
+  flex: 1 1 0;
+  min-height: 2.5rem;
+  border: 2px solid transparent;
+  border-radius: calc(var(--nb-radius-sm) - 2px);
+  background: transparent;
+  color: var(--nb-color-ink);
+  cursor: pointer;
+  padding: 0.55rem 0.9rem;
+  font-family: var(--nb-font-display);
+  font-weight: 800;
+}
+.nb-tabs__trigger.is-active {
+  border-color: var(--nb-color-ink);
+  box-shadow: 2px 2px 0 var(--nb-shadow-color);
+  background: var(--nb-color-primary);
+  transform: translate(-1px, -1px);
+}
+.nb-tabs__trigger:disabled { cursor: not-allowed; opacity: 0.45; }
+.nb-tabs__content {
+  border: var(--nb-border-width) solid var(--nb-color-ink);
+  border-radius: var(--nb-radius-sm);
+  box-shadow: 5px 5px 0 var(--nb-shadow-color);
+  background: var(--nb-color-paper);
+  padding: 1rem;
+}
+.nb-tabs--vertical { grid-template-columns: minmax(9rem, 0.35fr) minmax(0, 1fr); align-items: start; }
+.nb-tabs--vertical .nb-tabs__list { flex-direction: column; }
+.nb-tabs--vertical .nb-tabs__trigger { flex-basis: auto; text-align: left; }
+
+@media (max-width: 42rem) {
+  .nb-tabs--vertical { grid-template-columns: 1fr; }
+}
 
 .nb-tooltip { position: relative; display: inline-flex; }
 .nb-tooltip__trigger { display: inline-flex; cursor: help; }

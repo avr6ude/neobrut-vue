@@ -9,12 +9,12 @@ import { NbAlert } from './components/NbAlert'
 import { NbDialog } from './components/NbDialog'
 import { NbInput } from './components/NbInput'
 import { NbSelect } from './components/NbSelect'
-import { NbTabs } from './components/NbTabs'
+import { NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger } from './components/NbTabs'
 import { NbTextarea } from './components/NbTextarea'
 import { NbTooltip } from './components/NbTooltip'
 
-export { NbAlert, NbBadge, NbButton, NbCard, NbCheckbox, NbDialog, NbInput, NbSelect, NbTabs, NbTextarea, NbTooltip }
-export type { NbTabDefinition } from './components/NbTabs'
+export { NbAlert, NbBadge, NbButton, NbCard, NbCheckbox, NbDialog, NbInput, NbSelect, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTextarea, NbTooltip }
+export type { NbTabsOrientation } from './components/NbTabs'
 
 export const NeoBrutalVue = createNeoBrutalPlugin({
   NbAlert,
@@ -26,6 +26,9 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbInput,
   NbSelect,
   NbTabs,
+  NbTabsContent,
+  NbTabsList,
+  NbTabsTrigger,
   NbTextarea,
   NbTooltip,
 })

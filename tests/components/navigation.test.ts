@@ -1,28 +1,96 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import { NbTabs } from '../../src'
+import {
+  NbTabs,
+  NbTabsContent,
+  NbTabsList,
+  NbTabsTrigger,
+} from '../../src'
 
-describe('NbTabs', () => {
-  const tabs = [
-    { value: 'one', label: 'One' },
-    { value: 'two', label: 'Two' },
-  ]
+const components = { NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger }
 
-  it('renders the active tab relationship', () => {
-    const wrapper = mount(NbTabs, {
-      props: { tabs, modelValue: 'one' },
-      slots: { 'panel-one': 'First panel' },
+describe('compound tabs', () => {
+  it('connects the active trigger and panel', () => {
+    const wrapper = mount({
+      components,
+      template: `
+        <NbTabs default-value="one">
+          <NbTabsList>
+            <NbTabsTrigger value="one">One</NbTabsTrigger>
+            <NbTabsTrigger value="two">Two</NbTabsTrigger>
+          </NbTabsList>
+          <NbTabsContent value="one">First panel</NbTabsContent>
+          <NbTabsContent value="two">Second panel</NbTabsContent>
+        </NbTabs>
+      `,
     })
 
-    expect(wrapper.get('[role="tab"]').attributes('aria-selected')).toBe('true')
-    expect(wrapper.get('[role="tabpanel"]').text()).toBe('First panel')
+    const activeTab = wrapper.get('[role="tab"][aria-selected="true"]')
+    const activePanel = wrapper.get('[role="tabpanel"]:not([hidden])')
+
+    expect(activeTab.text()).toBe('One')
+    expect(activeTab.attributes('aria-controls')).toBe(activePanel.attributes('id'))
+    expect(activePanel.attributes('aria-labelledby')).toBe(activeTab.attributes('id'))
+    expect(activePanel.text()).toBe('First panel')
   })
 
-  it('moves tabs with ArrowRight', async () => {
-    const wrapper = mount(NbTabs, { props: { tabs, modelValue: 'one' } })
+  it('moves and activates with horizontal arrow keys while skipping disabled tabs', async () => {
+    const wrapper = mount({
+      components,
+      template: `
+        <NbTabs default-value="one">
+          <NbTabsList>
+            <NbTabsTrigger value="one">One</NbTabsTrigger>
+            <NbTabsTrigger value="two" disabled>Two</NbTabsTrigger>
+            <NbTabsTrigger value="three">Three</NbTabsTrigger>
+          </NbTabsList>
+          <NbTabsContent value="one">First</NbTabsContent>
+          <NbTabsContent value="three">Third</NbTabsContent>
+        </NbTabs>
+      `,
+    }, { attachTo: document.body })
 
     await wrapper.get('[role="tab"]').trigger('keydown', { key: 'ArrowRight' })
 
-    expect(wrapper.emitted('update:modelValue')).toEqual([['two']])
+    expect(wrapper.get('[role="tab"][aria-selected="true"]').text()).toBe('Three')
+    expect(document.activeElement?.textContent).toBe('Three')
+    wrapper.unmount()
+  })
+
+  it('uses vertical arrow keys for vertical tabs', async () => {
+    const wrapper = mount({
+      components,
+      template: `
+        <NbTabs default-value="one" orientation="vertical">
+          <NbTabsList>
+            <NbTabsTrigger value="one">One</NbTabsTrigger>
+            <NbTabsTrigger value="two">Two</NbTabsTrigger>
+          </NbTabsList>
+          <NbTabsContent value="one">First</NbTabsContent>
+          <NbTabsContent value="two">Second</NbTabsContent>
+        </NbTabs>
+      `,
+    })
+
+    await wrapper.get('[role="tab"]').trigger('keydown', { key: 'ArrowDown' })
+
+    expect(wrapper.get('[role="tab"][aria-selected="true"]').text()).toBe('Two')
+    expect(wrapper.get('[role="tablist"]').attributes('aria-orientation')).toBe('vertical')
+  })
+
+  it('emits updates when controlled', async () => {
+    const wrapper = mount({
+      components,
+      data: () => ({ value: 'one' }),
+      template: `
+        <NbTabs :model-value="value" @update:model-value="$emit('change', $event)">
+          <NbTabsList><NbTabsTrigger value="two">Two</NbTabsTrigger></NbTabsList>
+        </NbTabs>
+      `,
+    })
+
+    await wrapper.get('[role="tab"]').trigger('click')
+
+    expect(wrapper.emitted('change')).toEqual([['two']])
   })
 })
