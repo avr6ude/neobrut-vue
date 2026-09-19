@@ -158,6 +158,7 @@
 .nb-radio-group__legend, .nb-fieldset__legend {
   padding: 0;
   font-family: var(--nb-font-display);
+  border-radius: var(--nb-radius-sm);
   font-size: 1rem;
   font-weight: 900;
 }
@@ -225,7 +226,12 @@
   background: var(--nb-color-paper);
   padding: 1rem;
 }
-.nb-fieldset__legend { border: 2px solid var(--nb-color-ink); background: var(--nb-color-secondary); padding: 0.25rem 0.55rem; }
+.nb-fieldset__legend {
+    border: var(--nb-border-width) solid var(--nb-color-ink);
+    background: var(--nb-color-secondary);
+    padding: 0.25rem 0.55rem;
+    box-shadow: 2px 2px 0 var(--nb-shadow-color);
+}
 .nb-fieldset__description { margin: 0 0 1rem; font-size: 0.9rem; }
 .nb-fieldset__content { display: grid; gap: 1rem; }
 .nb-fieldset:disabled { opacity: 0.55; }
