@@ -8,6 +8,7 @@ export default defineConfig({
     vue(),
     dts({
       entryRoot: 'src',
+      include: ['src'],
       insertTypesEntry: true,
     }),
   ],

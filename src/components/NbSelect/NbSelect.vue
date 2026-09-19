@@ -24,18 +24,21 @@ const describedById = computed(() => describedBy(props.hint, props.error, ids.hi
 <template>
   <div class="nb-root nb-field">
     <label v-if="label" class="nb-field__label" :for="ids.inputId">{{ label }}</label>
-    <select
-      v-bind="$attrs"
-      :id="ids.inputId"
-      class="nb-field__control"
-      :value="modelValue"
-      :disabled="disabled"
-      :aria-invalid="error ? 'true' : undefined"
-      :aria-describedby="describedById"
-      @change="emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
-    >
-      <slot />
-    </select>
+    <div class="nb-select">
+      <select
+        v-bind="$attrs"
+        :id="ids.inputId"
+        class="nb-field__control"
+        :value="modelValue"
+        :disabled="disabled"
+        :aria-invalid="error ? 'true' : undefined"
+        :aria-describedby="describedById"
+        @change="emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
+      >
+        <slot />
+      </select>
+      <span class="nb-select__chevron" aria-hidden="true" />
+    </div>
     <span v-if="hint" :id="ids.hintId" class="nb-field__hint">{{ hint }}</span>
     <span v-if="error" :id="ids.errorId" class="nb-field__error">{{ error }}</span>
   </div>
