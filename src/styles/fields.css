@@ -1,5 +1,7 @@
 .nb-field {
   display: grid;
+  align-items: start;
+  grid-auto-rows: max-content;
   gap: 0.4rem;
 }
 
@@ -9,6 +11,7 @@
 }
 
 .nb-field__control {
+  display: block;
   width: 100%;
   min-height: 2.75rem;
   border: var(--nb-border-width) solid var(--nb-color-ink);
@@ -29,7 +32,7 @@
   border-right: 3px solid var(--nb-color-ink);
   border-bottom: 3px solid var(--nb-color-ink);
   pointer-events: none;
-  transform: translateY(-65%) rotate(45deg);
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .nb-field__control--textarea { min-height: 7rem; resize: vertical; }
