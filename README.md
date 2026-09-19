@@ -21,7 +21,7 @@ import { NbButton } from '@neobrut-vue/core'
 
 Available components:
 
-`NbAlert`, `NbBadge`, `NbButton`, `NbCard`, `NbCheckbox`, `NbDialog`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbRadioGroup`, `NbSelect`, `NbSwitch`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent`, `NbTextarea`, and `NbTooltip`.
+`NbAlert`, `NbBadge`, `NbButton`, `NbCard`, `NbCheckbox`, `NbDialog`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbRadioGroup`, `NbSelect`, `NbSelectItem`, `NbSwitch`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent`, `NbTextarea`, and `NbTooltip`.
 
 ## Tabs
 

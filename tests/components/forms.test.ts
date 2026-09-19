@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { h, nextTick } from 'vue'
 import { describe, expect, it } from 'vitest'
 import {
   NbCheckbox,
@@ -7,6 +8,7 @@ import {
   NbInputGroup,
   NbRadioGroup,
   NbSelect,
+  NbSelectItem,
   NbSwitch,
 } from '../../src'
 
@@ -27,10 +29,29 @@ describe('form fields', () => {
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([true])
   })
 
-  it('renders a custom select chevron', () => {
-    const wrapper = mount(NbSelect, { props: { label: 'Tone' } })
+  it('opens the styled select menu and emits the chosen value', async () => {
+    const wrapper = mount(NbSelect, {
+      attachTo: document.body,
+      props: { label: 'Tone', modelValue: 'primary' },
+      slots: {
+        default: () => [
+          h(NbSelectItem, { value: 'primary' }, () => 'Electric blue'),
+          h(NbSelectItem, { value: 'accent' }, () => 'Safety yellow'),
+        ],
+      },
+    })
 
-    expect(wrapper.get('.nb-select__chevron').attributes('aria-hidden')).toBe('true')
+    await wrapper.get('[role="combobox"]').trigger('keydown', { key: 'Enter' })
+    await nextTick()
+    const option = document.body.querySelector<HTMLElement>('[role="option"][data-value="accent"]')
+
+    expect(document.body.querySelector('.nb-select__content')).not.toBeNull()
+    expect(option).not.toBeNull()
+    option?.dispatchEvent(new MouseEvent('pointerup', { bubbles: true }))
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['accent'])
+
+    wrapper.unmount()
   })
 
   it('emits the selected native radio value from a labelled group', async () => {

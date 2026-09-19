@@ -12,6 +12,7 @@ import {
   NbInputGroup,
   NbRadioGroup,
   NbSelect,
+  NbSelectItem,
   NbSwitch,
   NbTabs,
   NbTabsContent,
@@ -82,9 +83,9 @@ const plans = [
               <NbInput v-model="name" required label="Name" hint="Required field" placeholder="Ada Lovelace" />
               <NbInput v-model="email" type="email" label="Email" error="That email is intentionally suspicious." />
               <NbSelect v-model="tone" label="Favorite tone">
-                <option value="primary">Electric blue</option>
-                <option value="secondary">Bubblegum pink</option>
-                <option value="accent">Safety yellow</option>
+                <NbSelectItem value="primary">Electric blue</NbSelectItem>
+                <NbSelectItem value="secondary">Bubblegum pink</NbSelectItem>
+                <NbSelectItem value="accent">Safety yellow</NbSelectItem>
               </NbSelect>
               <NbInput type="file" label="Avatar" accept="image/*" hint="Native file input, same field rhythm." />
               <NbTextarea v-model="note" class="form-grid__wide" label="Note" placeholder="Say something loud." />

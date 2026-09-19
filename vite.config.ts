@@ -19,9 +19,9 @@ export default defineConfig({
       fileName: 'neobrut-vue',
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', 'reka-ui'],
       output: {
-        globals: { vue: 'Vue' },
+        globals: { vue: 'Vue', 'reka-ui': 'RekaUI' },
       },
     },
   },
