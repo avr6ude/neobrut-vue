@@ -21,7 +21,69 @@ import { NbButton } from '@neobrut-vue/core'
 
 Available components:
 
-`NbAlert`, `NbBadge`, `NbButton`, `NbCard`, `NbCheckbox`, `NbDialog`, `NbInput`, `NbSelect`, `NbTabs`, `NbTextarea`, and `NbTooltip`.
+`NbAlert`, `NbBadge`, `NbButton`, `NbCard`, `NbCheckbox`, `NbDialog`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbRadioGroup`, `NbSelect`, `NbSwitch`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent`, `NbTextarea`, and `NbTooltip`.
+
+## Tabs
+
+Tabs use composable pieces so labels can contain icons, badges, or any other content:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger } from '@neobrut-vue/core'
+
+const activeTab = ref('account')
+</script>
+
+<template>
+  <NbTabs v-model="activeTab">
+    <NbTabsList>
+      <NbTabsTrigger value="account">Account</NbTabsTrigger>
+      <NbTabsTrigger value="password">Password</NbTabsTrigger>
+    </NbTabsList>
+    <NbTabsContent value="account">Account settings</NbTabsContent>
+    <NbTabsContent value="password">Password settings</NbTabsContent>
+  </NbTabs>
+</template>
+```
+
+Use `default-value` instead of `v-model` for uncontrolled tabs. Set `orientation="vertical"` for vertical keyboard and visual behavior.
+
+## Form primitives
+
+The form components stay native: radio groups render radio inputs, switches retain a checkbox, and fieldsets use `fieldset`/`legend`.
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NbFieldset, NbRadioGroup, NbSwitch } from '@neobrut-vue/core'
+
+const plan = ref('pro')
+const alerts = ref(true)
+const plans = [
+  { value: 'free', label: 'Free' },
+  { value: 'pro', label: 'Pro', description: 'For teams shipping regularly.' },
+]
+</script>
+
+<template>
+  <NbFieldset legend="Preferences" description="Change these whenever you like.">
+    <NbRadioGroup v-model="plan" label="Plan" :options="plans" />
+    <NbSwitch v-model="alerts" label="Launch alerts" />
+  </NbFieldset>
+</template>
+```
+
+`NbInputGroup` keeps prefixes, suffixes, or small actions attached to a native input. Give the input its normal label or accessible name:
+
+```vue
+<label for="handle">Handle</label>
+<NbInputGroup>
+  <template #start>@</template>
+  <input id="handle">
+  <template #end>.dev</template>
+</NbInputGroup>
+```
 
 ## Optional plugin
 
