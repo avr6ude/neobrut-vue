@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useStableId } from '../../lib/ids'
+import { useStableId } from '../../lib/ids';
 
 withDefaults(defineProps<{
   legend?: string
