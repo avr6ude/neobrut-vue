@@ -1,1 +1,2 @@
-/* Theme styles are added in Task 2. */
+@import './tokens.css';
+@import './base.css';

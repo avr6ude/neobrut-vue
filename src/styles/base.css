@@ -1,0 +1,26 @@
+:where(.nb-root) {
+  color: var(--nb-color-ink);
+  font-family: var(--nb-font-body);
+}
+
+:where(.nb-root *, .nb-root *::before, .nb-root *::after) {
+  box-sizing: border-box;
+}
+
+:where(.nb-root button, .nb-root input, .nb-root textarea, .nb-root select) {
+  font: inherit;
+}
+
+:where(.nb-root button, .nb-root [role='button'], .nb-root input, .nb-root textarea, .nb-root select):focus-visible {
+  outline: 3px solid var(--nb-color-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.nb-root *, .nb-root *::before, .nb-root *::after) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
