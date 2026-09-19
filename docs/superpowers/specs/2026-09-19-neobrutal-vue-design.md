@@ -48,6 +48,20 @@ The first release includes:
 - `NbTabs`: controlled or v-model-compatible active tab state with keyboard navigation.
 - `NbTooltip`: hover and focus trigger with accessible relationship to its content.
 
+### Initial-release expansion
+
+The initial release also includes the common controls needed to build a realistic form without another component package:
+
+- `NbTabs`, `NbTabsList`, `NbTabsTrigger`, and `NbTabsContent` form a composable tabs API. The root supports controlled and uncontrolled values plus horizontal and vertical orientation. Triggers support arbitrary slot content, disabled state, roving focus, and automatic activation.
+- `NbRadioGroup` renders a labelled native radio group from a small options array and exposes a string `v-model`.
+- `NbSwitch` uses a native checkbox while presenting a switch appearance and exposing its checked state with native semantics.
+- `NbFieldset` groups related controls with an optional legend and description using native `fieldset` and `legend` elements.
+- `NbInputGroup` visually joins an input or textarea with slotted leading or trailing text/actions without replacing the native control.
+
+Existing input, textarea, and select components continue to own their label, hint, and error relationships. Required, disabled, invalid, and file-input examples are documented in the playground rather than introducing a form-validation framework.
+
+The playground follows the visual proportions of `neobrutalism.dev`: flat segmented tab lists, an inset saturated active tab, separate bordered content surfaces, compact labels, hard shadows, and high-contrast form states. It does not copy the React/Base UI implementation or add a runtime dependency.
+
 ## Interaction rules
 
 - Every interactive component has a visible `:focus-visible` state.
@@ -64,6 +78,8 @@ The first release includes:
 - Form controls connect labels, hints, and errors with `for`/`id` and `aria-describedby`; invalid fields expose `aria-invalid`.
 - `NbDialog` uses `role="dialog"`, `aria-modal="true"`, an accessible name, focus containment, Escape-to-close, and focus return.
 - `NbTabs` follows the tabs pattern with `tablist`, `tab`, `tabpanel`, `aria-selected`, `aria-controls`, and arrow/Home/End keyboard navigation.
+- Horizontal tabs use Left/Right and vertical tabs use Up/Down; Home and End work in both orientations. Disabled triggers are skipped.
+- Radio groups and fieldsets use native grouping and naming semantics. The switch retains a real checkbox input and an accessible label.
 - `NbTooltip` exposes its content through `aria-describedby` and remains available to keyboard and touch users.
 - Automated accessibility checks are part of playground verification for the interactive component set.
 
