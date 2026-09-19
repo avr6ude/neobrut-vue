@@ -1,0 +1,54 @@
+.nb-field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.nb-field__label, .nb-checkbox__label {
+  font-family: var(--nb-font-display);
+  font-weight: 800;
+}
+
+.nb-field__control {
+  width: 100%;
+  min-height: 2.75rem;
+  border: var(--nb-border-width) solid var(--nb-color-ink);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-color-paper);
+  color: var(--nb-color-ink);
+  padding: 0.7rem 0.8rem;
+}
+
+.nb-field__control--textarea { min-height: 7rem; resize: vertical; }
+.nb-field__control:disabled { cursor: not-allowed; opacity: 0.55; }
+.nb-field__hint, .nb-field__error { font-size: 0.8rem; }
+.nb-field__hint { color: color-mix(in srgb, var(--nb-color-ink) 65%, transparent); }
+.nb-field__error { color: var(--nb-color-danger); font-weight: 700; }
+
+.nb-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.nb-checkbox__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nb-checkbox__box {
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  place-items: center;
+  border: var(--nb-border-width) solid var(--nb-color-ink);
+  background: var(--nb-color-paper);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.nb-checkbox__input:not(:checked) + .nb-checkbox__box { color: transparent; }
+.nb-checkbox__input:checked + .nb-checkbox__box { background: var(--nb-color-primary); }
+.nb-checkbox__input:focus-visible + .nb-checkbox__box { outline: 3px solid var(--nb-color-accent); outline-offset: 3px; }
+.nb-checkbox__input:disabled + .nb-checkbox__box, .nb-checkbox__input:disabled ~ .nb-checkbox__label { opacity: 0.55; }
