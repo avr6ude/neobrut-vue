@@ -1,14 +1,18 @@
 import { mount } from '@vue/test-utils'
 import { afterEach, describe, expect, it } from 'vitest'
+import { nextTick } from 'vue'
 import { axe } from 'vitest-axe'
 import {
   NbButton,
   NbCombobox,
   NbDialog,
+  NbDropdownMenu,
+  NbDropdownMenuItem,
   NbFieldset,
   NbInput,
   NbInputGroup,
   NbNumberInput,
+  NbPopover,
   NbRadioGroup,
   NbSlider,
   NbSwitch,
@@ -16,6 +20,7 @@ import {
   NbTabsContent,
   NbTabsList,
   NbTabsTrigger,
+  NbToast,
   NbToggleGroup,
   NbToggleGroupItem,
 } from '../src'
@@ -99,5 +104,35 @@ describe('accessible component states', () => {
       })
       expect(results.violations).toEqual([])
     }
+  })
+
+  it('has no axe violations in open overlay states', async () => {
+    mount(NbPopover, {
+      attachTo: document.body,
+      props: { defaultOpen: true, title: 'Quick actions' },
+      slots: { trigger: 'Open actions', default: 'Popover content' },
+    })
+    mount({
+      components: { NbDropdownMenu, NbDropdownMenuItem },
+      template: `
+        <NbDropdownMenu default-open label="Open actions">
+          <template #trigger>Actions</template>
+          <NbDropdownMenuItem>Duplicate</NbDropdownMenuItem>
+        </NbDropdownMenu>
+      `,
+    }, { attachTo: document.body })
+    mount(NbToast, {
+      attachTo: document.body,
+      props: { open: true, title: 'Saved', description: 'Your changes are live.' },
+    })
+    await nextTick()
+
+    const results = await axe(document.body, {
+      rules: {
+        region: { enabled: false },
+        'color-contrast': { enabled: false },
+      },
+    })
+    expect(results.violations).toEqual([])
   })
 })

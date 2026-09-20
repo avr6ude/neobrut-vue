@@ -21,7 +21,7 @@ import { NbButton } from '@neobrut-vue/core'
 
 Available components:
 
-`NbAlert`, `NbBadge`, `NbButton`, `NbCard`, `NbCheckbox`, `NbCombobox`, `NbDialog`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbRadioGroup`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent`, `NbTextarea`, `NbToggleGroup`, `NbToggleGroupItem`, and `NbTooltip`.
+`NbAlert`, `NbBadge`, `NbButton`, `NbCard`, `NbCheckbox`, `NbCombobox`, `NbDialog`, `NbDropdownMenu`, `NbDropdownMenuItem`, `NbDropdownMenuSeparator`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbPopover`, `NbRadioGroup`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent`, `NbTextarea`, `NbToast`, `NbToggleGroup`, `NbToggleGroupItem`, and `NbTooltip`.
 
 ## Tabs
 
@@ -154,7 +154,7 @@ Override the CSS custom properties on `:root` or a wrapper:
 
 ## Accessibility
 
-Components prefer native HTML semantics. Form controls connect labels, hints, and errors with IDs and `aria-describedby`; invalid fields expose `aria-invalid`. Dialogs, tabs, and tooltips implement their relevant keyboard and ARIA patterns. Consumers should still provide meaningful labels and content.
+Components prefer native HTML semantics. Form controls connect labels, hints, and errors with IDs and `aria-describedby`; invalid fields expose `aria-invalid`. Dialogs, menus, popovers, tabs, toasts, and tooltips implement their relevant keyboard and ARIA patterns. Consumers should still provide meaningful labels and content.
 
 ## Local playground
 

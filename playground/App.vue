@@ -9,10 +9,14 @@ import {
   NbCheckbox,
   NbCombobox,
   NbDialog,
+  NbDropdownMenu,
+  NbDropdownMenuItem,
+  NbDropdownMenuSeparator,
   NbFieldset,
   NbInput,
   NbInputGroup,
   NbNumberInput,
+  NbPopover,
   NbRadioGroup,
   NbSelect,
   NbSelectItem,
@@ -23,6 +27,7 @@ import {
   NbTabsList,
   NbTabsTrigger,
   NbTextarea,
+  NbToast,
   NbToggleGroup,
   NbToggleGroupItem,
   NbTooltip,
@@ -43,6 +48,8 @@ const seats = ref(3)
 const volume = ref(65)
 const alignment = ref('center')
 const validationMessage = ref('')
+const toastOpen = ref(false)
+const menuAction = ref('Nothing selected yet.')
 
 const plans = [
   { value: 'free', label: 'Free', description: 'For small experiments and wonderfully bad ideas.' },
@@ -92,7 +99,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
         <NbTabsTrigger value="buttons"><span aria-hidden="true">✦</span> Buttons</NbTabsTrigger>
         <NbTabsTrigger value="forms"><span aria-hidden="true">✎</span> Forms</NbTabsTrigger>
         <NbTabsTrigger value="cards"><span aria-hidden="true">▰</span> Surfaces</NbTabsTrigger>
-        <NbTabsTrigger value="soon" disabled>More soon</NbTabsTrigger>
+        <NbTabsTrigger value="overlays"><span aria-hidden="true">◆</span> Overlays</NbTabsTrigger>
       </NbTabsList>
 
       <NbTabsContent value="buttons">
@@ -200,6 +207,51 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
           </NbCard>
         </div>
       </NbTabsContent>
+
+      <NbTabsContent value="overlays">
+        <div class="overlay-grid">
+          <section class="overlay-demo overlay-demo--yellow">
+            <div>
+              <NbBadge tone="accent">Popover</NbBadge>
+              <h2>Extra context, zero drama.</h2>
+              <p>Useful for compact actions and small bits of supporting content.</p>
+            </div>
+            <NbPopover title="Quick note" align="start">
+              <template #trigger>Open popover</template>
+              <p class="overlay-copy">This stays lightweight, closes on Escape, and returns focus.</p>
+            </NbPopover>
+          </section>
+
+          <section class="overlay-demo overlay-demo--mint">
+            <div>
+              <NbBadge tone="primary">Menu</NbBadge>
+              <h2>Actions with proper keys.</h2>
+              <p>{{ menuAction }}</p>
+            </div>
+            <NbDropdownMenu label="Open project actions">
+              <template #trigger>Project actions</template>
+              <NbDropdownMenuItem @select="menuAction = 'Duplicated the project.'">Duplicate</NbDropdownMenuItem>
+              <NbDropdownMenuItem @select="menuAction = 'Copied a share link.'">Copy link</NbDropdownMenuItem>
+              <NbDropdownMenuSeparator />
+              <NbDropdownMenuItem destructive @select="menuAction = 'Delete selected.'">Delete</NbDropdownMenuItem>
+            </NbDropdownMenu>
+          </section>
+
+          <section class="overlay-demo overlay-demo--pink">
+            <div>
+              <NbBadge tone="secondary">Feedback</NbBadge>
+              <h2>Say it, then get out.</h2>
+              <p>Toasts announce short-lived results without blocking the page.</p>
+            </div>
+            <div class="sample-row">
+              <NbButton variant="accent" @click="toastOpen = true">Show toast</NbButton>
+              <NbTooltip content="Keyboard focus reveals this too.">
+                <NbButton variant="ghost">Tooltip</NbButton>
+              </NbTooltip>
+            </div>
+          </section>
+        </div>
+      </NbTabsContent>
     </NbTabs>
 
     <NbDialog v-model:open="dialogOpen" title="A little confirmation">
@@ -209,5 +261,12 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
         <NbButton variant="accent" @click="dialogOpen = false">Looks good</NbButton>
       </template>
     </NbDialog>
+
+    <NbToast
+      v-model:open="toastOpen"
+      tone="success"
+      title="Nice. That worked."
+      description="The toast will dismiss itself in a few seconds."
+    />
   </main>
 </template>
