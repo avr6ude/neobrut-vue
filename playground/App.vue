@@ -298,8 +298,8 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
               <div class="skeleton-demo">
                 <NbSkeleton width="3rem" height="3rem" rounded />
                 <div>
-                  <NbSkeleton width="9rem" />
-                  <NbSkeleton width="13rem" height="0.75rem" />
+                  <NbSkeleton width="70%" />
+                  <NbSkeleton width="100%" height="0.75rem" />
                 </div>
               </div>
             </section>
