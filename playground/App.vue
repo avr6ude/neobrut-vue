@@ -2,8 +2,12 @@
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import {
+  NbAccordion,
+  NbAccordionItem,
   NbAlert,
+  NbAvatar,
   NbBadge,
+  NbBreadcrumbs,
   NbButton,
   NbCard,
   NbCheckbox,
@@ -16,10 +20,13 @@ import {
   NbInput,
   NbInputGroup,
   NbNumberInput,
+  NbPagination,
   NbPopover,
+  NbProgress,
   NbRadioGroup,
   NbSelect,
   NbSelectItem,
+  NbSkeleton,
   NbSlider,
   NbSwitch,
   NbTabs,
@@ -50,6 +57,7 @@ const alignment = ref('center')
 const validationMessage = ref('')
 const toastOpen = ref(false)
 const menuAction = ref('Nothing selected yet.')
+const currentPage = ref(3)
 
 const plans = [
   { value: 'free', label: 'Free', description: 'For small experiments and wonderfully bad ideas.' },
@@ -100,6 +108,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
         <NbTabsTrigger value="forms"><span aria-hidden="true">✎</span> Forms</NbTabsTrigger>
         <NbTabsTrigger value="cards"><span aria-hidden="true">▰</span> Surfaces</NbTabsTrigger>
         <NbTabsTrigger value="overlays"><span aria-hidden="true">◆</span> Overlays</NbTabsTrigger>
+        <NbTabsTrigger value="data"><span aria-hidden="true">●</span> Data</NbTabsTrigger>
       </NbTabsList>
 
       <NbTabsContent value="buttons">
@@ -250,6 +259,58 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
               </NbTooltip>
             </div>
           </section>
+        </div>
+      </NbTabsContent>
+
+      <NbTabsContent value="data">
+        <div class="data-stack">
+          <NbBreadcrumbs :items="[
+            { label: 'Home', href: '#' },
+            { label: 'Components', href: '#' },
+            { label: 'Data display' },
+          ]" />
+
+          <div class="data-grid">
+            <section class="data-panel data-panel--yellow">
+              <h2>People</h2>
+              <div class="avatar-row">
+                <NbAvatar name="Ada Lovelace" size="lg" />
+                <NbAvatar name="Grace Hopper" tone="secondary" />
+                <NbAvatar name="Linus Torvalds" size="sm" tone="accent" />
+              </div>
+            </section>
+
+            <section class="data-panel data-panel--pink">
+              <h2>Build status</h2>
+              <NbProgress :value="72" label="Package build" show-value />
+              <NbProgress :value="null" label="Waiting for checks" />
+            </section>
+
+            <section class="data-panel data-panel--mint">
+              <h2>Loading card</h2>
+              <div class="skeleton-demo">
+                <NbSkeleton width="3rem" height="3rem" rounded />
+                <div>
+                  <NbSkeleton width="9rem" />
+                  <NbSkeleton width="13rem" height="0.75rem" />
+                </div>
+              </div>
+            </section>
+
+            <section class="data-panel data-panel--wide">
+              <h2>Frequently yelled questions</h2>
+              <NbAccordion default-value="why">
+                <NbAccordionItem value="why" title="Why is it so loud?">Because quiet interfaces already have enough libraries.</NbAccordionItem>
+                <NbAccordionItem value="keyboard" title="Does the keyboard work?">Yes. Focus, arrows, Enter, Space, and ARIA are part of the component.</NbAccordionItem>
+                <NbAccordionItem value="theme" title="Can I change the colors?">Every core color and shadow is a CSS custom property.</NbAccordionItem>
+              </NbAccordion>
+            </section>
+
+            <section class="data-panel data-panel--wide data-panel--paper">
+              <h2>Pages of components</h2>
+              <NbPagination v-model:page="currentPage" :total="120" :items-per-page="10" />
+            </section>
+          </div>
         </div>
       </NbTabsContent>
     </NbTabs>

@@ -3,7 +3,11 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 import { axe } from 'vitest-axe'
 import {
+  NbAccordion,
+  NbAccordionItem,
+  NbAvatar,
   NbButton,
+  NbBreadcrumbs,
   NbCombobox,
   NbDialog,
   NbDropdownMenu,
@@ -12,9 +16,12 @@ import {
   NbInput,
   NbInputGroup,
   NbNumberInput,
+  NbPagination,
   NbPopover,
+  NbProgress,
   NbRadioGroup,
   NbSlider,
+  NbSkeleton,
   NbSwitch,
   NbTabs,
   NbTabsContent,
@@ -128,6 +135,33 @@ describe('accessible component states', () => {
     await nextTick()
 
     const results = await axe(document.body, {
+      rules: {
+        region: { enabled: false },
+        'color-contrast': { enabled: false },
+      },
+    })
+    expect(results.violations).toEqual([])
+  })
+
+  it('has no axe violations in data display states', async () => {
+    const wrapper = mount({
+      components: { NbAccordion, NbAccordionItem, NbAvatar, NbBreadcrumbs, NbPagination, NbProgress, NbSkeleton },
+      data: () => ({ crumbs: [{ label: 'Home', href: '/' }, { label: 'Library' }] }),
+      template: `
+        <div>
+          <NbBreadcrumbs :items="crumbs" />
+          <NbAvatar name="Ada Lovelace" />
+          <NbProgress :value="45" label="Upload progress" />
+          <NbSkeleton />
+          <NbAccordion default-value="one">
+            <NbAccordionItem value="one" title="Details">Content</NbAccordionItem>
+          </NbAccordion>
+          <NbPagination :total="30" :items-per-page="10" />
+        </div>
+      `,
+    })
+
+    const results = await axe(wrapper.element, {
       rules: {
         region: { enabled: false },
         'color-contrast': { enabled: false },
