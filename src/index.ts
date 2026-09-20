@@ -8,24 +8,28 @@ import { NbCheckbox } from './components/NbCheckbox'
 import { NbCombobox } from './components/NbCombobox'
 import { NbAlert } from './components/NbAlert'
 import { NbDialog } from './components/NbDialog'
+import { NbDropdownMenu, NbDropdownMenuItem, NbDropdownMenuSeparator } from './components/NbDropdownMenu'
 import { NbFieldset } from './components/NbFieldset'
 import { NbInput } from './components/NbInput'
 import { NbInputGroup } from './components/NbInputGroup'
 import { NbNumberInput } from './components/NbNumberInput'
+import { NbPopover } from './components/NbPopover'
 import { NbRadioGroup } from './components/NbRadioGroup'
 import { NbSelect, NbSelectItem } from './components/NbSelect'
 import { NbSlider } from './components/NbSlider'
 import { NbSwitch } from './components/NbSwitch'
 import { NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger } from './components/NbTabs'
 import { NbTextarea } from './components/NbTextarea'
+import { NbToast } from './components/NbToast'
 import { NbToggleGroup, NbToggleGroupItem } from './components/NbToggleGroup'
 import { NbTooltip } from './components/NbTooltip'
 
-export { NbAlert, NbBadge, NbButton, NbCard, NbCheckbox, NbCombobox, NbDialog, NbFieldset, NbInput, NbInputGroup, NbNumberInput, NbRadioGroup, NbSelect, NbSelectItem, NbSlider, NbSwitch, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTextarea, NbToggleGroup, NbToggleGroupItem, NbTooltip }
+export { NbAlert, NbBadge, NbButton, NbCard, NbCheckbox, NbCombobox, NbDialog, NbDropdownMenu, NbDropdownMenuItem, NbDropdownMenuSeparator, NbFieldset, NbInput, NbInputGroup, NbNumberInput, NbPopover, NbRadioGroup, NbSelect, NbSelectItem, NbSlider, NbSwitch, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTextarea, NbToast, NbToggleGroup, NbToggleGroupItem, NbTooltip }
 export type { NbComboboxOption } from './components/NbCombobox'
 export type { NbRadioOption } from './components/NbRadioGroup'
 export type { NbTabsOrientation } from './components/NbTabs'
 export type { NbToggleGroupOrientation, NbToggleGroupType } from './components/NbToggleGroup'
+export type { NbToastTone } from './components/NbToast'
 
 export const NeoBrutalVue = createNeoBrutalPlugin({
   NbAlert,
@@ -35,10 +39,14 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbCheckbox,
   NbCombobox,
   NbDialog,
+  NbDropdownMenu,
+  NbDropdownMenuItem,
+  NbDropdownMenuSeparator,
   NbFieldset,
   NbInput,
   NbInputGroup,
   NbNumberInput,
+  NbPopover,
   NbRadioGroup,
   NbSelect,
   NbSelectItem,
@@ -49,6 +57,7 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbTabsList,
   NbTabsTrigger,
   NbTextarea,
+  NbToast,
   NbToggleGroup,
   NbToggleGroupItem,
   NbTooltip,
