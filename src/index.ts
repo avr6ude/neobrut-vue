@@ -17,11 +17,13 @@ import { NbSlider } from './components/NbSlider'
 import { NbSwitch } from './components/NbSwitch'
 import { NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger } from './components/NbTabs'
 import { NbTextarea } from './components/NbTextarea'
+import { NbToggleGroup, NbToggleGroupItem } from './components/NbToggleGroup'
 import { NbTooltip } from './components/NbTooltip'
 
-export { NbAlert, NbBadge, NbButton, NbCard, NbCheckbox, NbDialog, NbFieldset, NbInput, NbInputGroup, NbNumberInput, NbRadioGroup, NbSelect, NbSelectItem, NbSlider, NbSwitch, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTextarea, NbTooltip }
+export { NbAlert, NbBadge, NbButton, NbCard, NbCheckbox, NbDialog, NbFieldset, NbInput, NbInputGroup, NbNumberInput, NbRadioGroup, NbSelect, NbSelectItem, NbSlider, NbSwitch, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTextarea, NbToggleGroup, NbToggleGroupItem, NbTooltip }
 export type { NbRadioOption } from './components/NbRadioGroup'
 export type { NbTabsOrientation } from './components/NbTabs'
+export type { NbToggleGroupOrientation, NbToggleGroupType } from './components/NbToggleGroup'
 
 export const NeoBrutalVue = createNeoBrutalPlugin({
   NbAlert,
@@ -44,5 +46,7 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbTabsList,
   NbTabsTrigger,
   NbTextarea,
+  NbToggleGroup,
+  NbToggleGroupItem,
   NbTooltip,
 })

@@ -12,6 +12,8 @@ import {
   NbSelectItem,
   NbSlider,
   NbSwitch,
+  NbToggleGroup,
+  NbToggleGroupItem,
 } from '../../src'
 
 describe('form fields', () => {
@@ -151,5 +153,27 @@ describe('form fields', () => {
     expect(slider.attributes('aria-labelledby')).toContain('label')
     expect(slider.attributes('aria-describedby')).toContain('error')
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([45])
+  })
+
+  it('selects an item in a labelled single toggle group', async () => {
+    const wrapper = mount({
+      components: { NbToggleGroup, NbToggleGroupItem },
+      template: `
+        <NbToggleGroup model-value="left" label="Alignment" hint="Choose one">
+          <NbToggleGroupItem value="left">Left</NbToggleGroupItem>
+          <NbToggleGroupItem value="center">Center</NbToggleGroupItem>
+          <NbToggleGroupItem value="right">Right</NbToggleGroupItem>
+        </NbToggleGroup>
+      `,
+    })
+
+    const group = wrapper.get('[role="group"]')
+    const items = wrapper.findAll('button')
+    await items[1]?.trigger('click')
+
+    expect(group.attributes('aria-labelledby')).toContain('label')
+    expect(group.attributes('aria-describedby')).toContain('hint')
+    expect(items[0]?.attributes('aria-pressed')).toBe('true')
+    expect(wrapper.findComponent(NbToggleGroup).emitted('update:modelValue')?.[0]).toEqual(['center'])
   })
 })
