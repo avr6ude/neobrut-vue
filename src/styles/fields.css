@@ -359,7 +359,7 @@
 .nb-toggle-group__item:last-child { border-right: 0; }
 .nb-toggle-group[data-orientation='vertical'] .nb-toggle-group__item { border-right: 0; border-bottom: var(--nb-border-width) solid var(--nb-color-ink); }
 .nb-toggle-group[data-orientation='vertical'] .nb-toggle-group__item:last-child { border-bottom: 0; }
-.nb-toggle-group__item[data-state='on'] { background: var(--nb-color-primary); box-shadow: inset 0 -4px 0 color-mix(in srgb, var(--nb-color-ink) 18%, transparent); }
+.nb-toggle-group__item[data-state='on'] { background: var(--nb-color-primary); }
 .nb-toggle-group__item:focus-visible { position: relative; z-index: 1; outline: 3px solid var(--nb-color-accent); outline-offset: -3px; }
 .nb-toggle-group__item:disabled { cursor: not-allowed; opacity: 0.45; }
 
