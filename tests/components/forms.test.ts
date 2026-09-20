@@ -10,6 +10,7 @@ import {
   NbRadioGroup,
   NbSelect,
   NbSelectItem,
+  NbSlider,
   NbSwitch,
 } from '../../src'
 
@@ -130,5 +131,25 @@ describe('form fields', () => {
     expect(input.attributes('aria-invalid')).toBe('true')
     expect(input.attributes('aria-describedby')).toContain('error')
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([3])
+  })
+
+  it('emits a scalar value from a keyboard-operated slider', async () => {
+    const wrapper = mount(NbSlider, {
+      props: {
+        modelValue: 40,
+        label: 'Volume',
+        error: 'Turn it up',
+        min: 0,
+        max: 100,
+        step: 5,
+      },
+    })
+
+    const slider = wrapper.get('[role="slider"]')
+    await slider.trigger('keydown', { key: 'ArrowRight' })
+
+    expect(slider.attributes('aria-labelledby')).toContain('label')
+    expect(slider.attributes('aria-describedby')).toContain('error')
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([45])
   })
 })
