@@ -101,7 +101,7 @@
 }
 .nb-field__control[type='file']::file-selector-button {
   height: 100%;
-  margin-right: 0.75rem;
+  margin: 0 0.75rem 0 0;
   border: 0;
   border-right: var(--nb-border-width) solid var(--nb-color-ink);
   background: var(--nb-color-primary);
@@ -110,6 +110,8 @@
   font: inherit;
   font-family: var(--nb-font-display);
   font-weight: 800;
+  line-height: normal;
+  vertical-align: top;
   cursor: pointer;
 }
 
