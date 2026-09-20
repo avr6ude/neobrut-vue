@@ -5,6 +5,7 @@ import {
   NbAccordion,
   NbAccordionItem,
   NbAlert,
+  NbAspectRatio,
   NbAvatar,
   NbBadge,
   NbBreadcrumbs,
@@ -16,6 +17,7 @@ import {
   NbDropdownMenu,
   NbDropdownMenuItem,
   NbDropdownMenuSeparator,
+  NbEmptyState,
   NbFieldset,
   NbInput,
   NbInputGroup,
@@ -24,16 +26,20 @@ import {
   NbPopover,
   NbProgress,
   NbRadioGroup,
+  NbScrollArea,
   NbSelect,
   NbSelectItem,
+  NbSeparator,
   NbSkeleton,
   NbSlider,
+  NbSpinner,
   NbSwitch,
   NbTabs,
   NbTabsContent,
   NbTabsList,
   NbTabsTrigger,
   NbTextarea,
+  NbTable,
   NbToast,
   NbToggleGroup,
   NbToggleGroupItem,
@@ -109,6 +115,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
         <NbTabsTrigger value="cards"><span aria-hidden="true">▰</span> Surfaces</NbTabsTrigger>
         <NbTabsTrigger value="overlays"><span aria-hidden="true">◆</span> Overlays</NbTabsTrigger>
         <NbTabsTrigger value="data"><span aria-hidden="true">●</span> Data</NbTabsTrigger>
+        <NbTabsTrigger value="layout"><span aria-hidden="true">▦</span> Layout</NbTabsTrigger>
       </NbTabsList>
 
       <NbTabsContent value="buttons">
@@ -311,6 +318,61 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
               <NbPagination v-model:page="currentPage" :total="120" :items-per-page="10" />
             </section>
           </div>
+        </div>
+      </NbTabsContent>
+
+      <NbTabsContent value="layout">
+        <div class="layout-grid">
+          <section class="layout-panel layout-panel--wide">
+            <NbTable caption="Component readiness">
+              <thead>
+                <tr><th scope="col">Component</th><th scope="col">State</th><th scope="col">Keyboard</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Dialog</td><td><NbBadge tone="secondary" size="sm">Ready</NbBadge></td><td>Escape + trap</td></tr>
+                <tr><td>Combobox</td><td><NbBadge tone="secondary" size="sm">Ready</NbBadge></td><td>Arrows + Enter</td></tr>
+                <tr><td>Pagination</td><td><NbBadge tone="secondary" size="sm">Ready</NbBadge></td><td>Native buttons</td></tr>
+              </tbody>
+            </NbTable>
+          </section>
+
+          <section class="layout-panel layout-panel--yellow">
+            <h2>Aspect ratio</h2>
+            <NbAspectRatio :ratio="16 / 9">
+              <div class="ratio-art"><span>16:9</span></div>
+            </NbAspectRatio>
+          </section>
+
+          <section class="layout-panel layout-panel--mint">
+            <h2>Scroll area</h2>
+            <NbScrollArea label="Release notes" height="13rem" type="always">
+              <div class="release-list">
+                <article><strong>Forms</strong><span>Inputs, selects, validation.</span></article>
+                <NbSeparator />
+                <article><strong>Overlays</strong><span>Dialogs, menus, feedback.</span></article>
+                <NbSeparator />
+                <article><strong>Data</strong><span>Navigation and loading states.</span></article>
+                <NbSeparator />
+                <article><strong>Layout</strong><span>The final component batch.</span></article>
+              </div>
+            </NbScrollArea>
+          </section>
+
+          <section class="layout-panel layout-panel--pink">
+            <h2>Loading</h2>
+            <div class="spinner-row">
+              <NbSpinner size="sm" label="Small loader" />
+              <NbSpinner label="Medium loader" />
+              <NbSpinner size="lg" label="Large loader" />
+              <NbSeparator orientation="vertical" />
+              <span>Still working</span>
+            </div>
+          </section>
+
+          <NbEmptyState class="layout-panel--wide" title="No boring screens" description="Empty states can still have some personality.">
+            <template #icon>✦</template>
+            <NbButton variant="accent">Make something</NbButton>
+          </NbEmptyState>
         </div>
       </NbTabsContent>
     </NbTabs>

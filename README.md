@@ -21,7 +21,7 @@ import { NbButton } from '@neobrut-vue/core'
 
 Available components:
 
-`NbAccordion`, `NbAccordionItem`, `NbAlert`, `NbAvatar`, `NbBadge`, `NbBreadcrumbs`, `NbButton`, `NbCard`, `NbCheckbox`, `NbCombobox`, `NbDialog`, `NbDropdownMenu`, `NbDropdownMenuItem`, `NbDropdownMenuSeparator`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbPagination`, `NbPopover`, `NbProgress`, `NbRadioGroup`, `NbSelect`, `NbSelectItem`, `NbSkeleton`, `NbSlider`, `NbSwitch`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent`, `NbTextarea`, `NbToast`, `NbToggleGroup`, `NbToggleGroupItem`, and `NbTooltip`.
+`NbAccordion`, `NbAccordionItem`, `NbAlert`, `NbAspectRatio`, `NbAvatar`, `NbBadge`, `NbBreadcrumbs`, `NbButton`, `NbCard`, `NbCheckbox`, `NbCombobox`, `NbDialog`, `NbDropdownMenu`, `NbDropdownMenuItem`, `NbDropdownMenuSeparator`, `NbEmptyState`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbPagination`, `NbPopover`, `NbProgress`, `NbRadioGroup`, `NbScrollArea`, `NbSelect`, `NbSelectItem`, `NbSeparator`, `NbSkeleton`, `NbSlider`, `NbSpinner`, `NbSwitch`, `NbTable`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent`, `NbTextarea`, `NbToast`, `NbToggleGroup`, `NbToggleGroupItem`, and `NbTooltip`.
 
 ## Tabs
 

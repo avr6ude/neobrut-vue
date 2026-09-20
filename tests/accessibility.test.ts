@@ -5,6 +5,7 @@ import { axe } from 'vitest-axe'
 import {
   NbAccordion,
   NbAccordionItem,
+  NbAspectRatio,
   NbAvatar,
   NbButton,
   NbBreadcrumbs,
@@ -12,6 +13,7 @@ import {
   NbDialog,
   NbDropdownMenu,
   NbDropdownMenuItem,
+  NbEmptyState,
   NbFieldset,
   NbInput,
   NbInputGroup,
@@ -20,9 +22,12 @@ import {
   NbPopover,
   NbProgress,
   NbRadioGroup,
+  NbScrollArea,
   NbSlider,
+  NbSpinner,
   NbSkeleton,
   NbSwitch,
+  NbTable,
   NbTabs,
   NbTabsContent,
   NbTabsList,
@@ -157,6 +162,29 @@ describe('accessible component states', () => {
             <NbAccordionItem value="one" title="Details">Content</NbAccordionItem>
           </NbAccordion>
           <NbPagination :total="30" :items-per-page="10" />
+        </div>
+      `,
+    })
+
+    const results = await axe(wrapper.element, {
+      rules: {
+        region: { enabled: false },
+        'color-contrast': { enabled: false },
+      },
+    })
+    expect(results.violations).toEqual([])
+  })
+
+  it('has no axe violations in content and layout states', async () => {
+    const wrapper = mount({
+      components: { NbAspectRatio, NbEmptyState, NbScrollArea, NbSpinner, NbTable },
+      template: `
+        <div>
+          <NbTable caption="Team"><thead><tr><th>Name</th></tr></thead><tbody><tr><td>Ada</td></tr></tbody></NbTable>
+          <NbEmptyState title="Nothing here" description="Try another filter." />
+          <NbSpinner label="Loading results" />
+          <NbAspectRatio :ratio="16 / 9"><div>Preview</div></NbAspectRatio>
+          <NbScrollArea label="Release notes"><p>Scrollable content</p></NbScrollArea>
         </div>
       `,
     })
