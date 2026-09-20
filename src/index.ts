@@ -5,6 +5,7 @@ import { NbBadge } from './components/NbBadge'
 import { NbButton } from './components/NbButton'
 import { NbCard } from './components/NbCard'
 import { NbCheckbox } from './components/NbCheckbox'
+import { NbCombobox } from './components/NbCombobox'
 import { NbAlert } from './components/NbAlert'
 import { NbDialog } from './components/NbDialog'
 import { NbFieldset } from './components/NbFieldset'
@@ -20,7 +21,8 @@ import { NbTextarea } from './components/NbTextarea'
 import { NbToggleGroup, NbToggleGroupItem } from './components/NbToggleGroup'
 import { NbTooltip } from './components/NbTooltip'
 
-export { NbAlert, NbBadge, NbButton, NbCard, NbCheckbox, NbDialog, NbFieldset, NbInput, NbInputGroup, NbNumberInput, NbRadioGroup, NbSelect, NbSelectItem, NbSlider, NbSwitch, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTextarea, NbToggleGroup, NbToggleGroupItem, NbTooltip }
+export { NbAlert, NbBadge, NbButton, NbCard, NbCheckbox, NbCombobox, NbDialog, NbFieldset, NbInput, NbInputGroup, NbNumberInput, NbRadioGroup, NbSelect, NbSelectItem, NbSlider, NbSwitch, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTextarea, NbToggleGroup, NbToggleGroupItem, NbTooltip }
+export type { NbComboboxOption } from './components/NbCombobox'
 export type { NbRadioOption } from './components/NbRadioGroup'
 export type { NbTabsOrientation } from './components/NbTabs'
 export type { NbToggleGroupOrientation, NbToggleGroupType } from './components/NbToggleGroup'
@@ -31,6 +33,7 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbButton,
   NbCard,
   NbCheckbox,
+  NbCombobox,
   NbDialog,
   NbFieldset,
   NbInput,

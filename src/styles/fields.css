@@ -362,3 +362,69 @@
 .nb-toggle-group__item[data-state='on'] { background: var(--nb-color-primary); box-shadow: inset 0 -4px 0 color-mix(in srgb, var(--nb-color-ink) 18%, transparent); }
 .nb-toggle-group__item:focus-visible { position: relative; z-index: 1; outline: 3px solid var(--nb-color-accent); outline-offset: -3px; }
 .nb-toggle-group__item:disabled { cursor: not-allowed; opacity: 0.45; }
+
+.nb-combobox__anchor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2.75rem;
+  height: 2.75rem;
+  overflow: hidden;
+  border: var(--nb-border-width) solid var(--nb-color-ink);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-color-paper);
+}
+.nb-combobox__input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--nb-color-ink);
+  padding: 0 0.8rem;
+  outline: 0;
+}
+.nb-combobox__trigger {
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-left: var(--nb-border-width) solid var(--nb-color-ink);
+  background: var(--nb-color-primary);
+  color: var(--nb-color-ink);
+  cursor: pointer;
+}
+.nb-combobox__trigger svg, .nb-combobox__indicator svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+.nb-combobox__anchor:has(.nb-combobox__input:focus-visible) { outline: 3px solid var(--nb-color-accent); outline-offset: 3px; }
+.nb-combobox__anchor:has(.nb-combobox__input:disabled) { opacity: 0.55; }
+.nb-combobox__content {
+  z-index: 50;
+  width: var(--reka-combobox-trigger-width);
+  max-height: min(24rem, var(--reka-combobox-content-available-height));
+  overflow: hidden;
+  border: var(--nb-border-width) solid var(--nb-color-ink);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-color-paper);
+  color: var(--nb-color-ink);
+}
+.nb-combobox__viewport { padding: 0.25rem; }
+.nb-combobox__item {
+  position: relative;
+  display: flex;
+  min-height: 2.25rem;
+  align-items: center;
+  border: 2px solid transparent;
+  border-radius: calc(var(--nb-radius-sm) - 0.1rem);
+  padding: 0.4rem 2rem 0.4rem 0.6rem;
+  outline: 0;
+  cursor: default;
+  user-select: none;
+}
+.nb-combobox__item[data-highlighted] { border-color: var(--nb-color-ink); background: var(--nb-color-primary); }
+.nb-combobox__item[data-disabled] { pointer-events: none; opacity: 0.45; }
+.nb-combobox__indicator { position: absolute; right: 0.55rem; display: grid; place-items: center; }
+.nb-combobox__empty { padding: 0.7rem; font-size: 0.85rem; font-weight: 700; }

@@ -3,6 +3,7 @@ import { h, nextTick } from 'vue'
 import { describe, expect, it } from 'vitest'
 import {
   NbCheckbox,
+  NbCombobox,
   NbFieldset,
   NbInput,
   NbInputGroup,
@@ -175,5 +176,32 @@ describe('form fields', () => {
     expect(group.attributes('aria-describedby')).toContain('hint')
     expect(items[0]?.attributes('aria-pressed')).toBe('true')
     expect(wrapper.findComponent(NbToggleGroup).emitted('update:modelValue')?.[0]).toEqual(['center'])
+  })
+
+  it('filters and selects a combobox option', async () => {
+    const wrapper = mount(NbCombobox, {
+      attachTo: document.body,
+      props: {
+        modelValue: 'vue',
+        label: 'Framework',
+        options: [
+          { value: 'vue', label: 'Vue' },
+          { value: 'react', label: 'React' },
+        ],
+      },
+    })
+
+    const input = wrapper.get('[role="combobox"]')
+    expect((input.element as HTMLInputElement).value).toBe('Vue')
+
+    await input.setValue('Rea')
+    await nextTick()
+    const option = document.body.querySelector<HTMLElement>('[role="option"][data-value="react"]')
+    option?.click()
+    await nextTick()
+
+    expect(option).not.toBeNull()
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['react'])
+    wrapper.unmount()
   })
 })
