@@ -253,3 +253,37 @@
 .nb-input-group__control { display: flex; min-width: 0; }
 .nb-input-group__control > :where(input, textarea, select) { width: 100%; min-width: 0; border: 0; background: transparent; color: var(--nb-color-ink); padding: 0.65rem 0.75rem; outline: 0; }
 .nb-input-group:has(.nb-input-group__control > :where(input, textarea, select):focus-visible) { outline: 3px solid var(--nb-color-accent); outline-offset: 3px; }
+
+.nb-number-input {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+  height: 2.75rem;
+  overflow: hidden;
+  border: var(--nb-border-width) solid var(--nb-color-ink);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-color-paper);
+}
+.nb-number-input__input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  border-right: var(--nb-border-width) solid var(--nb-color-ink);
+  border-left: var(--nb-border-width) solid var(--nb-color-ink);
+  background: var(--nb-color-paper);
+  color: var(--nb-color-ink);
+  padding: 0 0.7rem;
+  text-align: center;
+  outline: 0;
+}
+.nb-number-input__button {
+  border: 0;
+  background: var(--nb-color-primary);
+  color: var(--nb-color-ink);
+  font-family: var(--nb-font-display);
+  font-size: 1.25rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+.nb-number-input__button:disabled { cursor: not-allowed; opacity: 0.45; }
+.nb-number-input:has(.nb-number-input__input:focus-visible) { outline: 3px solid var(--nb-color-accent); outline-offset: 3px; }
+.nb-number-input:has(.nb-number-input__input:disabled) { opacity: 0.55; }

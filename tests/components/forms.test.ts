@@ -6,6 +6,7 @@ import {
   NbFieldset,
   NbInput,
   NbInputGroup,
+  NbNumberInput,
   NbRadioGroup,
   NbSelect,
   NbSelectItem,
@@ -109,5 +110,25 @@ describe('form fields', () => {
     expect(wrapper.element.children[0]?.textContent).toBe('@')
     expect(wrapper.element.children[1]?.querySelector('input')).toBeTruthy()
     expect(wrapper.element.children[2]?.textContent).toBe('.dev')
+  })
+
+  it('increments a labelled number field with the keyboard and exposes its error', async () => {
+    const wrapper = mount(NbNumberInput, {
+      props: {
+        modelValue: 2,
+        label: 'Seats',
+        error: 'Choose at least three seats',
+        min: 1,
+        max: 5,
+        step: 1,
+      },
+    })
+
+    const input = wrapper.get('[role="spinbutton"]')
+    await input.trigger('keydown', { key: 'ArrowUp' })
+
+    expect(input.attributes('aria-invalid')).toBe('true')
+    expect(input.attributes('aria-describedby')).toContain('error')
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([3])
   })
 })
