@@ -1,24 +1,30 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useForm } from 'vee-validate'
 import {
   NbAlert,
   NbBadge,
   NbButton,
   NbCard,
   NbCheckbox,
+  NbCombobox,
   NbDialog,
   NbFieldset,
   NbInput,
   NbInputGroup,
+  NbNumberInput,
   NbRadioGroup,
   NbSelect,
   NbSelectItem,
+  NbSlider,
   NbSwitch,
   NbTabs,
   NbTabsContent,
   NbTabsList,
   NbTabsTrigger,
   NbTextarea,
+  NbToggleGroup,
+  NbToggleGroupItem,
   NbTooltip,
 } from '../src'
 
@@ -32,12 +38,35 @@ const accepted = ref(false)
 const notifications = ref(true)
 const dialogOpen = ref(false)
 const activeTab = ref('buttons')
+const framework = ref('vue')
+const seats = ref(3)
+const volume = ref(65)
+const alignment = ref('center')
+const validationMessage = ref('')
 
 const plans = [
   { value: 'free', label: 'Free', description: 'For small experiments and wonderfully bad ideas.' },
   { value: 'pro', label: 'Pro', description: 'For shipping loud interfaces with a team.' },
   { value: 'studio', label: 'Studio', description: 'For agencies juggling several colorful products.' },
 ]
+
+const frameworks = [
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'react', label: 'React' },
+  { value: 'angular', label: 'Angular' },
+]
+
+const { defineField, errors, handleSubmit } = useForm({
+  initialValues: { workspace: '' },
+  validationSchema: {
+    workspace: (value: string) => value.trim().length >= 3 || 'Use at least three characters.',
+  },
+})
+const [workspace, workspaceAttrs] = defineField('workspace')
+const validateWorkspace = handleSubmit(({ workspace }) => {
+  validationMessage.value = `Saved “${workspace}”.`
+})
 </script>
 
 <template>
@@ -92,6 +121,38 @@ const plans = [
             </div>
           </NbFieldset>
 
+          <NbFieldset legend="Power controls" description="Search, step, slide, and choose without losing native form behavior.">
+            <div class="form-grid form-grid--advanced">
+              <NbCombobox
+                v-model="framework"
+                label="Framework"
+                hint="Type to filter the list."
+                name="framework"
+                :options="frameworks"
+              />
+              <NbNumberInput
+                v-model="seats"
+                label="Team seats"
+                hint="Arrow keys work too."
+                name="seats"
+                :min="1"
+                :max="12"
+              />
+              <NbSlider
+                v-model="volume"
+                label="Launch volume"
+                hint="Keyboard and pointer friendly."
+                name="volume"
+                :step="5"
+              />
+              <NbToggleGroup v-model="alignment" label="Alignment" hint="A composable single-choice group." name="alignment">
+                <NbToggleGroupItem value="left">Left</NbToggleGroupItem>
+                <NbToggleGroupItem value="center">Center</NbToggleGroupItem>
+                <NbToggleGroupItem value="right">Right</NbToggleGroupItem>
+              </NbToggleGroup>
+            </div>
+          </NbFieldset>
+
           <div class="form-grid form-grid--extras">
             <NbRadioGroup v-model="plan" label="Pick a plan" hint="The whole card is clickable." :options="plans" />
             <div class="form-stack form-stack--compact">
@@ -109,6 +170,21 @@ const plans = [
               <NbInput disabled label="Disabled field" model-value="No touching" />
             </div>
           </div>
+
+          <NbFieldset legend="VeeValidate" description="The core stays form-library agnostic; standard bindings do the work.">
+            <form class="validation-demo" @submit="validateWorkspace">
+              <NbInput
+                v-model="workspace"
+                v-bind="workspaceAttrs"
+                name="workspace"
+                label="Workspace name"
+                placeholder="loud-studio"
+                :error="errors.workspace"
+              />
+              <NbButton type="submit" variant="accent">Validate</NbButton>
+              <p class="validation-demo__status" role="status">{{ validationMessage }}</p>
+            </form>
+          </NbFieldset>
         </div>
       </NbTabsContent>
 

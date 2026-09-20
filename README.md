@@ -21,7 +21,7 @@ import { NbButton } from '@neobrut-vue/core'
 
 Available components:
 
-`NbAlert`, `NbBadge`, `NbButton`, `NbCard`, `NbCheckbox`, `NbDialog`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbRadioGroup`, `NbSelect`, `NbSelectItem`, `NbSwitch`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent`, `NbTextarea`, and `NbTooltip`.
+`NbAlert`, `NbBadge`, `NbButton`, `NbCard`, `NbCheckbox`, `NbCombobox`, `NbDialog`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbRadioGroup`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent`, `NbTextarea`, `NbToggleGroup`, `NbToggleGroupItem`, and `NbTooltip`.
 
 ## Tabs
 
@@ -83,6 +83,47 @@ const plans = [
   <input id="handle">
   <template #end>.dev</template>
 </NbInputGroup>
+```
+
+Searchable, numeric, range, and segmented controls use the same field contract:
+
+```vue
+<NbCombobox v-model="framework" label="Framework" name="framework" :options="frameworks" />
+<NbNumberInput v-model="seats" label="Seats" name="seats" :min="1" :max="12" />
+<NbSlider v-model="volume" label="Volume" name="volume" :step="5" />
+<NbToggleGroup v-model="alignment" label="Alignment" name="alignment">
+  <NbToggleGroupItem value="left">Left</NbToggleGroupItem>
+  <NbToggleGroupItem value="center">Center</NbToggleGroupItem>
+  <NbToggleGroupItem value="right">Right</NbToggleGroupItem>
+</NbToggleGroup>
+```
+
+## VeeValidate
+
+VeeValidate is optional. Bind its field model and attributes directly; `@neobrut-vue/core` does not depend on it:
+
+```vue
+<script setup lang="ts">
+import { useForm } from 'vee-validate'
+import { NbInput } from '@neobrut-vue/core'
+
+const { defineField, errors } = useForm({
+  validationSchema: {
+    email: (value: string) => value ? true : 'Email is required',
+  },
+})
+const [email, emailAttrs] = defineField('email')
+</script>
+
+<template>
+  <NbInput
+    v-model="email"
+    v-bind="emailAttrs"
+    name="email"
+    label="Email"
+    :error="errors.email"
+  />
+</template>
 ```
 
 ## Optional plugin
