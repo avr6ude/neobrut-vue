@@ -1,7 +1,7 @@
 {
   "name": "@neobrut-vue/core",
   "version": "0.1.0",
-  "description": "Colorful, accessible neo-brutalist components for Vue 3.",
+  "description": "Colorful and accessible neo-brutalist components for Vue 3.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/neobrut-vue.js",

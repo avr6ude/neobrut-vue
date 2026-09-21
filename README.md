@@ -1,6 +1,6 @@
 # @neobrut-vue/core
 
-Colorful, accessible neo-brutalist components for Vue 3. Hard borders, loud colors, native semantics.
+Colorful and accessible neo-brutalist components for Vue 3.
 
 ## Requirements
 
