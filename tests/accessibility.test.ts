@@ -8,6 +8,7 @@ import {
   NbAspectRatio,
   NbAvatar,
   NbButton,
+  NbButtonGroup,
   NbBreadcrumbs,
   NbCombobox,
   NbDialog,
@@ -17,6 +18,9 @@ import {
   NbFieldset,
   NbInput,
   NbInputGroup,
+  NbKbd,
+  NbLink,
+  NbMarker,
   NbNumberInput,
   NbPagination,
   NbPopover,
@@ -33,6 +37,7 @@ import {
   NbTabsList,
   NbTabsTrigger,
   NbToast,
+  NbToggle,
   NbToggleGroup,
   NbToggleGroupItem,
 } from '../src'
@@ -185,6 +190,32 @@ describe('accessible component states', () => {
           <NbSpinner label="Loading results" />
           <NbAspectRatio :ratio="16 / 9"><div>Preview</div></NbAspectRatio>
           <NbScrollArea label="Release notes"><p>Scrollable content</p></NbScrollArea>
+        </div>
+      `,
+    })
+
+    const results = await axe(wrapper.element, {
+      rules: {
+        region: { enabled: false },
+        'color-contrast': { enabled: false },
+      },
+    })
+    expect(results.violations).toEqual([])
+  })
+
+  it('has no axe violations in inline action states', async () => {
+    const wrapper = mount({
+      components: { NbButton, NbButtonGroup, NbKbd, NbLink, NbMarker, NbToggle },
+      template: `
+        <div>
+          <NbLink href="/docs">Read the docs</NbLink>
+          <NbMarker>New</NbMarker>
+          <NbKbd>Enter</NbKbd>
+          <NbToggle label="Pin project">Pin</NbToggle>
+          <NbButtonGroup label="Document actions">
+            <NbButton>Save</NbButton>
+            <NbButton variant="secondary">Share</NbButton>
+          </NbButtonGroup>
         </div>
       `,
     })

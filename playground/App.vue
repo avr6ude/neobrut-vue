@@ -10,6 +10,7 @@ import {
   NbBadge,
   NbBreadcrumbs,
   NbButton,
+  NbButtonGroup,
   NbCard,
   NbCheckbox,
   NbCombobox,
@@ -21,6 +22,9 @@ import {
   NbFieldset,
   NbInput,
   NbInputGroup,
+  NbKbd,
+  NbLink,
+  NbMarker,
   NbNumberInput,
   NbPagination,
   NbPopover,
@@ -41,6 +45,7 @@ import {
   NbTextarea,
   NbTable,
   NbToast,
+  NbToggle,
   NbToggleGroup,
   NbToggleGroupItem,
   NbTooltip,
@@ -64,6 +69,7 @@ const validationMessage = ref('')
 const toastOpen = ref(false)
 const menuAction = ref('Nothing selected yet.')
 const currentPage = ref(3)
+const pinned = ref(false)
 
 const plans = [
   { value: 'free', label: 'Free', description: 'For small experiments and wonderfully bad ideas.' },
@@ -119,12 +125,38 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
       </NbTabsList>
 
       <NbTabsContent value="buttons">
-        <div class="sample-row">
-          <NbButton variant="primary">Primary</NbButton>
-          <NbButton variant="secondary">Secondary</NbButton>
-          <NbButton variant="accent">Accent</NbButton>
-          <NbButton variant="danger">Danger</NbButton>
-          <NbButton variant="ghost">Ghost</NbButton>
+        <div class="action-grid">
+          <section class="action-panel action-panel--yellow">
+            <h2>Buttons</h2>
+            <div class="sample-row">
+              <NbButton variant="primary">Primary</NbButton>
+              <NbButton variant="secondary">Secondary</NbButton>
+              <NbButton variant="accent">Accent</NbButton>
+              <NbButton variant="danger">Danger</NbButton>
+              <NbButton variant="ghost">Ghost</NbButton>
+            </div>
+          </section>
+
+          <section class="action-panel action-panel--mint">
+            <h2>Actions that belong together</h2>
+            <NbButtonGroup label="Document actions">
+              <NbButton>Save</NbButton>
+              <NbButton variant="secondary">Share</NbButton>
+              <NbButton variant="accent">Export</NbButton>
+            </NbButtonGroup>
+            <NbToggle v-model="pinned" label="Pin component" tone="accent">
+              {{ pinned ? 'Pinned!' : 'Pin component' }}
+            </NbToggle>
+          </section>
+
+          <section class="action-panel action-panel--pink">
+            <h2>Links and inline details</h2>
+            <p>
+              <NbLink href="https://github.com/avr6ude/neobrut-vue">Read the docs</NbLink>
+              and ship something <NbMarker tone="primary">unmistakable</NbMarker>.
+            </p>
+            <p class="shortcut-row">Open search <NbKbd>⌘</NbKbd><NbKbd>K</NbKbd></p>
+          </section>
         </div>
       </NbTabsContent>
 

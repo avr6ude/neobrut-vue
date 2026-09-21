@@ -49,12 +49,40 @@ import { NbBadge, NbButton, NbCard } from '@neobrut-vue/core'
 
 | Group | Components |
 | --- | --- |
-| Actions and surfaces | `NbButton`, `NbCard`, `NbAlert`, `NbBadge` |
+| Actions and surfaces | `NbButton`, `NbButtonGroup`, `NbToggle`, `NbCard`, `NbAlert`, `NbBadge` |
 | Forms | `NbCheckbox`, `NbCombobox`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbRadioGroup`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTextarea`, `NbToggleGroup`, `NbToggleGroupItem` |
 | Navigation | `NbBreadcrumbs`, `NbPagination`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent` |
 | Overlays | `NbDialog`, `NbDropdownMenu`, `NbDropdownMenuItem`, `NbDropdownMenuSeparator`, `NbPopover`, `NbToast`, `NbTooltip` |
 | Data display | `NbAccordion`, `NbAccordionItem`, `NbAvatar`, `NbEmptyState`, `NbProgress`, `NbSkeleton`, `NbSpinner`, `NbTable` |
-| Layout | `NbAspectRatio`, `NbScrollArea`, `NbSeparator` |
+| Inline and layout | `NbLink`, `NbKbd`, `NbMarker`, `NbAspectRatio`, `NbScrollArea`, `NbSeparator` |
+
+## Links and actions
+
+`NbLink` forwards native anchor attributes and can render a router component through `as`. Related actions stay semantic and keyboard accessible:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NbButton, NbButtonGroup, NbKbd, NbLink, NbMarker, NbToggle } from '@neobrut-vue/core'
+
+const pinned = ref(false)
+</script>
+
+<template>
+  <p>
+    <NbLink href="/docs" tone="accent">Read the docs</NbLink>
+    and build something <NbMarker>loud</NbMarker>.
+  </p>
+
+  <NbButtonGroup label="Document actions">
+    <NbButton>Save</NbButton>
+    <NbButton variant="secondary">Share</NbButton>
+  </NbButtonGroup>
+
+  <NbToggle v-model="pinned" label="Pin project">Pin</NbToggle>
+  <span>Search with <NbKbd>⌘ K</NbKbd></span>
+</template>
+```
 
 ## Forms
 
