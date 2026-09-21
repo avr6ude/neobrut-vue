@@ -1,6 +1,12 @@
 # @neobrut-vue/core
 
+[![npm](https://img.shields.io/npm/v/%40neobrut-vue%2Fcore)](https://www.npmjs.com/package/@neobrut-vue/core)
+[![CI](https://github.com/avr6ude/neobrut-vue/actions/workflows/ci.yml/badge.svg)](https://github.com/avr6ude/neobrut-vue/actions/workflows/ci.yml)
+[![license](https://img.shields.io/npm/l/%40neobrut-vue%2Fcore)](https://github.com/avr6ude/neobrut-vue/blob/main/LICENSE)
+
 Colorful and accessible neo-brutalist components for Vue 3.
+
+[npm](https://www.npmjs.com/package/@neobrut-vue/core) · [GitHub](https://github.com/avr6ude/neobrut-vue) · [Issues](https://github.com/avr6ude/neobrut-vue/issues)
 
 ## Requirements
 

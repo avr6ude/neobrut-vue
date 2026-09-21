@@ -1,8 +1,16 @@
 {
   "name": "@neobrut-vue/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Colorful and accessible neo-brutalist components for Vue 3.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avr6ude/neobrut-vue.git"
+  },
+  "homepage": "https://github.com/avr6ude/neobrut-vue#readme",
+  "bugs": {
+    "url": "https://github.com/avr6ude/neobrut-vue/issues"
+  },
   "type": "module",
   "main": "./dist/neobrut-vue.js",
   "module": "./dist/neobrut-vue.js",
