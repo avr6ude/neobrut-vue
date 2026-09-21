@@ -13,12 +13,12 @@
 .nb-field__control {
   display: block;
   width: 100%;
-  min-height: 2.75rem;
+  height: 2.75rem;
   border: var(--nb-border-width) solid var(--nb-color-ink);
   border-radius: var(--nb-radius-sm);
   background: var(--nb-color-paper);
   color: var(--nb-color-ink);
-  padding: 0.7rem 0.8rem;
+  padding: 0 0.8rem;
 }
 
 .nb-select__trigger {
@@ -115,7 +115,7 @@
   cursor: pointer;
 }
 
-.nb-field__control--textarea { min-height: 7rem; resize: vertical; }
+.nb-field__control--textarea { height: auto; min-height: 7rem; padding: 0.7rem 0.8rem; resize: vertical; }
 .nb-field__control:disabled { cursor: not-allowed; opacity: 0.50; }
 .nb-field__hint, .nb-field__error { font-size: 0.8rem; }
 .nb-field__hint { color: color-mix(in srgb, var(--nb-color-ink) 65%, transparent); }

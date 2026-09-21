@@ -75,7 +75,7 @@ const classes = computed(() => cx(
 }
 
 .nb-button--sm { min-height: 2rem; padding: 0.5rem 0.75rem; font-size: 0.8rem; }
-.nb-button--md { min-height: 2.75rem; padding: 0.75rem 1rem; font-size: 0.95rem; }
+.nb-button--md { height: 2.75rem; padding: 0 1rem; font-size: 0.95rem; }
 .nb-button--lg { min-height: 3.25rem; padding: 0.9rem 1.25rem; font-size: 1.05rem; }
 .nb-button--primary { background: var(--nb-color-primary); }
 .nb-button--secondary { background: var(--nb-color-secondary); }
