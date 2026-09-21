@@ -17,12 +17,10 @@ export default defineConfig({
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
       name: 'NeoBrutVue',
       fileName: 'neobrut-vue',
+      formats: ['es'],
     },
     rollupOptions: {
       external: ['vue', 'reka-ui'],
-      output: {
-        globals: { vue: 'Vue', 'reka-ui': 'RekaUI' },
-      },
     },
   },
 })

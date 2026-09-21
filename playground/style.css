@@ -119,8 +119,8 @@ body { margin: 0; }
 }
 
 @media (max-width: 600px) {
-  .form-grid, .card-grid, .overlay-grid, .data-grid, .layout-grid { grid-template-columns: 1fr; }
-  .data-panel--wide, .layout-panel--wide { grid-column: auto; }
+  .form-grid, .card-grid, .overlay-grid, .data-grid { grid-template-columns: 1fr; }
+  .data-panel--wide { grid-column: auto; }
   .validation-demo { grid-template-columns: 1fr; align-items: stretch; }
   .validation-demo__status { grid-column: auto; }
   .form-grid__wide { grid-column: auto; }
