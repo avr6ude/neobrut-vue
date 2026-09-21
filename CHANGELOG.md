@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0
+
+- Added `NbLink`, `NbButtonGroup`, `NbToggle`, `NbKbd`, and `NbMarker`.
+- Added accessible examples and playground coverage for the new primitives.
+
 ## 0.1.1
 
 - Added package links and repository metadata.
