@@ -1,31 +1,153 @@
 # @neobrut-vue/core
 
-Opinionated Vue 3 components for colorful neo-brutalist interfaces.
+Colorful, accessible neo-brutalist components for Vue 3. Hard borders, loud colors, native semantics.
+
+## Requirements
+
+- Vue 3.5 or newer
+- A client-side Vue application
 
 ## Install
 
 ```bash
-bun add @neobrut-vue/core
+npm install @neobrut-vue/core
 ```
 
-Import the CSS once, then use named components:
+Import the stylesheet once in your application entry:
 
 ```ts
+import { createApp } from 'vue'
 import '@neobrut-vue/core/style.css'
-import { NbButton } from '@neobrut-vue/core'
+import App from './App.vue'
+
+createApp(App).mount('#app')
 ```
+
+Components are available as named imports:
 
 ```vue
-<NbButton variant="accent">Launch</NbButton>
+<script setup lang="ts">
+import { NbBadge, NbButton, NbCard } from '@neobrut-vue/core'
+</script>
+
+<template>
+  <NbCard tone="primary" interactive>
+    <template #header><NbBadge tone="accent">New</NbBadge></template>
+    <h2>Make it loud.</h2>
+    <template #footer><NbButton variant="accent">Launch</NbButton></template>
+  </NbCard>
+</template>
 ```
 
-Available components:
+## Components
 
-`NbAccordion`, `NbAccordionItem`, `NbAlert`, `NbAspectRatio`, `NbAvatar`, `NbBadge`, `NbBreadcrumbs`, `NbButton`, `NbCard`, `NbCheckbox`, `NbCombobox`, `NbDialog`, `NbDropdownMenu`, `NbDropdownMenuItem`, `NbDropdownMenuSeparator`, `NbEmptyState`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbPagination`, `NbPopover`, `NbProgress`, `NbRadioGroup`, `NbScrollArea`, `NbSelect`, `NbSelectItem`, `NbSeparator`, `NbSkeleton`, `NbSlider`, `NbSpinner`, `NbSwitch`, `NbTable`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent`, `NbTextarea`, `NbToast`, `NbToggleGroup`, `NbToggleGroupItem`, and `NbTooltip`.
+| Group | Components |
+| --- | --- |
+| Actions and surfaces | `NbButton`, `NbCard`, `NbAlert`, `NbBadge` |
+| Forms | `NbCheckbox`, `NbCombobox`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbRadioGroup`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTextarea`, `NbToggleGroup`, `NbToggleGroupItem` |
+| Navigation | `NbBreadcrumbs`, `NbPagination`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent` |
+| Overlays | `NbDialog`, `NbDropdownMenu`, `NbDropdownMenuItem`, `NbDropdownMenuSeparator`, `NbPopover`, `NbToast`, `NbTooltip` |
+| Data display | `NbAccordion`, `NbAccordionItem`, `NbAvatar`, `NbEmptyState`, `NbProgress`, `NbSkeleton`, `NbSpinner`, `NbTable` |
+| Layout | `NbAspectRatio`, `NbScrollArea`, `NbSeparator` |
 
-## Tabs
+## Forms
 
-Tabs use composable pieces so labels can contain icons, badges, or any other content:
+Form components use `v-model`, forward native input attributes, and expose labels, hints, and errors through the relevant ARIA relationships.
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import {
+  NbCheckbox,
+  NbInput,
+  NbSelect,
+  NbSelectItem,
+  NbSwitch,
+  NbTextarea,
+} from '@neobrut-vue/core'
+
+const name = ref('')
+const tone = ref('primary')
+const note = ref('')
+const alerts = ref(true)
+const accepted = ref(false)
+</script>
+
+<template>
+  <form>
+    <NbInput v-model="name" label="Name" required placeholder="Ada Lovelace" />
+
+    <NbSelect v-model="tone" label="Favorite tone">
+      <NbSelectItem value="primary">Electric blue</NbSelectItem>
+      <NbSelectItem value="accent">Bubblegum pink</NbSelectItem>
+    </NbSelect>
+
+    <NbTextarea v-model="note" label="Note" hint="Keep it short and loud." />
+    <NbSwitch v-model="alerts" label="Launch alerts" description="Notify me when it ships." />
+    <NbCheckbox v-model="accepted" label="I accept the chaos" />
+  </form>
+</template>
+```
+
+Searchable, numeric, range, and segmented controls share the same field contract:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import {
+  NbCombobox,
+  NbNumberInput,
+  NbSlider,
+  NbToggleGroup,
+  NbToggleGroupItem,
+  type NbComboboxOption,
+} from '@neobrut-vue/core'
+
+const frameworks: NbComboboxOption[] = [
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+]
+const framework = ref('vue')
+const seats = ref(3)
+const volume = ref(65)
+const alignment = ref('center')
+</script>
+
+<template>
+  <NbCombobox v-model="framework" label="Framework" :options="frameworks" />
+  <NbNumberInput v-model="seats" label="Seats" :min="1" :max="12" />
+  <NbSlider v-model="volume" label="Volume" :step="5" show-value />
+  <NbToggleGroup v-model="alignment" label="Alignment">
+    <NbToggleGroupItem value="left">Left</NbToggleGroupItem>
+    <NbToggleGroupItem value="center">Center</NbToggleGroupItem>
+    <NbToggleGroupItem value="right">Right</NbToggleGroupItem>
+  </NbToggleGroup>
+</template>
+```
+
+`NbInputGroup` attaches prefixes, suffixes, or small actions to a native input. Give the input its normal label or accessible name:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NbInputGroup } from '@neobrut-vue/core'
+
+const handle = ref('')
+</script>
+
+<template>
+  <label for="handle">Profile handle</label>
+  <NbInputGroup>
+    <template #start>@</template>
+    <input id="handle" v-model="handle" autocomplete="username">
+    <template #end>.dev</template>
+  </NbInputGroup>
+</template>
+```
+
+## Navigation and disclosure
+
+Tabs support controlled and uncontrolled state plus horizontal or vertical keyboard navigation:
 
 ```vue
 <script setup lang="ts">
@@ -39,68 +161,103 @@ const activeTab = ref('account')
   <NbTabs v-model="activeTab">
     <NbTabsList>
       <NbTabsTrigger value="account">Account</NbTabsTrigger>
-      <NbTabsTrigger value="password">Password</NbTabsTrigger>
+      <NbTabsTrigger value="billing">Billing</NbTabsTrigger>
     </NbTabsList>
     <NbTabsContent value="account">Account settings</NbTabsContent>
-    <NbTabsContent value="password">Password settings</NbTabsContent>
+    <NbTabsContent value="billing">Billing settings</NbTabsContent>
   </NbTabs>
 </template>
 ```
 
-Use `default-value` instead of `v-model` for uncontrolled tabs. Set `orientation="vertical"` for vertical keyboard and visual behavior.
+Use `default-value` instead of `v-model` for uncontrolled tabs. Accordions follow the same pattern:
 
-## Form primitives
+```vue
+<script setup lang="ts">
+import { NbAccordion, NbAccordionItem } from '@neobrut-vue/core'
+</script>
 
-The form components stay native: radio groups render radio inputs, switches retain a checkbox, and fieldsets use `fieldset`/`legend`.
+<template>
+  <NbAccordion default-value="shipping">
+    <NbAccordionItem value="shipping" title="How fast is shipping?">
+      Loudly fast.
+    </NbAccordionItem>
+    <NbAccordionItem value="returns" title="Can I return it?">
+      Absolutely.
+    </NbAccordionItem>
+  </NbAccordion>
+</template>
+```
+
+## Dialogs and menus
+
+`NbDialog` traps focus, closes on Escape, and restores focus to its trigger:
 
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NbFieldset, NbRadioGroup, NbSwitch } from '@neobrut-vue/core'
+import { NbButton, NbDialog } from '@neobrut-vue/core'
 
-const plan = ref('pro')
-const alerts = ref(true)
-const plans = [
-  { value: 'free', label: 'Free' },
-  { value: 'pro', label: 'Pro', description: 'For teams shipping regularly.' },
-]
+const open = ref(false)
 </script>
 
 <template>
-  <NbFieldset legend="Preferences" description="Change these whenever you like.">
-    <NbRadioGroup v-model="plan" label="Plan" :options="plans" />
-    <NbSwitch v-model="alerts" label="Launch alerts" />
-  </NbFieldset>
+  <NbButton @click="open = true">Open dialog</NbButton>
+  <NbDialog v-model:open="open" title="Confirm launch">
+    This action is delightfully irreversible.
+    <template #footer>
+      <NbButton variant="ghost" @click="open = false">Cancel</NbButton>
+      <NbButton variant="accent" @click="open = false">Launch</NbButton>
+    </template>
+  </NbDialog>
 </template>
 ```
 
-`NbInputGroup` keeps prefixes, suffixes, or small actions attached to a native input. Give the input its normal label or accessible name:
+Dropdown menus provide styled keyboard navigation through Reka UI:
 
 ```vue
-<label for="handle">Handle</label>
-<NbInputGroup>
-  <template #start>@</template>
-  <input id="handle">
-  <template #end>.dev</template>
-</NbInputGroup>
+<script setup lang="ts">
+import {
+  NbDropdownMenu,
+  NbDropdownMenuItem,
+  NbDropdownMenuSeparator,
+} from '@neobrut-vue/core'
+</script>
+
+<template>
+  <NbDropdownMenu label="Project actions">
+    <template #trigger>Actions</template>
+    <NbDropdownMenuItem>Duplicate</NbDropdownMenuItem>
+    <NbDropdownMenuSeparator />
+    <NbDropdownMenuItem destructive>Delete</NbDropdownMenuItem>
+  </NbDropdownMenu>
+</template>
 ```
 
-Searchable, numeric, range, and segmented controls use the same field contract:
+## Data display
 
 ```vue
-<NbCombobox v-model="framework" label="Framework" name="framework" :options="frameworks" />
-<NbNumberInput v-model="seats" label="Seats" name="seats" :min="1" :max="12" />
-<NbSlider v-model="volume" label="Volume" name="volume" :step="5" />
-<NbToggleGroup v-model="alignment" label="Alignment" name="alignment">
-  <NbToggleGroupItem value="left">Left</NbToggleGroupItem>
-  <NbToggleGroupItem value="center">Center</NbToggleGroupItem>
-  <NbToggleGroupItem value="right">Right</NbToggleGroupItem>
-</NbToggleGroup>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NbAvatar, NbPagination, NbProgress, NbTable } from '@neobrut-vue/core'
+
+const page = ref(1)
+</script>
+
+<template>
+  <NbAvatar name="Ada Lovelace" size="lg" />
+  <NbProgress :value="72" label="Package build" show-value />
+  <NbPagination v-model:page="page" :total="120" :items-per-page="10" />
+
+  <NbTable caption="Release status">
+    <thead><tr><th>Package</th><th>Status</th></tr></thead>
+    <tbody><tr><td>Core</td><td>Ready</td></tr></tbody>
+  </NbTable>
+</template>
 ```
 
 ## VeeValidate
 
-VeeValidate is optional. Bind its field model and attributes directly; `@neobrut-vue/core` does not depend on it:
+VeeValidate is optional. Standard model and attribute bindings work without an adapter:
 
 ```vue
 <script setup lang="ts">
@@ -126,13 +283,14 @@ const [email, emailAttrs] = defineField('email')
 </template>
 ```
 
-## Optional plugin
+## Global registration
 
-Named imports are preferred. If global registration is useful, install the plugin:
+Named imports are preferred. For templates that need every component globally, install the optional plugin:
 
 ```ts
 import { createApp } from 'vue'
 import { NeoBrutalVue } from '@neobrut-vue/core'
+import '@neobrut-vue/core/style.css'
 import App from './App.vue'
 
 createApp(App).use(NeoBrutalVue).mount('#app')
@@ -140,24 +298,38 @@ createApp(App).use(NeoBrutalVue).mount('#app')
 
 ## Theming
 
-Override the CSS custom properties on `:root` or a wrapper:
+Override CSS custom properties on `:root` or any wrapper. Components inherit the nearest values.
 
 ```css
 :root {
+  --nb-color-paper: #fff8e7;
+  --nb-color-ink: #171717;
   --nb-color-primary: #ffdf3f;
+  --nb-color-secondary: #72ddc3;
   --nb-color-accent: #ff7b71;
-  --nb-border-width: 4px;
-  --nb-shadow-x: 8px;
-  --nb-shadow-y: 8px;
+  --nb-color-danger: #ff4d5a;
+  --nb-border-width: 3px;
+  --nb-shadow-x: 7px;
+  --nb-shadow-y: 7px;
 }
 ```
 
 ## Accessibility
 
-Components prefer native HTML semantics. Form controls connect labels, hints, and errors with IDs and `aria-describedby`; invalid fields expose `aria-invalid`. Interactive and status components implement their relevant keyboard and ARIA patterns, including accordions, dialogs, menus, pagination, progress, popovers, tabs, toasts, and tooltips. Consumers should still provide meaningful labels and content.
+The components prefer native elements and established ARIA patterns. Labels, hints, errors, invalid states, dialog focus management, menu navigation, tabs, accordions, progress, pagination, toasts, and tooltips are covered by automated axe tests and browser checks.
 
-## Local playground
+Consumers are still responsible for meaningful labels, sensible content, heading order, and sufficient contrast after overriding theme tokens.
+
+## Development
 
 ```bash
+bun install
 bun run dev:playground
+bun run check
 ```
+
+`bun run check` runs the tests, TypeScript validation, and production build. `npm pack --dry-run` runs the same checks and prints the exact files that would be published.
+
+## License
+
+MIT
