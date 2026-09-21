@@ -1,19 +1,33 @@
 {
   "name": "@neobrut-vue/core",
   "version": "0.1.0",
-  "private": true,
+  "description": "Colorful, accessible neo-brutalist components for Vue 3.",
+  "license": "MIT",
   "type": "module",
-  "files": ["dist", "README.md"],
+  "main": "./dist/neobrut-vue.js",
+  "module": "./dist/neobrut-vue.js",
+  "types": "./dist/index.d.ts",
+  "style": "./dist/neobrut-vue.css",
+  "files": ["dist", "README.md", "CHANGELOG.md", "LICENSE"],
+  "sideEffects": ["**/*.css"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/neobrut-vue.js"
+      "import": "./dist/neobrut-vue.js",
+      "default": "./dist/neobrut-vue.js"
     },
-    "./style.css": "./dist/neobrut-vue.css"
+    "./style.css": "./dist/neobrut-vue.css",
+    "./package.json": "./package.json"
+  },
+  "keywords": ["vue", "vue3", "components", "ui", "neobrutalism", "accessible"],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "vite build",
+    "check": "bun run test -- --run && bun run typecheck && bun run build",
     "dev:playground": "vite --config playground/vite.config.ts",
+    "prepack": "bun run check",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "typecheck": "vue-tsc --noEmit"
