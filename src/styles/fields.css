@@ -119,7 +119,7 @@
 .nb-field__control:disabled { cursor: not-allowed; opacity: 0.50; }
 .nb-field__hint, .nb-field__error { font-size: 0.8rem; }
 .nb-field__hint { color: color-mix(in srgb, var(--nb-color-ink) 65%, transparent); }
-.nb-field__error { color: var(--nb-color-danger); font-weight: 700; }
+.nb-field__error { color: color-mix(in srgb, var(--nb-color-danger) 60%, var(--nb-color-ink)); font-weight: 700; }
 
 .nb-checkbox {
   display: inline-flex;

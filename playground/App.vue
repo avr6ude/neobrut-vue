@@ -94,7 +94,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
   <main class="playground nb-root">
     <header class="hero">
       <NbBadge tone="accent">@neobrut-vue/core</NbBadge>
-      <h1>Make it loud.</h1>
+      <h1>Make it<br>loud.</h1>
       <p>Colorful, tactile UI primitives for interfaces with a pulse.</p>
       <div class="hero__actions">
         <NbButton variant="primary" size="lg" @click="dialogOpen = true">Open dialog</NbButton>
