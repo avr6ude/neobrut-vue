@@ -51,8 +51,8 @@ import { NbBadge, NbButton, NbCard } from '@neobrut-vue/core'
 | --- | --- |
 | Actions and surfaces | `NbButton`, `NbButtonGroup`, `NbToggle`, `NbCard`, `NbAlert`, `NbBadge` |
 | Forms | `NbCheckbox`, `NbCombobox`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbRadioGroup`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTextarea`, `NbToggleGroup`, `NbToggleGroupItem` |
-| Navigation | `NbBreadcrumbs`, `NbPagination`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent` |
-| Overlays | `NbDialog`, `NbDropdownMenu`, `NbDropdownMenuItem`, `NbDropdownMenuSeparator`, `NbPopover`, `NbToast`, `NbTooltip` |
+| Navigation | `NbBreadcrumbs`, `NbNavigationMenu`, `NbPagination`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent` |
+| Overlays | `NbAlertDialog`, `NbCommand`, `NbContextMenu`, `NbDialog`, `NbDropdownMenu`, `NbHoverCard`, `NbPopover`, `NbSheet`, `NbToast`, `NbTooltip` |
 | Data display | `NbAccordion`, `NbAccordionItem`, `NbAvatar`, `NbEmptyState`, `NbProgress`, `NbSkeleton`, `NbSpinner`, `NbTable` |
 | Inline and layout | `NbLink`, `NbKbd`, `NbMarker`, `NbAspectRatio`, `NbScrollArea`, `NbSeparator` |
 
@@ -266,6 +266,41 @@ import {
   </NbDropdownMenu>
 </template>
 ```
+
+Sheets, alert dialogs, and command menus use the same controlled or uncontrolled open-state pattern:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NbAlertDialog, NbCommand, NbSheet, type NbCommandOption } from '@neobrut-vue/core'
+
+const selected = ref('')
+const commands: NbCommandOption[] = [
+  { value: 'new', label: 'New component', group: 'Project', shortcut: '⌘N' },
+  { value: 'publish', label: 'Publish package', group: 'Project', keywords: ['release'] },
+]
+</script>
+
+<template>
+  <NbSheet title="Edit component" side="right">
+    <template #trigger>Edit</template>
+    Sheet content
+  </NbSheet>
+
+  <NbAlertDialog
+    title="Delete component?"
+    description="This action cannot be undone."
+    action-label="Delete"
+    destructive
+  >
+    <template #trigger>Delete</template>
+  </NbAlertDialog>
+
+  <NbCommand v-model="selected" :options="commands" label="Project commands" />
+</template>
+```
+
+`NbContextMenu` includes item, checkbox, radio, submenu, label, separator, and shortcut primitives. `NbHoverCard` preserves the semantics of its slotted trigger, while `NbNavigationMenu` accepts a small data-driven link tree.
 
 ## Data display
 

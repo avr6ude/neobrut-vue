@@ -67,6 +67,7 @@ body { margin: 0; }
 .card-grid h2 { margin: 0 0 0.5rem; font-family: var(--nb-font-display); }
 .card-grid p { margin: 0; }
 .overlay-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.overlay-navigation { margin-bottom: 1.25rem; }
 .overlay-demo {
   display: flex;
   min-height: 18rem;
@@ -82,8 +83,11 @@ body { margin: 0; }
 .overlay-demo--yellow { background: var(--nb-color-primary); }
 .overlay-demo--mint { background: var(--nb-color-secondary); }
 .overlay-demo--pink { background: var(--nb-color-accent); }
+.overlay-demo--wide { grid-column: span 2; }
 .overlay-demo h2 { margin: 0.75rem 0 0.5rem; font-family: var(--nb-font-display); font-size: 1.5rem; line-height: 1; }
 .overlay-demo p, .overlay-copy { margin: 0; }
+.overlay-demo .nb-command { width: 100%; }
+.context-target { border: var(--nb-border-width) dashed var(--nb-color-ink); border-radius: var(--nb-radius-sm); background: rgb(255 255 255 / 45%); padding: 1.25rem; font-family: var(--nb-font-display); font-weight: 900; text-align: center; }
 .data-stack { display: grid; gap: 1.25rem; }
 .data-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .data-panel {
@@ -129,6 +133,7 @@ body { margin: 0; }
 
 @media (max-width: 600px) {
   .action-grid, .form-grid, .card-grid, .overlay-grid, .data-grid { grid-template-columns: 1fr; }
+  .overlay-demo--wide { grid-column: auto; }
   .action-panel:first-child { grid-column: auto; }
   .data-panel--wide { grid-column: auto; }
   .validation-demo { grid-template-columns: 1fr; align-items: stretch; }

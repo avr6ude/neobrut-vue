@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0
+
+- Added `NbSheet`, `NbAlertDialog`, `NbContextMenu`, `NbCommand`, `NbHoverCard`, and `NbNavigationMenu`.
+- Added accessible playground and README examples for navigation and advanced overlays.
+
 ## 0.2.0
 
 - Added `NbLink`, `NbButtonGroup`, `NbToggle`, `NbKbd`, and `NbMarker`.

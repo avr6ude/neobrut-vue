@@ -5,6 +5,7 @@ import {
   NbAccordion,
   NbAccordionItem,
   NbAlert,
+  NbAlertDialog,
   NbAspectRatio,
   NbAvatar,
   NbBadge,
@@ -14,17 +15,26 @@ import {
   NbCard,
   NbCheckbox,
   NbCombobox,
+  NbCommand,
+  NbContextMenu,
+  NbContextMenuCheckboxItem,
+  NbContextMenuItem,
+  NbContextMenuLabel,
+  NbContextMenuSeparator,
+  NbContextMenuShortcut,
   NbDialog,
   NbDropdownMenu,
   NbDropdownMenuItem,
   NbDropdownMenuSeparator,
   NbEmptyState,
   NbFieldset,
+  NbHoverCard,
   NbInput,
   NbInputGroup,
   NbKbd,
   NbLink,
   NbMarker,
+  NbNavigationMenu,
   NbNumberInput,
   NbPagination,
   NbPopover,
@@ -34,6 +44,7 @@ import {
   NbSelect,
   NbSelectItem,
   NbSeparator,
+  NbSheet,
   NbSkeleton,
   NbSlider,
   NbSpinner,
@@ -70,6 +81,8 @@ const toastOpen = ref(false)
 const menuAction = ref('Nothing selected yet.')
 const currentPage = ref(3)
 const pinned = ref(false)
+const gridVisible = ref(true)
+const commandValue = ref('')
 
 const plans = [
   { value: 'free', label: 'Free', description: 'For small experiments and wonderfully bad ideas.' },
@@ -82,6 +95,25 @@ const frameworks = [
   { value: 'svelte', label: 'Svelte' },
   { value: 'react', label: 'React' },
   { value: 'angular', label: 'Angular' },
+]
+
+const commands = [
+  { value: 'new', label: 'New component', group: 'Project', shortcut: '⌘N' },
+  { value: 'publish', label: 'Publish package', group: 'Project', shortcut: '⌘P', keywords: ['release', 'npm'] },
+  { value: 'theme', label: 'Change theme', group: 'Settings' },
+]
+
+const navigationItems = [
+  { label: 'Docs', href: '#docs' },
+  {
+    label: 'Components',
+    children: [
+      { label: 'Actions', href: '#actions', description: 'Buttons, toggles, and links.' },
+      { label: 'Forms', href: '#forms', description: 'Inputs without the beige.' },
+      { label: 'Overlays', href: '#overlays', description: 'Focused layers with proper focus.' },
+    ],
+  },
+  { label: 'GitHub', href: 'https://github.com/avr6ude/neobrut-vue' },
 ]
 
 const { defineField, errors, handleSubmit } = useForm({
@@ -257,6 +289,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
       </NbTabsContent>
 
       <NbTabsContent value="overlays">
+        <NbNavigationMenu class="overlay-navigation" label="Component demo navigation" :items="navigationItems" />
         <div class="overlay-grid">
           <section class="overlay-demo overlay-demo--yellow">
             <div>
@@ -297,6 +330,56 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
                 <NbButton variant="ghost">Tooltip</NbButton>
               </NbTooltip>
             </div>
+          </section>
+
+          <section class="overlay-demo overlay-demo--wide overlay-demo--yellow">
+            <div>
+              <NbBadge tone="accent">Command</NbBadge>
+              <h2>Find the action. Run the action.</h2>
+              <p>{{ commandValue ? `Selected: ${commandValue}` : 'Type “publish” or use the arrow keys.' }}</p>
+            </div>
+            <NbCommand v-model="commandValue" :options="commands" label="Demo commands" />
+          </section>
+
+          <section class="overlay-demo overlay-demo--mint">
+            <div>
+              <NbBadge tone="primary">Panels</NbBadge>
+              <h2>Big decisions, clear exits.</h2>
+              <p>Sheets keep context. Alert dialogs demand a real answer.</p>
+            </div>
+            <div class="sample-row">
+              <NbSheet title="Edit component" description="Make the loud thing even louder.">
+                <template #trigger>Open sheet</template>
+                <NbInput label="Component name" model-value="ExplosiveButton" />
+                <template #footer><NbButton variant="accent">Save changes</NbButton></template>
+              </NbSheet>
+              <NbAlertDialog
+                title="Delete component?"
+                description="This removes it from the demo immediately."
+                action-label="Delete"
+                destructive
+              >
+                <template #trigger>Delete…</template>
+              </NbAlertDialog>
+            </div>
+          </section>
+
+          <section class="overlay-demo overlay-demo--pink">
+            <div>
+              <NbBadge tone="secondary">Context</NbBadge>
+              <h2>More where you expect it.</h2>
+              <p>
+                Meet <NbHoverCard :open-delay="250"><template #trigger><NbLink href="#ada">Ada Lovelace</NbLink></template>Mathematician, writer, and very early programmer.</NbHoverCard>
+              </p>
+            </div>
+            <NbContextMenu>
+              <template #trigger><div class="context-target" tabindex="0">Right-click this card</div></template>
+              <NbContextMenuLabel>Canvas</NbContextMenuLabel>
+              <NbContextMenuItem>Duplicate <NbContextMenuShortcut>⌘D</NbContextMenuShortcut></NbContextMenuItem>
+              <NbContextMenuCheckboxItem v-model="gridVisible">Show grid</NbContextMenuCheckboxItem>
+              <NbContextMenuSeparator />
+              <NbContextMenuItem destructive>Delete</NbContextMenuItem>
+            </NbContextMenu>
           </section>
         </div>
       </NbTabsContent>
