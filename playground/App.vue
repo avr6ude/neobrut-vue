@@ -364,7 +364,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
             </div>
           </section>
 
-          <section class="overlay-demo overlay-demo--pink">
+          <section class="overlay-demo overlay-demo--full overlay-demo--pink">
             <div>
               <NbBadge tone="secondary">Context</NbBadge>
               <h2>More where you expect it.</h2>

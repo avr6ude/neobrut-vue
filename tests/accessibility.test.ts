@@ -5,28 +5,35 @@ import { axe } from 'vitest-axe'
 import {
   NbAccordion,
   NbAccordionItem,
+  NbAlertDialog,
   NbAspectRatio,
   NbAvatar,
   NbButton,
   NbButtonGroup,
   NbBreadcrumbs,
   NbCombobox,
+  NbCommand,
+  NbContextMenu,
+  NbContextMenuItem,
   NbDialog,
   NbDropdownMenu,
   NbDropdownMenuItem,
   NbEmptyState,
   NbFieldset,
+  NbHoverCard,
   NbInput,
   NbInputGroup,
   NbKbd,
   NbLink,
   NbMarker,
+  NbNavigationMenu,
   NbNumberInput,
   NbPagination,
   NbPopover,
   NbProgress,
   NbRadioGroup,
   NbScrollArea,
+  NbSheet,
   NbSlider,
   NbSpinner,
   NbSkeleton,
@@ -227,5 +234,52 @@ describe('accessible component states', () => {
       },
     })
     expect(results.violations).toEqual([])
+  })
+
+  it('has no axe violations in advanced interaction states', async () => {
+    const fixtures = [
+      () => mount(NbSheet, {
+        attachTo: document.body,
+        props: { defaultOpen: true, title: 'Edit profile', description: 'Update your public details.' },
+        slots: { trigger: 'Open profile', default: 'Profile fields' },
+      }),
+      () => mount(NbAlertDialog, {
+        attachTo: document.body,
+        props: { defaultOpen: true, title: 'Delete project?', description: 'This cannot be undone.' },
+        slots: { trigger: 'Delete project' },
+      }),
+      () => mount(NbCommand, {
+        attachTo: document.body,
+        props: { dialog: true, defaultOpen: true, label: 'Quick actions', options: [{ value: 'new', label: 'New project' }] },
+        slots: { trigger: 'Open commands' },
+      }),
+      () => mount(NbHoverCard, {
+        attachTo: document.body,
+        props: { defaultOpen: true },
+        slots: { trigger: '<a href="/ada">Ada Lovelace</a>', default: 'First computer programmer' },
+      }),
+      () => mount({
+        components: { NbContextMenu, NbContextMenuItem },
+        template: '<NbContextMenu default-open><template #trigger><div>Canvas</div></template><NbContextMenuItem>Duplicate</NbContextMenuItem></NbContextMenu>',
+      }, { attachTo: document.body }),
+      () => mount(NbNavigationMenu, {
+        attachTo: document.body,
+        props: { label: 'Main navigation', items: [{ label: 'Docs', href: '/docs' }] },
+      }),
+    ]
+
+    for (const render of fixtures) {
+      const wrapper = render()
+      await nextTick()
+      const results = await axe(document.body, {
+        rules: {
+          region: { enabled: false },
+          'color-contrast': { enabled: false },
+        },
+      })
+      expect(results.violations).toEqual([])
+      wrapper.unmount()
+      document.body.innerHTML = ''
+    }
   })
 })

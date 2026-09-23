@@ -9,8 +9,6 @@ describe('command and navigation primitives', () => {
   })
 
   it('filters and selects command actions', async () => {
-    expect(core.NbCommand).toBeTruthy()
-
     const deploy = { value: 'deploy', label: 'Deploy project', group: 'Project', shortcut: '⌘D' }
     const wrapper = mount(core.NbCommand, {
       props: {
@@ -34,8 +32,6 @@ describe('command and navigation primitives', () => {
   })
 
   it('can present the command menu as a labelled dialog', async () => {
-    expect(core.NbCommand).toBeTruthy()
-
     mount(core.NbCommand, {
       props: {
         dialog: true,
@@ -54,8 +50,6 @@ describe('command and navigation primitives', () => {
   })
 
   it('renders labelled navigation and reveals grouped links', async () => {
-    expect(core.NbNavigationMenu).toBeTruthy()
-
     const wrapper = mount(core.NbNavigationMenu, {
       props: {
         label: 'Main navigation',

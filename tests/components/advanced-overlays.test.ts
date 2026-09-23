@@ -9,8 +9,6 @@ describe('advanced overlay primitives', () => {
   })
 
   it('opens and closes a labelled sheet from its trigger', async () => {
-    expect(core.NbSheet).toBeTruthy()
-
     const wrapper = mount(core.NbSheet, {
       attachTo: document.body,
       props: { title: 'Edit profile', side: 'right' },
@@ -31,8 +29,6 @@ describe('advanced overlay primitives', () => {
   })
 
   it('requires an explicit decision in an alert dialog', async () => {
-    expect(core.NbAlertDialog).toBeTruthy()
-
     const wrapper = mount(core.NbAlertDialog, {
       attachTo: document.body,
       props: {
@@ -56,11 +52,7 @@ describe('advanced overlay primitives', () => {
     expect(wrapper.emitted('update:open')?.at(-1)).toEqual([false])
   })
 
-  it('opens a context menu and selects its actions', async () => {
-    expect(core.NbContextMenu).toBeTruthy()
-    expect(core.NbContextMenuItem).toBeTruthy()
-    expect(core.NbContextMenuCheckboxItem).toBeTruthy()
-
+  it('forwards context-menu choices and actions', async () => {
     const wrapper = mount({
       components: {
         NbContextMenu: core.NbContextMenu,
@@ -81,13 +73,43 @@ describe('advanced overlay primitives', () => {
 
     const items = document.body.querySelectorAll<HTMLElement>('[role^="menuitem"]')
     expect(items).toHaveLength(2)
-    items[0]?.click()
+    items[1]?.click()
+    await nextTick()
+    expect((wrapper.vm as unknown as { grid: boolean }).grid).toBe(true)
+
+    await wrapper.get('[data-trigger]').trigger('contextmenu')
+    document.body.querySelector<HTMLElement>('[role="menuitem"]')?.click()
     expect(wrapper.emitted('duplicate')).toHaveLength(1)
   })
 
-  it('preserves link semantics while showing a hover card', async () => {
-    expect(core.NbHoverCard).toBeTruthy()
+  it('forwards context-menu radio choices', async () => {
+    const wrapper = mount({
+      components: {
+        NbContextMenu: core.NbContextMenu,
+        NbContextMenuRadioGroup: core.NbContextMenuRadioGroup,
+        NbContextMenuRadioItem: core.NbContextMenuRadioItem,
+      },
+      data: () => ({ tone: 'yellow' }),
+      template: `
+        <NbContextMenu>
+          <template #trigger><div data-trigger>Canvas</div></template>
+          <NbContextMenuRadioGroup v-model="tone">
+            <NbContextMenuRadioItem value="yellow">Yellow</NbContextMenuRadioItem>
+            <NbContextMenuRadioItem value="pink">Pink</NbContextMenuRadioItem>
+          </NbContextMenuRadioGroup>
+        </NbContextMenu>
+      `,
+    }, { attachTo: document.body })
 
+    await wrapper.get('[data-trigger]').trigger('contextmenu')
+    const choices = document.body.querySelectorAll<HTMLElement>('[role="menuitemradio"]')
+    choices[1]?.click()
+    await nextTick()
+
+    expect((wrapper.vm as unknown as { tone: string }).tone).toBe('pink')
+  })
+
+  it('preserves link semantics while showing a hover card', async () => {
     const wrapper = mount(core.NbHoverCard, {
       attachTo: document.body,
       props: { defaultOpen: true },
