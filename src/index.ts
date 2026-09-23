@@ -11,6 +11,7 @@ import { NbButtonGroup } from './components/NbButtonGroup'
 import { NbCard } from './components/NbCard'
 import { NbCheckbox } from './components/NbCheckbox'
 import { NbCombobox } from './components/NbCombobox'
+import { NbCommand } from './components/NbCommand'
 import { NbContextMenu, NbContextMenuCheckboxItem, NbContextMenuItem, NbContextMenuLabel, NbContextMenuRadioGroup, NbContextMenuRadioItem, NbContextMenuSeparator, NbContextMenuShortcut, NbContextMenuSub } from './components/NbContextMenu'
 import { NbAlert } from './components/NbAlert'
 import { NbAlertDialog } from './components/NbAlertDialog'
@@ -24,6 +25,7 @@ import { NbHoverCard } from './components/NbHoverCard'
 import { NbKbd } from './components/NbKbd'
 import { NbLink } from './components/NbLink'
 import { NbMarker } from './components/NbMarker'
+import { NbNavigationMenu } from './components/NbNavigationMenu'
 import { NbNumberInput } from './components/NbNumberInput'
 import { NbPagination } from './components/NbPagination'
 import { NbPopover } from './components/NbPopover'
@@ -45,11 +47,13 @@ import { NbToggle } from './components/NbToggle'
 import { NbToggleGroup, NbToggleGroupItem } from './components/NbToggleGroup'
 import { NbTooltip } from './components/NbTooltip'
 
-export { NbAccordion, NbAccordionItem, NbAlert, NbAlertDialog, NbAspectRatio, NbAvatar, NbBadge, NbBreadcrumbs, NbButton, NbButtonGroup, NbCard, NbCheckbox, NbCombobox, NbContextMenu, NbContextMenuCheckboxItem, NbContextMenuItem, NbContextMenuLabel, NbContextMenuRadioGroup, NbContextMenuRadioItem, NbContextMenuSeparator, NbContextMenuShortcut, NbContextMenuSub, NbDialog, NbDropdownMenu, NbDropdownMenuItem, NbDropdownMenuSeparator, NbEmptyState, NbFieldset, NbHoverCard, NbInput, NbInputGroup, NbKbd, NbLink, NbMarker, NbNumberInput, NbPagination, NbPopover, NbProgress, NbRadioGroup, NbScrollArea, NbSelect, NbSelectItem, NbSeparator, NbSheet, NbSkeleton, NbSlider, NbSpinner, NbSwitch, NbTable, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTextarea, NbToast, NbToggle, NbToggleGroup, NbToggleGroupItem, NbTooltip }
+export { NbAccordion, NbAccordionItem, NbAlert, NbAlertDialog, NbAspectRatio, NbAvatar, NbBadge, NbBreadcrumbs, NbButton, NbButtonGroup, NbCard, NbCheckbox, NbCombobox, NbCommand, NbContextMenu, NbContextMenuCheckboxItem, NbContextMenuItem, NbContextMenuLabel, NbContextMenuRadioGroup, NbContextMenuRadioItem, NbContextMenuSeparator, NbContextMenuShortcut, NbContextMenuSub, NbDialog, NbDropdownMenu, NbDropdownMenuItem, NbDropdownMenuSeparator, NbEmptyState, NbFieldset, NbHoverCard, NbInput, NbInputGroup, NbKbd, NbLink, NbMarker, NbNavigationMenu, NbNumberInput, NbPagination, NbPopover, NbProgress, NbRadioGroup, NbScrollArea, NbSelect, NbSelectItem, NbSeparator, NbSheet, NbSkeleton, NbSlider, NbSpinner, NbSwitch, NbTable, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTextarea, NbToast, NbToggle, NbToggleGroup, NbToggleGroupItem, NbTooltip }
 export type { NbBreadcrumbItem } from './components/NbBreadcrumbs'
 export type { NbComboboxOption } from './components/NbCombobox'
+export type { NbCommandOption } from './components/NbCommand'
 export type { NbLinkTone } from './components/NbLink'
 export type { NbMarkerTone } from './components/NbMarker'
+export type { NbNavigationItem } from './components/NbNavigationMenu'
 export type { NbRadioOption } from './components/NbRadioGroup'
 export type { NbSheetSide } from './components/NbSheet'
 export type { NbTabsOrientation } from './components/NbTabs'
@@ -71,6 +75,7 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbCard,
   NbCheckbox,
   NbCombobox,
+  NbCommand,
   NbContextMenu,
   NbContextMenuCheckboxItem,
   NbContextMenuItem,
@@ -92,6 +97,7 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbKbd,
   NbLink,
   NbMarker,
+  NbNavigationMenu,
   NbNumberInput,
   NbPagination,
   NbPopover,
