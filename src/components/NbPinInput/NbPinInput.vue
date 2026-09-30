@@ -26,6 +26,10 @@ const emit = defineEmits<{
 const ids = createFieldIds('pin-input', props.id)
 const labelId = `${ids.inputId}-label`
 const describedById = computed(() => describedBy(props.hint, props.error, ids.hintId, ids.errorId))
+
+function rejectLetter(event: InputEvent) {
+  if (event.inputType === 'insertText' && event.data && /\D/.test(event.data)) event.preventDefault()
+}
 </script>
 
 <template>
@@ -49,7 +53,7 @@ const describedById = computed(() => describedBy(props.hint, props.error, ids.hi
       @update:model-value="emit('update:modelValue', $event)"
       @complete="emit('complete', $event)"
     >
-      <PinInputInput v-for="index in length" :key="index" class="nb-pin-input__digit" :index="index - 1" :required="required" />
+      <PinInputInput v-for="index in length" :key="index" class="nb-pin-input__digit" :index="index - 1" :required="required" @beforeinput="rejectLetter" />
     </PinInputRoot>
     <span v-if="hint" :id="ids.hintId" class="nb-field__hint">{{ hint }}</span>
     <span v-if="error" :id="ids.errorId" class="nb-field__error">{{ error }}</span>

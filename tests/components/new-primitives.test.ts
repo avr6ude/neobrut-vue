@@ -74,6 +74,18 @@ describe('new primitives', () => {
     expect(wrapper.emitted('complete')).toBeUndefined()
   })
 
+  it('keeps an existing PIN digit when a letter is typed over it', () => {
+    const wrapper = mount(NbPinInput, { props: { label: 'Code', length: 4, modelValue: [1, 2, 3, 4] } })
+    const input = wrapper.get('.nb-pin-input__digit').element as HTMLInputElement
+    const letter = new InputEvent('beforeinput', { bubbles: true, cancelable: true, data: 'a', inputType: 'insertText' })
+
+    input.dispatchEvent(letter)
+
+    expect(letter.defaultPrevented).toBe(true)
+    expect(input.value).toBe('1')
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+  })
+
   it('blocks a required tags field without an explicit name until a tag is committed', async () => {
     const wrapper = mount({
       components: { NbTagsInput },
