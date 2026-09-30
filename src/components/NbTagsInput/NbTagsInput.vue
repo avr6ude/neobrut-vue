@@ -29,7 +29,7 @@ const describedById = computed(() => describedBy(props.hint, props.error, ids.hi
     <TagsInputRoot
       class="nb-tags-input"
       :model-value="modelValue"
-      :name="name"
+      :name="name ?? (required ? ids.inputId : undefined)"
       :id="ids.inputId"
       :max="max"
       :disabled="disabled"

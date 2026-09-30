@@ -6,7 +6,7 @@ import { createFieldIds, describedBy } from '../formField'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<{
-  modelValue?: string[]
+  modelValue?: number[]
   length?: number
   label?: string
   hint?: string
@@ -20,8 +20,8 @@ const props = withDefaults(defineProps<{
 }>(), { modelValue: () => [], length: 6, disabled: false, required: false, mask: false, otp: false })
 
 const emit = defineEmits<{
-  'update:modelValue': [value: string[]]
-  complete: [value: string[]]
+  'update:modelValue': [value: number[]]
+  complete: [value: number[]]
 }>()
 const ids = createFieldIds('pin-input', props.id)
 const labelId = `${ids.inputId}-label`
@@ -38,8 +38,8 @@ const describedById = computed(() => describedBy(props.hint, props.error, ids.hi
       :id="ids.inputId"
       :model-value="modelValue"
       :name="name"
+      type="number"
       :disabled="disabled"
-      :required="required"
       :mask="mask"
       :otp="otp"
       :aria-label="label ? undefined : 'PIN input'"
@@ -49,7 +49,7 @@ const describedById = computed(() => describedBy(props.hint, props.error, ids.hi
       @update:model-value="emit('update:modelValue', $event)"
       @complete="emit('complete', $event)"
     >
-      <PinInputInput v-for="index in length" :key="index" class="nb-pin-input__digit" :index="index - 1" inputmode="numeric" />
+      <PinInputInput v-for="index in length" :key="index" class="nb-pin-input__digit" :index="index - 1" :required="required" />
     </PinInputRoot>
     <span v-if="hint" :id="ids.hintId" class="nb-field__hint">{{ hint }}</span>
     <span v-if="error" :id="ids.errorId" class="nb-field__error">{{ error }}</span>

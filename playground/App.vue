@@ -88,7 +88,7 @@ const pinned = ref(false)
 const gridVisible = ref(true)
 const commandValue = ref('')
 const skills = ref(['Vue', 'TypeScript'])
-const verificationCode = ref<string[]>([])
+const verificationCode = ref<number[]>([])
 const experienceRating = ref(3)
 
 const plans = [

@@ -25,7 +25,7 @@ describe('new primitives', () => {
 
   it('emits each PIN digit and completion with a labelled field', async () => {
     const wrapper = mount(NbPinInput, {
-      props: { label: 'Verification code', length: 4, modelValue: ['1', '2', '3'] },
+      props: { label: 'Verification code', length: 4, modelValue: [1, 2, 3] },
     })
 
     const inputs = wrapper.findAll('input:not([type="hidden"])').filter(input => input.attributes('tabindex') !== '-1')
@@ -33,8 +33,56 @@ describe('new primitives', () => {
     expect(wrapper.get('[role="group"]').attributes('aria-labelledby')).toBe(wrapper.get('span.nb-field__label').attributes('id'))
     await inputs[3]!.setValue('4')
     await nextTick()
-    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['1', '2', '3', '4']])
-    expect(wrapper.emitted('complete')?.at(-1)).toEqual([['1', '2', '3', '4']])
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([[1, 2, 3, 4]])
+    expect(wrapper.emitted('complete')?.at(-1)).toEqual([[1, 2, 3, 4]])
+  })
+
+  it('preserves a leading zero in a controlled PIN', async () => {
+    const wrapper = mount({
+      components: { NbPinInput },
+      data: () => ({ code: [] as number[] }),
+      template: '<NbPinInput v-model="code" label="Verification code" :length="4" />',
+    })
+
+    await wrapper.get('.nb-pin-input__digit').setValue('0')
+    await nextTick()
+    expect(wrapper.vm.code).toEqual([0])
+    expect((wrapper.get('.nb-pin-input__digit').element as HTMLInputElement).value).toBe('0')
+  })
+
+  it('blocks a required PIN form until every digit is present', async () => {
+    const wrapper = mount({
+      components: { NbPinInput },
+      data: () => ({ code: [] as number[] }),
+      template: '<form><NbPinInput v-model="code" label="Code" :length="4" required name="code" /></form>',
+    })
+
+    const form = wrapper.get('form').element as HTMLFormElement
+    const digits = wrapper.findAll('.nb-pin-input__digit')
+    await digits[0]!.setValue('1')
+    expect(form.checkValidity()).toBe(false)
+    await digits[1]!.setValue('2')
+    await digits[2]!.setValue('3')
+    await digits[3]!.setValue('4')
+    expect(form.checkValidity()).toBe(true)
+  })
+
+  it('rejects letters in a numeric PIN', async () => {
+    const wrapper = mount(NbPinInput, { props: { label: 'Code', length: 4 } })
+    await wrapper.get('.nb-pin-input__digit').setValue('a')
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    expect(wrapper.emitted('complete')).toBeUndefined()
+  })
+
+  it('blocks a required tags field without an explicit name until a tag is committed', async () => {
+    const wrapper = mount({
+      components: { NbTagsInput },
+      template: '<form><NbTagsInput label="Skills" required /></form>',
+    })
+    const form = wrapper.get('form').element as HTMLFormElement
+    expect(form.checkValidity()).toBe(false)
+    await wrapper.get('input[type="text"]').setValue('unfinished draft')
+    expect(form.checkValidity()).toBe(false)
   })
 
   it('selects a rating through labelled radio options', async () => {

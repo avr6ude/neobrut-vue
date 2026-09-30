@@ -179,7 +179,8 @@ const handle = ref('')
 </template>
 ```
 
-Tags, verification codes, and ratings use the same `v-model` pattern. A PIN value is an array of characters so leading zeroes survive; `complete` fires when every cell is filled.
+Tags, verification codes, and ratings use the same `v-model` pattern. A PIN value is an array of digits so leading zeroes survive; `complete` fires when every cell is filled.
+Set `name` when submitting tags or codes in a native form so the submitted field has a predictable key.
 
 ```vue
 <script setup lang="ts">
@@ -187,7 +188,7 @@ import { ref } from 'vue'
 import { NbPinInput, NbRating, NbTagsInput } from '@neobrut-vue/core'
 
 const tags = ref(['Vue'])
-const code = ref<string[]>([])
+const code = ref<number[]>([])
 const rating = ref(3)
 </script>
 
