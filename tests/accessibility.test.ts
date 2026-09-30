@@ -12,6 +12,7 @@ import {
   NbButtonGroup,
   NbBreadcrumbs,
   NbCombobox,
+  NbCollapsible,
   NbCommand,
   NbContextMenu,
   NbContextMenuItem,
@@ -29,15 +30,18 @@ import {
   NbNavigationMenu,
   NbNumberInput,
   NbPagination,
+  NbPinInput,
   NbPopover,
   NbProgress,
   NbRadioGroup,
+  NbRating,
   NbScrollArea,
   NbSheet,
   NbSlider,
   NbSpinner,
   NbSkeleton,
   NbSwitch,
+  NbTagsInput,
   NbTable,
   NbTabs,
   NbTabsContent,
@@ -52,6 +56,25 @@ import {
 describe('accessible component states', () => {
   afterEach(() => {
     document.body.innerHTML = ''
+  })
+
+  it('has no axe violations in the new form and disclosure components', async () => {
+    const wrapper = mount({
+      components: { NbCollapsible, NbPinInput, NbRating, NbTagsInput },
+      template: `
+        <div>
+          <NbTagsInput label="Skills" :model-value="['Vue']" />
+          <NbPinInput label="Verification code" :length="4" />
+          <NbRating label="Experience" :model-value="3" />
+          <NbCollapsible title="More details" default-open>Additional information</NbCollapsible>
+        </div>
+      `,
+    })
+
+    const results = await axe(wrapper.element, {
+      rules: { region: { enabled: false }, 'color-contrast': { enabled: false } },
+    })
+    expect(results.violations).toEqual([])
   })
 
   it('has no axe violations in representative states', async () => {

@@ -1,14 +1,14 @@
 import { createApp } from 'vue'
 import { describe, expect, it } from 'vitest'
-import { NeoBrutalVue } from '../src'
+import * as core from '../src'
 
 describe('package entry point', () => {
-  it('globally registers the newest component families', () => {
+  it('globally registers every public component', () => {
     const app = createApp({})
-    app.use(NeoBrutalVue)
+    app.use(core.NeoBrutalVue)
 
-    for (const name of ['NbSheet', 'NbAlertDialog', 'NbContextMenu', 'NbCommand', 'NbHoverCard', 'NbNavigationMenu']) {
-      expect(app.component(name), `${name} was not registered`).toBeDefined()
+    for (const [name, component] of Object.entries(core)) {
+      if (name.startsWith('Nb')) expect(app.component(name), `${name} was not registered`).toBe(component)
     }
   })
 })

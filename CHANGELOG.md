@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+- Added `NbTagsInput`, `NbPinInput`, `NbRating`, and `NbCollapsible`.
+- Added accessible demos and usage examples for the new components.
+
 ## 0.3.0
 
 - Added `NbSheet`, `NbAlertDialog`, `NbContextMenu`, `NbCommand`, `NbHoverCard`, and `NbNavigationMenu`.

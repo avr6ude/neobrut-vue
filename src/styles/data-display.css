@@ -32,6 +32,17 @@
 .nb-accordion__content[data-state='closed'] { animation: nb-accordion-close 160ms ease-in; }
 .nb-accordion__body { border-top: 2px solid var(--nb-color-ink); padding: 1rem; }
 
+.nb-collapsible { overflow: hidden; border: var(--nb-border-width) solid var(--nb-color-ink); border-radius: var(--nb-radius-sm); box-shadow: 5px 5px 0 var(--nb-shadow-color); background: var(--nb-color-paper); }
+.nb-collapsible__trigger { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 1rem; border: 0; background: var(--nb-color-accent); color: var(--nb-color-ink); cursor: pointer; padding: 0.9rem 1rem; font-family: var(--nb-font-display); font-weight: 900; text-align: left; }
+.nb-collapsible__trigger:hover { background: var(--nb-color-primary); }
+.nb-collapsible__trigger:disabled { cursor: not-allowed; opacity: 0.55; }
+.nb-collapsible__icon { width: 1rem; height: 1rem; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 2.5; transition: transform 150ms ease; }
+.nb-collapsible__trigger[data-state='open'] .nb-collapsible__icon { transform: rotate(180deg); }
+.nb-collapsible__content { overflow: hidden; }
+.nb-collapsible__content[data-state='open'] { animation: nb-collapsible-open 180ms ease-out; }
+.nb-collapsible__content[data-state='closed'] { animation: nb-collapsible-close 160ms ease-in; }
+.nb-collapsible__body { border-top: 2px solid var(--nb-color-ink); padding: 1rem; }
+
 .nb-breadcrumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
 .nb-breadcrumbs li { display: inline-flex; align-items: center; gap: 0.35rem; }
 .nb-breadcrumbs a { color: inherit; font-weight: 750; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
@@ -82,12 +93,16 @@
 
 @keyframes nb-accordion-open { from { height: 0; opacity: 0; } to { height: var(--reka-accordion-content-height); opacity: 1; } }
 @keyframes nb-accordion-close { from { height: var(--reka-accordion-content-height); opacity: 1; } to { height: 0; opacity: 0; } }
+@keyframes nb-collapsible-open { from { height: 0; opacity: 0; } to { height: var(--reka-collapsible-content-height); opacity: 1; } }
+@keyframes nb-collapsible-close { from { height: var(--reka-collapsible-content-height); opacity: 1; } to { height: 0; opacity: 0; } }
 @keyframes nb-progress-stripes { to { background-position-x: 2.125rem; } }
 @keyframes nb-skeleton-shimmer { to { background-position-x: -250%; } }
 
 @media (prefers-reduced-motion: reduce) {
   .nb-accordion__content,
   .nb-accordion__icon,
+  .nb-collapsible__content,
+  .nb-collapsible__icon,
   .nb-progress__indicator,
   .nb-skeleton { animation: none; transition: none; }
 }

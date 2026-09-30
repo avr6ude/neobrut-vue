@@ -14,6 +14,7 @@ import {
   NbButtonGroup,
   NbCard,
   NbCheckbox,
+  NbCollapsible,
   NbCombobox,
   NbCommand,
   NbContextMenu,
@@ -37,9 +38,11 @@ import {
   NbNavigationMenu,
   NbNumberInput,
   NbPagination,
+  NbPinInput,
   NbPopover,
   NbProgress,
   NbRadioGroup,
+  NbRating,
   NbScrollArea,
   NbSelect,
   NbSelectItem,
@@ -49,6 +52,7 @@ import {
   NbSlider,
   NbSpinner,
   NbSwitch,
+  NbTagsInput,
   NbTabs,
   NbTabsContent,
   NbTabsList,
@@ -83,6 +87,9 @@ const currentPage = ref(3)
 const pinned = ref(false)
 const gridVisible = ref(true)
 const commandValue = ref('')
+const skills = ref(['Vue', 'TypeScript'])
+const verificationCode = ref<string[]>([])
+const experienceRating = ref(3)
 
 const plans = [
   { value: 'free', label: 'Free', description: 'For small experiments and wonderfully bad ideas.' },
@@ -258,6 +265,14 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
             </div>
           </div>
 
+          <NbFieldset legend="Small but mighty" description="Tags, codes, and ratings with proper keyboard controls.">
+            <div class="form-grid">
+              <NbTagsInput v-model="skills" label="Skills" hint="Type a skill and press Enter." placeholder="Add a skill" name="skills" />
+              <NbPinInput v-model="verificationCode" label="Verification code" hint="Try typing or pasting six digits." :length="6" otp name="code" />
+              <NbRating v-model="experienceRating" label="How fun is this?" hint="Pick one to five stars." name="rating" />
+            </div>
+          </NbFieldset>
+
           <NbFieldset legend="VeeValidate" description="The core stays form-library agnostic; standard bindings do the work.">
             <form class="validation-demo" @submit="validateWorkspace">
               <NbInput
@@ -426,6 +441,11 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
                 <NbAccordionItem value="keyboard" title="Does the keyboard work?">Yes. Focus, arrows, Enter, Space, and ARIA are part of the component.</NbAccordionItem>
                 <NbAccordionItem value="theme" title="Can I change the colors?">Every core color and shadow is a CSS custom property.</NbAccordionItem>
               </NbAccordion>
+            </section>
+
+            <section class="data-panel data-panel--wide data-panel--paper">
+              <h2>One more detail</h2>
+              <NbCollapsible title="What is a collapsible?">A single section you can reveal without opening a whole accordion.</NbCollapsible>
             </section>
 
             <section class="data-panel data-panel--wide data-panel--paper">

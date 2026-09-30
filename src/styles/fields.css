@@ -121,6 +121,38 @@
 .nb-field__hint { color: color-mix(in srgb, var(--nb-color-ink) 65%, transparent); }
 .nb-field__error { color: color-mix(in srgb, var(--nb-color-danger) 60%, var(--nb-color-ink)); font-weight: 700; }
 
+.nb-tags-input {
+  display: flex;
+  min-height: 2.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  border: var(--nb-border-width) solid var(--nb-color-ink);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-color-paper);
+  padding: 0.3rem 0.45rem;
+}
+.nb-tags-input[data-disabled] { opacity: 0.55; }
+.nb-tags-input__tag { display: inline-flex; align-items: center; gap: 0.25rem; border: 2px solid var(--nb-color-ink); border-radius: var(--nb-radius-sm); background: var(--nb-color-secondary); padding: 0.1rem 0.2rem 0.1rem 0.45rem; font-weight: 750; }
+.nb-tags-input__remove { display: grid; width: 1.35rem; height: 1.35rem; place-items: center; border: 0; background: transparent; color: inherit; cursor: pointer; font-size: 1.1rem; line-height: 1; }
+.nb-tags-input__remove:hover { background: var(--nb-color-primary); }
+.nb-tags-input__input { min-width: 6rem; flex: 1; border: 0; background: transparent; color: inherit; padding: 0.2rem 0.35rem; outline: 0; }
+.nb-tags-input:focus-within { outline: 3px solid var(--nb-color-accent); outline-offset: 3px; }
+
+.nb-pin-input { display: flex; max-width: 100%; flex-wrap: wrap; gap: 0.45rem; }
+.nb-pin-input__digit { width: clamp(2.2rem, 8.5vw, 2.75rem); height: 2.75rem; border: var(--nb-border-width) solid var(--nb-color-ink); border-radius: var(--nb-radius-sm); background: var(--nb-color-paper); color: var(--nb-color-ink); text-align: center; font-family: var(--nb-font-display); font-size: 1.25rem; font-weight: 900; }
+.nb-pin-input__digit:disabled { opacity: 0.55; }
+
+.nb-rating { min-width: 0; margin: 0; border: 0; padding: 0; }
+.nb-rating__options { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.nb-rating__option { position: relative; display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 2px solid var(--nb-color-ink); border-radius: var(--nb-radius-sm); box-shadow: 2px 2px 0 var(--nb-shadow-color); background: var(--nb-color-paper); cursor: pointer; }
+.nb-rating__option.is-active { background: var(--nb-color-primary); }
+.nb-rating__option svg { width: 1.5rem; height: 1.5rem; fill: var(--nb-color-paper); stroke: var(--nb-color-ink); stroke-linejoin: round; stroke-width: 1.5; }
+.nb-rating__option.is-active svg { fill: var(--nb-color-accent); }
+.nb-rating__input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.nb-rating__input:focus-visible + svg { outline: 3px solid var(--nb-color-accent); outline-offset: 5px; }
+.nb-rating:disabled .nb-rating__option { cursor: not-allowed; opacity: 0.55; box-shadow: none; }
+
 .nb-checkbox {
   display: inline-flex;
   align-items: center;

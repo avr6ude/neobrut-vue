@@ -10,6 +10,7 @@ import { NbButton } from './components/NbButton'
 import { NbButtonGroup } from './components/NbButtonGroup'
 import { NbCard } from './components/NbCard'
 import { NbCheckbox } from './components/NbCheckbox'
+import { NbCollapsible } from './components/NbCollapsible'
 import { NbCombobox } from './components/NbCombobox'
 import { NbCommand } from './components/NbCommand'
 import { NbContextMenu, NbContextMenuCheckboxItem, NbContextMenuItem, NbContextMenuLabel, NbContextMenuRadioGroup, NbContextMenuRadioItem, NbContextMenuSeparator, NbContextMenuShortcut, NbContextMenuSub } from './components/NbContextMenu'
@@ -28,9 +29,11 @@ import { NbMarker } from './components/NbMarker'
 import { NbNavigationMenu } from './components/NbNavigationMenu'
 import { NbNumberInput } from './components/NbNumberInput'
 import { NbPagination } from './components/NbPagination'
+import { NbPinInput } from './components/NbPinInput'
 import { NbPopover } from './components/NbPopover'
 import { NbProgress } from './components/NbProgress'
 import { NbRadioGroup } from './components/NbRadioGroup'
+import { NbRating } from './components/NbRating'
 import { NbScrollArea } from './components/NbScrollArea'
 import { NbSheet } from './components/NbSheet'
 import { NbSelect, NbSelectItem } from './components/NbSelect'
@@ -39,6 +42,7 @@ import { NbSlider } from './components/NbSlider'
 import { NbSkeleton } from './components/NbSkeleton'
 import { NbSpinner } from './components/NbSpinner'
 import { NbSwitch } from './components/NbSwitch'
+import { NbTagsInput } from './components/NbTagsInput'
 import { NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger } from './components/NbTabs'
 import { NbTextarea } from './components/NbTextarea'
 import { NbTable } from './components/NbTable'
@@ -47,7 +51,7 @@ import { NbToggle } from './components/NbToggle'
 import { NbToggleGroup, NbToggleGroupItem } from './components/NbToggleGroup'
 import { NbTooltip } from './components/NbTooltip'
 
-export { NbAccordion, NbAccordionItem, NbAlert, NbAlertDialog, NbAspectRatio, NbAvatar, NbBadge, NbBreadcrumbs, NbButton, NbButtonGroup, NbCard, NbCheckbox, NbCombobox, NbCommand, NbContextMenu, NbContextMenuCheckboxItem, NbContextMenuItem, NbContextMenuLabel, NbContextMenuRadioGroup, NbContextMenuRadioItem, NbContextMenuSeparator, NbContextMenuShortcut, NbContextMenuSub, NbDialog, NbDropdownMenu, NbDropdownMenuItem, NbDropdownMenuSeparator, NbEmptyState, NbFieldset, NbHoverCard, NbInput, NbInputGroup, NbKbd, NbLink, NbMarker, NbNavigationMenu, NbNumberInput, NbPagination, NbPopover, NbProgress, NbRadioGroup, NbScrollArea, NbSelect, NbSelectItem, NbSeparator, NbSheet, NbSkeleton, NbSlider, NbSpinner, NbSwitch, NbTable, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTextarea, NbToast, NbToggle, NbToggleGroup, NbToggleGroupItem, NbTooltip }
+export { NbAccordion, NbAccordionItem, NbAlert, NbAlertDialog, NbAspectRatio, NbAvatar, NbBadge, NbBreadcrumbs, NbButton, NbButtonGroup, NbCard, NbCheckbox, NbCollapsible, NbCombobox, NbCommand, NbContextMenu, NbContextMenuCheckboxItem, NbContextMenuItem, NbContextMenuLabel, NbContextMenuRadioGroup, NbContextMenuRadioItem, NbContextMenuSeparator, NbContextMenuShortcut, NbContextMenuSub, NbDialog, NbDropdownMenu, NbDropdownMenuItem, NbDropdownMenuSeparator, NbEmptyState, NbFieldset, NbHoverCard, NbInput, NbInputGroup, NbKbd, NbLink, NbMarker, NbNavigationMenu, NbNumberInput, NbPagination, NbPinInput, NbPopover, NbProgress, NbRadioGroup, NbRating, NbScrollArea, NbSelect, NbSelectItem, NbSeparator, NbSheet, NbSkeleton, NbSlider, NbSpinner, NbSwitch, NbTable, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTagsInput, NbTextarea, NbToast, NbToggle, NbToggleGroup, NbToggleGroupItem, NbTooltip }
 export type { NbBreadcrumbItem } from './components/NbBreadcrumbs'
 export type { NbComboboxOption } from './components/NbCombobox'
 export type { NbCommandOption } from './components/NbCommand'
@@ -74,6 +78,7 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbButtonGroup,
   NbCard,
   NbCheckbox,
+  NbCollapsible,
   NbCombobox,
   NbCommand,
   NbContextMenu,
@@ -100,9 +105,11 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbNavigationMenu,
   NbNumberInput,
   NbPagination,
+  NbPinInput,
   NbPopover,
   NbProgress,
   NbRadioGroup,
+  NbRating,
   NbScrollArea,
   NbSheet,
   NbSelect,
@@ -112,6 +119,7 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbSlider,
   NbSpinner,
   NbSwitch,
+  NbTagsInput,
   NbTable,
   NbTabs,
   NbTabsContent,

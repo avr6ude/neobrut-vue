@@ -50,10 +50,10 @@ import { NbBadge, NbButton, NbCard } from '@neobrut-vue/core'
 | Group | Components |
 | --- | --- |
 | Actions and surfaces | `NbButton`, `NbButtonGroup`, `NbToggle`, `NbCard`, `NbAlert`, `NbBadge` |
-| Forms | `NbCheckbox`, `NbCombobox`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbRadioGroup`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTextarea`, `NbToggleGroup`, `NbToggleGroupItem` |
+| Forms | `NbCheckbox`, `NbCombobox`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbPinInput`, `NbRadioGroup`, `NbRating`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTagsInput`, `NbTextarea`, `NbToggleGroup`, `NbToggleGroupItem` |
 | Navigation | `NbBreadcrumbs`, `NbNavigationMenu`, `NbPagination`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent` |
 | Overlays | `NbAlertDialog`, `NbCommand`, `NbContextMenu`, `NbDialog`, `NbDropdownMenu`, `NbHoverCard`, `NbPopover`, `NbSheet`, `NbToast`, `NbTooltip` |
-| Data display | `NbAccordion`, `NbAccordionItem`, `NbAvatar`, `NbEmptyState`, `NbProgress`, `NbSkeleton`, `NbSpinner`, `NbTable` |
+| Data display | `NbAccordion`, `NbAccordionItem`, `NbAvatar`, `NbCollapsible`, `NbEmptyState`, `NbProgress`, `NbSkeleton`, `NbSpinner`, `NbTable` |
 | Inline and layout | `NbLink`, `NbKbd`, `NbMarker`, `NbAspectRatio`, `NbScrollArea`, `NbSeparator` |
 
 ## Links and actions
@@ -179,6 +179,25 @@ const handle = ref('')
 </template>
 ```
 
+Tags, verification codes, and ratings use the same `v-model` pattern. A PIN value is an array of characters so leading zeroes survive; `complete` fires when every cell is filled.
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NbPinInput, NbRating, NbTagsInput } from '@neobrut-vue/core'
+
+const tags = ref(['Vue'])
+const code = ref<string[]>([])
+const rating = ref(3)
+</script>
+
+<template>
+  <NbTagsInput v-model="tags" label="Skills" placeholder="Add a skill" name="skills" />
+  <NbPinInput v-model="code" label="Verification code" :length="6" otp name="code" />
+  <NbRating v-model="rating" label="Experience" name="rating" />
+</template>
+```
+
 ## Navigation and disclosure
 
 Tabs support controlled and uncontrolled state plus horizontal or vertical keyboard navigation:
@@ -219,6 +238,18 @@ import { NbAccordion, NbAccordionItem } from '@neobrut-vue/core'
       Absolutely.
     </NbAccordionItem>
   </NbAccordion>
+</template>
+```
+
+For one revealable section, use `NbCollapsible` with `default-open` or `v-model:open`:
+
+```vue
+<script setup lang="ts">
+import { NbCollapsible } from '@neobrut-vue/core'
+</script>
+
+<template>
+  <NbCollapsible title="Advanced options">Extra controls go here.</NbCollapsible>
 </template>
 ```
 
