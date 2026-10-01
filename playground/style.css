@@ -47,9 +47,10 @@ html { scroll-behavior: smooth; }
 .hero__actions a:focus-visible, .site-nav a:focus-visible, .gallery-intro a:focus-visible { outline: 3px solid var(--nb-color-accent); outline-offset: 4px; }
 .hero__primary { background: var(--nb-color-ink); color: var(--nb-color-paper) !important; }
 .hero__secondary { background: var(--nb-color-paper); }
-.install-command { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; width: min(100%, 26rem); border: 3px solid var(--nb-color-ink); border-radius: var(--nb-radius-sm); padding: 0.4rem 0.45rem 0.4rem 0.85rem; background: var(--nb-color-paper); }
-.install-command code { font-size: 0.8rem; font-weight: 800; overflow-wrap: anywhere; }
-.install-command .nb-copy-button { flex: 0 0 auto; }
+.install-command { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; width: min(100%, 30rem); border: 3px solid var(--nb-color-ink); border-radius: var(--nb-radius-sm); padding: 0.55rem 0.7rem 0.55rem 0.85rem; background: var(--nb-color-paper); }
+.install-command code { min-width: 0; font-size: 0.8rem; font-weight: 800; line-height: 1.5; }
+.install-command code span { white-space: nowrap; }
+.install-command .nb-copy-button { flex: 0 0 auto; white-space: nowrap; }
 .hero__meta { margin: 0; font-size: 0.8rem; font-weight: 800; }
 .hero__meta span { margin: 0 0.4rem; }
 .hero__preview { display: grid; align-content: center; gap: 1.2rem; min-width: 0; border-left: 3px solid var(--nb-color-ink); padding: clamp(1.5rem, 4vw, 3.5rem); background: var(--nb-color-secondary); }

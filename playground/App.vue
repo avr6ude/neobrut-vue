@@ -165,8 +165,8 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
           <a class="hero__secondary" href="#gallery">Explore components <span aria-hidden="true">↓</span></a>
         </div>
         <div class="install-command">
-          <code>npm install @neobrut-vue/core</code>
-          <NbCopyButton text="npm install @neobrut-vue/core" label="Copy command" aria-label="Copy install command" />
+          <code><span>npm install</span> <span>@neobrut-vue/core</span></code>
+          <NbCopyButton text="npm install @neobrut-vue/core" label="Copy" copied-label="Copied" aria-label="Copy install command" size="sm" />
         </div>
         <p class="hero__meta">Vue 3.5+ <span aria-hidden="true">·</span> MIT licensed <span aria-hidden="true">·</span> v0.5.0</p>
       </div>
