@@ -187,10 +187,6 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
       </div>
     </header>
 
-    <section class="proof-strip" aria-label="What comes in the kit">
-      <span>REAL COMPONENTS</span><span aria-hidden="true">✳</span><span>REAL INTERACTIONS</span><span aria-hidden="true">✳</span><span>ZERO BEIGE</span>
-    </section>
-
     <section id="gallery" class="gallery-intro" aria-labelledby="gallery-title">
       <div><h2 id="gallery-title">Take the whole kit for a spin.</h2><p>Buttons, forms, overlays, navigation and more. Click around—this is the real library.</p></div>
       <a href="/docs/components/">Browse the docs <span aria-hidden="true">↗</span></a>

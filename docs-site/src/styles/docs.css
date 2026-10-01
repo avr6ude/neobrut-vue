@@ -118,6 +118,7 @@ starlight-theme-select { display: none !important; }
 main,
 main .content-panel,
 main .sl-container { background: var(--docs-canvas); }
+.main-pane { flex: 1 1 auto; min-width: 0; }
 main { min-height: calc(100dvh - 4.25rem); }
 main .content-panel { border: 0; }
 main .content-panel:first-child .sl-container { padding-top: clamp(2.25rem, 5vw, 4rem); }
@@ -147,6 +148,8 @@ main h3 { font-size: 1.25rem; }
 .sl-markdown-content .astro-code { border: 3px solid var(--docs-ink); border-radius: 0; box-shadow: 5px 5px 0 var(--docs-ink); }
 
 .right-sidebar-container {
+  flex: 0 0 var(--sl-sidebar-width);
+  width: var(--sl-sidebar-width);
   border-left: 3px solid var(--docs-ink);
   background: #fff;
 }
@@ -175,7 +178,10 @@ main h3 { font-size: 1.25rem; }
 .right-sidebar-panel a[aria-current='true'] { background: var(--nb-color-primary); }
 
 main footer { border-top: 3px solid var(--docs-ink); }
+.pagination-links { display: flex; flex-wrap: wrap; gap: 1rem; }
 .pagination-links a {
+  flex: 0 1 20rem;
+  min-width: 0;
   border: 3px solid var(--docs-ink);
   border-radius: .25rem;
   background: #fff;
@@ -183,7 +189,9 @@ main footer { border-top: 3px solid var(--docs-ink); }
   color: var(--docs-ink);
   font-weight: 800;
 }
+.pagination-links a[rel='next'] { margin-left: auto; }
 .pagination-links a:hover { background: var(--nb-color-primary); }
+.pagination-links .link-title { color: var(--docs-ink); }
 :where(a, button, summary, input, select):focus-visible { outline: 3px solid var(--nb-color-accent) !important; outline-offset: 3px !important; }
 
 .nb-doc-example {
@@ -254,7 +262,7 @@ main footer { border-top: 3px solid var(--docs-ink); }
 .nb-doc-example [hidden] { display: none !important; }
 
 @media (max-width: 72rem) {
-  .right-sidebar-container { border-left: 0; }
+  .right-sidebar-container { width: auto; flex: none; border-left: 0; }
   .right-sidebar { padding-top: 0; }
   .right-sidebar nav { border: 2px solid var(--docs-ink); background: #fff; }
   .right-sidebar summary { color: var(--docs-ink); }
