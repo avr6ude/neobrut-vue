@@ -11,6 +11,7 @@ import { NbButtonGroup } from './components/NbButtonGroup'
 import { NbCard } from './components/NbCard'
 import { NbCheckbox } from './components/NbCheckbox'
 import { NbCollapsible } from './components/NbCollapsible'
+import { NbCopyButton } from './components/NbCopyButton'
 import { NbCombobox } from './components/NbCombobox'
 import { NbCommand } from './components/NbCommand'
 import { NbContextMenu, NbContextMenuCheckboxItem, NbContextMenuItem, NbContextMenuLabel, NbContextMenuRadioGroup, NbContextMenuRadioItem, NbContextMenuSeparator, NbContextMenuShortcut, NbContextMenuSub } from './components/NbContextMenu'
@@ -26,6 +27,7 @@ import { NbHoverCard } from './components/NbHoverCard'
 import { NbKbd } from './components/NbKbd'
 import { NbLink } from './components/NbLink'
 import { NbMarker } from './components/NbMarker'
+import { NbMeter } from './components/NbMeter'
 import { NbNavigationMenu } from './components/NbNavigationMenu'
 import { NbNumberInput } from './components/NbNumberInput'
 import { NbPagination } from './components/NbPagination'
@@ -41,17 +43,19 @@ import { NbSeparator } from './components/NbSeparator'
 import { NbSlider } from './components/NbSlider'
 import { NbSkeleton } from './components/NbSkeleton'
 import { NbSpinner } from './components/NbSpinner'
+import { NbStepper, NbStepperItem } from './components/NbStepper'
 import { NbSwitch } from './components/NbSwitch'
 import { NbTagsInput } from './components/NbTagsInput'
 import { NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger } from './components/NbTabs'
 import { NbTextarea } from './components/NbTextarea'
 import { NbTable } from './components/NbTable'
 import { NbToast } from './components/NbToast'
+import { NbTimeline, NbTimelineItem } from './components/NbTimeline'
 import { NbToggle } from './components/NbToggle'
 import { NbToggleGroup, NbToggleGroupItem } from './components/NbToggleGroup'
 import { NbTooltip } from './components/NbTooltip'
 
-export { NbAccordion, NbAccordionItem, NbAlert, NbAlertDialog, NbAspectRatio, NbAvatar, NbBadge, NbBreadcrumbs, NbButton, NbButtonGroup, NbCard, NbCheckbox, NbCollapsible, NbCombobox, NbCommand, NbContextMenu, NbContextMenuCheckboxItem, NbContextMenuItem, NbContextMenuLabel, NbContextMenuRadioGroup, NbContextMenuRadioItem, NbContextMenuSeparator, NbContextMenuShortcut, NbContextMenuSub, NbDialog, NbDropdownMenu, NbDropdownMenuItem, NbDropdownMenuSeparator, NbEmptyState, NbFieldset, NbHoverCard, NbInput, NbInputGroup, NbKbd, NbLink, NbMarker, NbNavigationMenu, NbNumberInput, NbPagination, NbPinInput, NbPopover, NbProgress, NbRadioGroup, NbRating, NbScrollArea, NbSelect, NbSelectItem, NbSeparator, NbSheet, NbSkeleton, NbSlider, NbSpinner, NbSwitch, NbTable, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTagsInput, NbTextarea, NbToast, NbToggle, NbToggleGroup, NbToggleGroupItem, NbTooltip }
+export { NbAccordion, NbAccordionItem, NbAlert, NbAlertDialog, NbAspectRatio, NbAvatar, NbBadge, NbBreadcrumbs, NbButton, NbButtonGroup, NbCard, NbCheckbox, NbCollapsible, NbCombobox, NbCommand, NbContextMenu, NbContextMenuCheckboxItem, NbContextMenuItem, NbContextMenuLabel, NbContextMenuRadioGroup, NbContextMenuRadioItem, NbContextMenuSeparator, NbContextMenuShortcut, NbContextMenuSub, NbCopyButton, NbDialog, NbDropdownMenu, NbDropdownMenuItem, NbDropdownMenuSeparator, NbEmptyState, NbFieldset, NbHoverCard, NbInput, NbInputGroup, NbKbd, NbLink, NbMarker, NbMeter, NbNavigationMenu, NbNumberInput, NbPagination, NbPinInput, NbPopover, NbProgress, NbRadioGroup, NbRating, NbScrollArea, NbSelect, NbSelectItem, NbSeparator, NbSheet, NbSkeleton, NbSlider, NbSpinner, NbStepper, NbStepperItem, NbSwitch, NbTable, NbTabs, NbTabsContent, NbTabsList, NbTabsTrigger, NbTagsInput, NbTextarea, NbTimeline, NbTimelineItem, NbToast, NbToggle, NbToggleGroup, NbToggleGroupItem, NbTooltip }
 export type { NbBreadcrumbItem } from './components/NbBreadcrumbs'
 export type { NbComboboxOption } from './components/NbCombobox'
 export type { NbCommandOption } from './components/NbCommand'
@@ -79,6 +83,7 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbCard,
   NbCheckbox,
   NbCollapsible,
+  NbCopyButton,
   NbCombobox,
   NbCommand,
   NbContextMenu,
@@ -102,6 +107,7 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbKbd,
   NbLink,
   NbMarker,
+  NbMeter,
   NbNavigationMenu,
   NbNumberInput,
   NbPagination,
@@ -118,6 +124,8 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbSkeleton,
   NbSlider,
   NbSpinner,
+  NbStepper,
+  NbStepperItem,
   NbSwitch,
   NbTagsInput,
   NbTable,
@@ -126,6 +134,8 @@ export const NeoBrutalVue = createNeoBrutalPlugin({
   NbTabsList,
   NbTabsTrigger,
   NbTextarea,
+  NbTimeline,
+  NbTimelineItem,
   NbToast,
   NbToggle,
   NbToggleGroup,

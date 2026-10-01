@@ -17,6 +17,7 @@ import {
   NbCollapsible,
   NbCombobox,
   NbCommand,
+  NbCopyButton,
   NbContextMenu,
   NbContextMenuCheckboxItem,
   NbContextMenuItem,
@@ -35,6 +36,7 @@ import {
   NbKbd,
   NbLink,
   NbMarker,
+  NbMeter,
   NbNavigationMenu,
   NbNumberInput,
   NbPagination,
@@ -51,6 +53,8 @@ import {
   NbSkeleton,
   NbSlider,
   NbSpinner,
+  NbStepper,
+  NbStepperItem,
   NbSwitch,
   NbTagsInput,
   NbTabs,
@@ -59,6 +63,8 @@ import {
   NbTabsTrigger,
   NbTextarea,
   NbTable,
+  NbTimeline,
+  NbTimelineItem,
   NbToast,
   NbToggle,
   NbToggleGroup,
@@ -90,6 +96,7 @@ const commandValue = ref('')
 const skills = ref(['Vue', 'TypeScript'])
 const verificationCode = ref<number[]>([])
 const experienceRating = ref(3)
+const releaseStep = ref(2)
 
 const plans = [
   { value: 'free', label: 'Free', description: 'For small experiments and wonderfully bad ideas.' },
@@ -186,6 +193,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
             <NbToggle v-model="pinned" label="Pin component" tone="accent">
               {{ pinned ? 'Pinned!' : 'Pin component' }}
             </NbToggle>
+            <NbCopyButton text="npm install @neobrut-vue/core" label="Copy install command" />
           </section>
 
           <section class="action-panel action-panel--pink">
@@ -421,6 +429,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
               <h2>Build status</h2>
               <NbProgress :value="72" label="Package build" show-value />
               <NbProgress :value="null" label="Waiting for checks" />
+              <NbMeter :value="72" label="Storage used" show-value />
             </section>
 
             <section class="data-panel data-panel--mint">
@@ -451,6 +460,23 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
             <section class="data-panel data-panel--wide data-panel--paper">
               <h2>Pages of components</h2>
               <NbPagination v-model:page="currentPage" :total="120" :items-per-page="10" />
+            </section>
+
+            <section class="data-panel data-panel--wide data-panel--yellow">
+              <h2>Release steps</h2>
+              <NbStepper v-model="releaseStep" label="Release workflow">
+                <NbStepperItem :step="1" title="Build" description="Make the components" />
+                <NbStepperItem :step="2" title="Review" description="Catch the rough edges" />
+                <NbStepperItem :step="3" title="Publish" description="Ship the package" />
+              </NbStepper>
+            </section>
+
+            <section class="data-panel data-panel--wide data-panel--paper">
+              <h2>Release history</h2>
+              <NbTimeline label="Release history">
+                <NbTimelineItem title="Version 0.5.0" date="Oct 1" datetime="2026-10-01">More useful primitives, same loud personality.</NbTimelineItem>
+                <NbTimelineItem title="Version 0.4.0" date="Sep 30" datetime="2026-09-30">Tags, PINs, ratings, and collapsibles.</NbTimelineItem>
+              </NbTimeline>
             </section>
           </div>
         </div>

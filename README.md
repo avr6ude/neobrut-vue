@@ -49,11 +49,11 @@ import { NbBadge, NbButton, NbCard } from '@neobrut-vue/core'
 
 | Group | Components |
 | --- | --- |
-| Actions and surfaces | `NbButton`, `NbButtonGroup`, `NbToggle`, `NbCard`, `NbAlert`, `NbBadge` |
+| Actions and surfaces | `NbButton`, `NbButtonGroup`, `NbCopyButton`, `NbToggle`, `NbCard`, `NbAlert`, `NbBadge` |
 | Forms | `NbCheckbox`, `NbCombobox`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbPinInput`, `NbRadioGroup`, `NbRating`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTagsInput`, `NbTextarea`, `NbToggleGroup`, `NbToggleGroupItem` |
-| Navigation | `NbBreadcrumbs`, `NbNavigationMenu`, `NbPagination`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent` |
+| Navigation | `NbBreadcrumbs`, `NbNavigationMenu`, `NbPagination`, `NbStepper`, `NbStepperItem`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent` |
 | Overlays | `NbAlertDialog`, `NbCommand`, `NbContextMenu`, `NbDialog`, `NbDropdownMenu`, `NbHoverCard`, `NbPopover`, `NbSheet`, `NbToast`, `NbTooltip` |
-| Data display | `NbAccordion`, `NbAccordionItem`, `NbAvatar`, `NbCollapsible`, `NbEmptyState`, `NbProgress`, `NbSkeleton`, `NbSpinner`, `NbTable` |
+| Data display | `NbAccordion`, `NbAccordionItem`, `NbAvatar`, `NbCollapsible`, `NbEmptyState`, `NbMeter`, `NbProgress`, `NbSkeleton`, `NbSpinner`, `NbTable`, `NbTimeline`, `NbTimelineItem` |
 | Inline and layout | `NbLink`, `NbKbd`, `NbMarker`, `NbAspectRatio`, `NbScrollArea`, `NbSeparator` |
 
 ## Links and actions
@@ -81,6 +81,18 @@ const pinned = ref(false)
 
   <NbToggle v-model="pinned" label="Pin project">Pin</NbToggle>
   <span>Search with <NbKbd>⌘ K</NbKbd></span>
+</template>
+```
+
+`NbCopyButton` copies its `text` with the browser Clipboard API. It displays a short success state and emits `copied` or `error`; clipboard access requires a secure context such as HTTPS or localhost.
+
+```vue
+<script setup lang="ts">
+import { NbCopyButton } from '@neobrut-vue/core'
+</script>
+
+<template>
+  <NbCopyButton text="npm install @neobrut-vue/core" label="Copy install command" />
 </template>
 ```
 
@@ -353,6 +365,31 @@ const page = ref(1)
     <thead><tr><th>Package</th><th>Status</th></tr></thead>
     <tbody><tr><td>Core</td><td>Ready</td></tr></tbody>
   </NbTable>
+</template>
+```
+
+Use `NbProgress` for completion, and the native `NbMeter` for a bounded measurement. `NbStepper` handles keyboard navigation and controlled or uncontrolled steps; render the active panel in your app. `NbTimeline` keeps event history in a semantic ordered list.
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NbMeter, NbStepper, NbStepperItem, NbTimeline, NbTimelineItem } from '@neobrut-vue/core'
+
+const step = ref(1)
+</script>
+
+<template>
+  <NbStepper v-model="step" label="Checkout">
+    <NbStepperItem :step="1" title="Cart" description="Review items" />
+    <NbStepperItem :step="2" title="Address" />
+    <NbStepperItem :step="3" title="Payment" />
+  </NbStepper>
+  <section v-if="step === 1">Review your cart here.</section>
+
+  <NbMeter label="Storage used" :value="72" show-value />
+  <NbTimeline label="Release history">
+    <NbTimelineItem title="Published" date="Oct 1" datetime="2026-10-01">Available on npm.</NbTimelineItem>
+  </NbTimeline>
 </template>
 ```
 
