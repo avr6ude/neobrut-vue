@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0
+
+- Added `NbStepper`, `NbMeter`, `NbTimeline`, and `NbCopyButton` with accessible examples.
+- Added clipboard success and failure feedback, with coverage for text changes during copying.
+
 ## 0.4.0
 
 - Added `NbTagsInput`, `NbPinInput`, `NbRating`, and `NbCollapsible`.

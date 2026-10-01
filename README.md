@@ -84,7 +84,7 @@ const pinned = ref(false)
 </template>
 ```
 
-`NbCopyButton` copies its `text` with the browser Clipboard API. It displays a short success state and emits `copied` or `error`; clipboard access requires a secure context such as HTTPS or localhost.
+`NbCopyButton` copies its `text` with the browser Clipboard API. It announces short success or failure feedback and emits `copied` or `error`; clipboard access requires a secure context such as HTTPS or localhost.
 
 ```vue
 <script setup lang="ts">
