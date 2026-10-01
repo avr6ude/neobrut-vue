@@ -1,0 +1,22 @@
+---
+title: Input
+description: A labeled text input with Vue v-model, hints, and errors.
+---
+
+import Example from '../../components/Example.astro'
+import InputDemo from '../../examples/InputDemo.vue'
+import source from '../../examples/InputDemo.vue?raw'
+
+`NbInput` is a native text input wrapped in the kit's field styling. Type below to see `v-model` update immediately.
+
+## Preview
+
+<Example title="Input" source={source}><InputDemo client:only="vue" /></Example>
+
+## Usage
+
+```vue
+<NbInput v-model="name" label="Name" placeholder="Ada Lovelace" />
+```
+
+Pass `hint` for supporting text or `error` for validation feedback. Native attributes such as `required`, `name`, `autocomplete`, and `disabled` are forwarded to the input.

@@ -1,0 +1,25 @@
+---
+title: Accordion
+description: Disclose one panel at a time with animated content.
+---
+
+import Example from '../../components/Example.astro'
+import AccordionDemo from '../../examples/AccordionDemo.vue'
+import source from '../../examples/AccordionDemo.vue?raw'
+
+`NbAccordion` groups `NbAccordionItem` sections. Each item has a unique `value` and a visible `title`.
+
+## Preview
+
+Open the headings below. `default-value` opens an item initially; use `v-model` to control the open item yourself.
+
+<Example title="Accordion" source={source}><AccordionDemo client:only="vue" /></Example>
+
+## Usage
+
+```vue
+<NbAccordion default-value="first">
+  <NbAccordionItem value="first" title="First question">Answer.</NbAccordionItem>
+  <NbAccordionItem value="second" title="Second question">Another answer.</NbAccordionItem>
+</NbAccordion>
+```

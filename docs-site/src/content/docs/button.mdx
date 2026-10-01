@@ -1,0 +1,28 @@
+---
+title: Button
+description: Actions in five colors, with sizes, disabled and loading states.
+---
+
+import Example from '../../components/Example.astro'
+import ButtonDemo from '../../examples/ButtonDemo.vue'
+import source from '../../examples/ButtonDemo.vue?raw'
+
+Use `NbButton` for an action. Use [NbLink](https://github.com/avr6ude/neobrut-vue/tree/main/src/components/NbLink) when the destination is a URL.
+
+## Preview
+
+Click **Save changes** to see the loading state. The other buttons show the available color variants.
+
+<Example title="Button" source={source}><ButtonDemo client:only="vue" /></Example>
+
+## Props
+
+| Prop | Values | Default |
+| --- | --- | --- |
+| `variant` | `primary`, `secondary`, `accent`, `danger`, `ghost` | `primary` |
+| `size` | `sm`, `md`, `lg` | `md` |
+| `type` | `button`, `submit`, `reset` | `button` |
+| `loading` | `boolean` | `false` |
+| `disabled` | `boolean` | `false` |
+
+The button is a native `<button>`, so it retains keyboard activation. Loading also disables it and sets `aria-busy`.

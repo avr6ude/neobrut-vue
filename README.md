@@ -6,7 +6,7 @@
 
 Colorful and accessible neo-brutalist components for Vue 3.
 
-[Landing](https://neobrut.avrdu.de/) · [Interactive docs](https://docs.avrdu.de/neobrut-vue/) · [npm](https://www.npmjs.com/package/@neobrut-vue/core) · [GitHub](https://github.com/avr6ude/neobrut-vue) · [Issues](https://github.com/avr6ude/neobrut-vue/issues)
+[Landing](https://neobrut.avrdu.de/) · [Interactive docs](https://neobrut.avrdu.de/docs/) · [npm](https://www.npmjs.com/package/@neobrut-vue/core) · [GitHub](https://github.com/avr6ude/neobrut-vue) · [Issues](https://github.com/avr6ude/neobrut-vue/issues)
 
 ## Landing and docs
 
@@ -17,7 +17,7 @@ bun install --frozen-lockfile
 bun run build:site
 ```
 
-Its output is `playground/dist`. Cloudflare Pages builds it from this repository with `BUN_VERSION=1.3.4` and serves it at [neobrut.avrdu.de](https://neobrut.avrdu.de/). The shared Starlight docs live in [avr6ude.github.io/docs-site](https://github.com/avr6ude/avr6ude.github.io/tree/main/docs-site) and serve [docs.avrdu.de](https://docs.avrdu.de/neobrut-vue/).
+Its output is `playground/dist`, including the static Starlight documentation under `/docs`. Cloudflare Pages builds it from this repository with `BUN_VERSION=1.3.4` and serves both at [neobrut.avrdu.de](https://neobrut.avrdu.de/).
 
 ## Requirements
 

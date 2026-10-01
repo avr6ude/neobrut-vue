@@ -1,0 +1,27 @@
+---
+title: Dialog
+description: A modal overlay with focus handling and Escape to close.
+---
+
+import Example from '../../components/Example.astro'
+import DialogDemo from '../../examples/DialogDemo.vue'
+import source from '../../examples/DialogDemo.vue?raw'
+
+Control `NbDialog` with `v-model:open` and provide a `title` so the dialog has an accessible name.
+
+## Preview
+
+Open the dialog, press Tab to move through its controls, then Escape to close it.
+
+<Example title="Dialog" source={source}><DialogDemo client:only="vue" /></Example>
+
+## Usage
+
+```vue
+<NbButton @click="open = true">Open dialog</NbButton>
+<NbDialog v-model:open="open" title="Ready to go?">
+  Dialog content.
+</NbDialog>
+```
+
+`NbDialog` restores focus to the previously active element when it closes.

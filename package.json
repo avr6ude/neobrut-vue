@@ -33,7 +33,7 @@
   },
   "scripts": {
     "build": "vite build",
-    "build:site": "vite build --config playground/vite.config.ts",
+    "build:site": "vite build --config playground/vite.config.ts && cd docs-site && ../node_modules/.bin/astro build && node --test tests/*.test.mjs",
     "check": "bun run test -- --run && bun run typecheck && bun run build",
     "dev:playground": "vite --config playground/vite.config.ts",
     "prepack": "bun run check",
@@ -45,9 +45,13 @@
     "vue": "^3.5.0"
   },
   "devDependencies": {
+    "@astrojs/mdx": "^8.0.2",
+    "@astrojs/starlight": "^0.42.5",
+    "@astrojs/vue": "^7.0.3",
     "@types/node": "^22.0.0",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/test-utils": "^2.4.6",
+    "astro": "^7.3.5",
     "axe-core": "^4.10.0",
     "jsdom": "^26.0.0",
     "typescript": "^5.7.0",

@@ -22,7 +22,7 @@ The package is installed from npm in a client-side Vue 3 app. Users import the s
 
 - Published package version at this site's initial build: 0.5.0.
 - Requires Vue 3.5 or newer and a client-side Vue application; no request-time SSR service for the sites.
-- The landing lives at `neobrut.avrdu.de`; shared documentation lives at `docs.avrdu.de`, with a dedicated Neobrut Vue section and room for other libraries.
+- The landing and documentation live together at `neobrut.avrdu.de` and `neobrut.avrdu.de/docs/`.
 - Playwright documentation is out of scope.
 
 ## Brand Commitments
@@ -38,7 +38,7 @@ The package name is `@neobrut-vue/core`. The user chose colorful neo-brutalism a
 - Show real components and behavior before making claims about them.
 - Make installation and finding a component fast.
 - Preserve semantic HTML, keyboard access, and explicit ARIA relationships.
-- Keep library documentation independent of the personal homepage and future library sections.
+- Keep library documentation on the library's own site, independent of the personal homepage.
 
 ## Accessibility & Inclusion
 

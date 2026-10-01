@@ -1,0 +1,43 @@
+---
+title: Forms
+description: Try a real form, then connect Neobrut Vue to validation.
+---
+
+import Example from '../../components/Example.astro'
+import FormDemo from '../../examples/FormDemo.vue'
+import source from '../../examples/FormDemo.vue?raw'
+
+Form controls use Vue `v-model`, expose labels, hints, and errors, and forward relevant native attributes. Import the stylesheet once as shown in [Getting started](/docs/getting-started/).
+
+## Interactive form
+
+Fill out the fields and submit. The button stays disabled until the checkbox is selected. This example runs here in the docs; it does not send data anywhere.
+
+<Example title="Form" source={source}><FormDemo client:only="vue" /></Example>
+
+## Validation libraries
+
+The core is form-library agnostic. With VeeValidate, bind `defineField` attrs and pass its error to the component:
+
+```vue
+<script setup lang="ts">
+import { useForm } from 'vee-validate'
+import { NbButton, NbInput } from '@neobrut-vue/core'
+
+const { defineField, errors, handleSubmit } = useForm({
+  initialValues: { workspace: '' },
+  validationSchema: {
+    workspace: (value: string) => value.trim().length >= 3 || 'Use at least three characters.',
+  },
+})
+const [workspace, workspaceAttrs] = defineField('workspace')
+const submit = handleSubmit(({ workspace }) => console.log(workspace))
+</script>
+
+<template>
+  <form @submit="submit">
+    <NbInput v-model="workspace" v-bind="workspaceAttrs" name="workspace" label="Workspace" :error="errors.workspace" />
+    <NbButton type="submit">Save</NbButton>
+  </form>
+</template>
+```

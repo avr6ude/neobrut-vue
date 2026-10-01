@@ -121,7 +121,7 @@ const commands = [
 ]
 
 const navigationItems = [
-  { label: 'Docs', href: 'https://docs.avrdu.de/neobrut-vue/' },
+  { label: 'Docs', href: '/docs/' },
   {
     label: 'Components',
     children: [
@@ -151,7 +151,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
       <a class="site-mark" href="#top" aria-label="Neobrut Vue home"><span aria-hidden="true">N.</span><span>neobrut<span class="site-mark__quiet">/vue</span></span></a>
       <div class="site-nav__links">
         <a href="#gallery">Components</a>
-        <a href="https://docs.avrdu.de/neobrut-vue/">Docs</a>
+        <a href="/docs/">Docs</a>
         <a href="https://github.com/avr6ude/neobrut-vue">GitHub <span aria-hidden="true">↗</span></a>
       </div>
     </nav>
@@ -161,7 +161,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
         <h1>UI with<br><span>an attitude.</span></h1>
         <p>Colorful, accessible Vue components that feel as good to use as they look.</p>
         <div class="hero__actions">
-          <a class="hero__primary" href="https://docs.avrdu.de/neobrut-vue/getting-started/">Get started <span aria-hidden="true">↗</span></a>
+          <a class="hero__primary" href="/docs/getting-started/">Get started <span aria-hidden="true">↗</span></a>
           <a class="hero__secondary" href="#gallery">Explore components <span aria-hidden="true">↓</span></a>
         </div>
         <div class="install-command">
@@ -193,7 +193,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
 
     <section id="gallery" class="gallery-intro" aria-labelledby="gallery-title">
       <div><h2 id="gallery-title">Take the whole kit for a spin.</h2><p>Buttons, forms, overlays, navigation and more. Click around—this is the real library.</p></div>
-      <a href="https://docs.avrdu.de/neobrut-vue/components/">Browse the docs <span aria-hidden="true">↗</span></a>
+      <a href="/docs/components/">Browse the docs <span aria-hidden="true">↗</span></a>
     </section>
 
     <NbAlert tone="success" title="Everything is intentional" dismissible>
@@ -239,7 +239,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
           <section class="action-panel action-panel--pink">
             <h2>Links and inline details</h2>
             <p>
-              <NbLink href="https://docs.avrdu.de/neobrut-vue/">Read the docs</NbLink>
+              <NbLink href="/docs/">Read the docs</NbLink>
               and ship something <NbMarker tone="primary">unmistakable</NbMarker>.
             </p>
             <p class="shortcut-row">Open search <NbKbd>⌘</NbKbd><NbKbd>K</NbKbd></p>
@@ -581,7 +581,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
 
     <footer class="site-footer">
       <div><h2>Build loud.<br>Ship kind.</h2><p>Start with the kit. Make the rest yours.</p></div>
-      <div class="site-footer__links"><a href="https://docs.avrdu.de/neobrut-vue/getting-started/">Get started <span aria-hidden="true">↗</span></a><a href="https://www.npmjs.com/package/@neobrut-vue/core">View on npm <span aria-hidden="true">↗</span></a></div>
+      <div class="site-footer__links"><a href="/docs/getting-started/">Get started <span aria-hidden="true">↗</span></a><a href="https://www.npmjs.com/package/@neobrut-vue/core">View on npm <span aria-hidden="true">↗</span></a></div>
     </footer>
 
     <NbDialog v-model:open="dialogOpen" title="A little confirmation">

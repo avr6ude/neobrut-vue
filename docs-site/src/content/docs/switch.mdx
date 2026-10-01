@@ -1,0 +1,22 @@
+---
+title: Switch
+description: A labeled on/off control backed by a native checkbox.
+---
+
+import Example from '../../components/Example.astro'
+import SwitchDemo from '../../examples/SwitchDemo.vue'
+import source from '../../examples/SwitchDemo.vue?raw'
+
+Use `NbSwitch` for settings that turn on or off. It requires a visible `label` and binds with `v-model`.
+
+## Preview
+
+<Example title="Switch" source={source}><SwitchDemo client:only="vue" /></Example>
+
+## Usage
+
+```vue
+<NbSwitch v-model="alerts" label="Launch alerts" />
+```
+
+The underlying checkbox keeps its native keyboard and form behavior. Use `NbCheckbox` for selecting an option in a group or agreeing to a statement.

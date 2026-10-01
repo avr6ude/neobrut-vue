@@ -1,0 +1,25 @@
+---
+title: Select
+description: A keyboard-accessible select with a styled option menu.
+---
+
+import Example from '../../components/Example.astro'
+import SelectDemo from '../../examples/SelectDemo.vue'
+import source from '../../examples/SelectDemo.vue?raw'
+
+`NbSelect` uses `NbSelectItem` children and supports `v-model`. Open the menu to try the styled options and keyboard navigation.
+
+## Preview
+
+<Example title="Select" source={source}><SelectDemo client:only="vue" /></Example>
+
+## Usage
+
+```vue
+<NbSelect v-model="color" label="Color" placeholder="Choose one">
+  <NbSelectItem value="yellow">Yellow</NbSelectItem>
+  <NbSelectItem value="mint">Mint</NbSelectItem>
+</NbSelect>
+```
+
+Each item needs a unique `value`. Pass `name` when the select participates in a native form submission.

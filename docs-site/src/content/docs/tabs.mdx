@@ -1,0 +1,29 @@
+---
+title: Tabs
+description: Switch between related panels with keyboard navigation.
+---
+
+import Example from '../../components/Example.astro'
+import TabsDemo from '../../examples/TabsDemo.vue'
+import source from '../../examples/TabsDemo.vue?raw'
+
+`NbTabs` connects triggers and panels by matching `value`. The tab list supports arrow keys, Home, and End.
+
+## Preview
+
+<Example title="Tabs" source={source}><TabsDemo client:only="vue" /></Example>
+
+## Usage
+
+```vue
+<NbTabs default-value="overview">
+  <NbTabsList>
+    <NbTabsTrigger value="overview">Overview</NbTabsTrigger>
+    <NbTabsTrigger value="details">Details</NbTabsTrigger>
+  </NbTabsList>
+  <NbTabsContent value="overview">The short version.</NbTabsContent>
+  <NbTabsContent value="details">The full story.</NbTabsContent>
+</NbTabs>
+```
+
+Use `v-model` instead of `default-value` when the parent needs the active tab.
