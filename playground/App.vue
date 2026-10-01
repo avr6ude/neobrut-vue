@@ -97,6 +97,9 @@ const skills = ref(['Vue', 'TypeScript'])
 const verificationCode = ref<number[]>([])
 const experienceRating = ref(3)
 const releaseStep = ref(2)
+const previewName = ref('Alex')
+const previewAlerts = ref(true)
+const previewSaved = ref(false)
 
 const plans = [
   { value: 'free', label: 'Free', description: 'For small experiments and wonderfully bad ideas.' },
@@ -118,7 +121,7 @@ const commands = [
 ]
 
 const navigationItems = [
-  { label: 'Docs', href: '#docs' },
+  { label: 'Docs', href: 'https://docs.avrdu.de/neobrut-vue/' },
   {
     label: 'Components',
     children: [
@@ -144,17 +147,54 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
 
 <template>
   <main class="playground nb-root">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="site-mark" href="#top" aria-label="Neobrut Vue home"><span aria-hidden="true">N.</span><span>neobrut<span class="site-mark__quiet">/vue</span></span></a>
+      <div class="site-nav__links">
+        <a href="#gallery">Components</a>
+        <a href="https://docs.avrdu.de/neobrut-vue/">Docs</a>
+        <a href="https://github.com/avr6ude/neobrut-vue">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+
     <header class="hero">
-      <NbBadge tone="accent">@neobrut-vue/core</NbBadge>
-      <h1>Make it<br>loud.</h1>
-      <p>Colorful, tactile UI primitives for interfaces with a pulse.</p>
-      <div class="hero__actions">
-        <NbButton variant="primary" size="lg" @click="dialogOpen = true">Open dialog</NbButton>
-        <NbTooltip content="This tooltip works with focus too.">
-          <NbButton variant="ghost" size="lg">Hover me</NbButton>
-        </NbTooltip>
+      <div id="top" class="hero__copy">
+        <h1>UI with<br><span>an attitude.</span></h1>
+        <p>Colorful, accessible Vue components that feel as good to use as they look.</p>
+        <div class="hero__actions">
+          <a class="hero__primary" href="https://docs.avrdu.de/neobrut-vue/getting-started/">Get started <span aria-hidden="true">↗</span></a>
+          <a class="hero__secondary" href="#gallery">Explore components <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="install-command">
+          <code>npm install @neobrut-vue/core</code>
+          <NbCopyButton text="npm install @neobrut-vue/core" label="Copy command" aria-label="Copy install command" />
+        </div>
+        <p class="hero__meta">Vue 3.5+ <span aria-hidden="true">·</span> MIT licensed <span aria-hidden="true">·</span> v0.5.0</p>
+      </div>
+
+      <div class="hero__preview" aria-label="Interactive component preview">
+        <div class="preview__top"><span class="preview__dots" aria-hidden="true"><i></i><i></i><i></i></span><span>live preview.vue</span><NbBadge tone="secondary" size="sm">INTERACTIVE</NbBadge></div>
+        <div class="preview__body">
+          <div class="preview__heading"><NbBadge tone="accent">YOUR CANVAS</NbBadge><span aria-hidden="true">✳</span></div>
+          <h2>Make something<br>unmistakable.</h2>
+          <p>Start with a name. The rest is yours.</p>
+          <NbInput v-model="previewName" label="Project name" placeholder="Your next big thing" @update:model-value="previewSaved = false" />
+          <NbSwitch v-model="previewAlerts" label="Launch alerts" description="Let the team know when it's ready." @update:model-value="previewSaved = false" />
+          <div class="preview__footer">
+            <NbButton variant="primary" @click="previewSaved = true">Save project</NbButton>
+            <span role="status">{{ previewSaved ? `${previewName || 'Untitled'} saved!` : previewAlerts ? 'Alerts are on' : 'Alerts are off' }}</span>
+          </div>
+        </div>
       </div>
     </header>
+
+    <section class="proof-strip" aria-label="What comes in the kit">
+      <span>REAL COMPONENTS</span><span aria-hidden="true">✳</span><span>REAL INTERACTIONS</span><span aria-hidden="true">✳</span><span>ZERO BEIGE</span>
+    </section>
+
+    <section id="gallery" class="gallery-intro" aria-labelledby="gallery-title">
+      <div><h2 id="gallery-title">Take the whole kit for a spin.</h2><p>Buttons, forms, overlays, navigation and more. Click around—this is the real library.</p></div>
+      <a href="https://docs.avrdu.de/neobrut-vue/components/">Browse the docs <span aria-hidden="true">↗</span></a>
+    </section>
 
     <NbAlert tone="success" title="Everything is intentional" dismissible>
       Hard borders, loud colors, sensible semantics.
@@ -199,7 +239,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
           <section class="action-panel action-panel--pink">
             <h2>Links and inline details</h2>
             <p>
-              <NbLink href="https://github.com/avr6ude/neobrut-vue">Read the docs</NbLink>
+              <NbLink href="https://docs.avrdu.de/neobrut-vue/">Read the docs</NbLink>
               and ship something <NbMarker tone="primary">unmistakable</NbMarker>.
             </p>
             <p class="shortcut-row">Open search <NbKbd>⌘</NbKbd><NbKbd>K</NbKbd></p>
@@ -371,6 +411,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
               <p>Sheets keep context. Alert dialogs demand a real answer.</p>
             </div>
             <div class="sample-row">
+              <NbButton variant="primary" @click="dialogOpen = true">Open dialog</NbButton>
               <NbSheet title="Edit component" description="Make the loud thing even louder.">
                 <template #trigger>Open sheet</template>
                 <NbInput label="Component name" model-value="ExplosiveButton" />
@@ -537,6 +578,11 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
         </div>
       </NbTabsContent>
     </NbTabs>
+
+    <footer class="site-footer">
+      <div><h2>Build loud.<br>Ship kind.</h2><p>Start with the kit. Make the rest yours.</p></div>
+      <div class="site-footer__links"><a href="https://docs.avrdu.de/neobrut-vue/getting-started/">Get started <span aria-hidden="true">↗</span></a><a href="https://www.npmjs.com/package/@neobrut-vue/core">View on npm <span aria-hidden="true">↗</span></a></div>
+    </footer>
 
     <NbDialog v-model:open="dialogOpen" title="A little confirmation">
       <p>This dialog traps focus, supports Escape, and returns focus when it closes.</p>

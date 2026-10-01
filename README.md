@@ -8,6 +8,17 @@ Colorful and accessible neo-brutalist components for Vue 3.
 
 [npm](https://www.npmjs.com/package/@neobrut-vue/core) · [GitHub](https://github.com/avr6ude/neobrut-vue) · [Issues](https://github.com/avr6ude/neobrut-vue/issues)
 
+## Landing and docs
+
+The static landing is built from the interactive Vue playground:
+
+```sh
+bun install --frozen-lockfile
+bun run build:site
+```
+
+Its output is `playground/dist`. For Cloudflare Pages, connect this repository with build command `bun run build:site`, output directory `playground/dist`, and `BUN_VERSION=1.3.4`. Attach `neobrut.avrdu.de` as a custom domain after the first successful build. Shared Starlight documentation lives in the separate `avrdu.de/docs-site` project and is intended for `docs.avrdu.de`.
+
 ## Requirements
 
 - Vue 3.5 or newer

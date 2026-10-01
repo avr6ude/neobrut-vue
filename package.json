@@ -33,6 +33,7 @@
   },
   "scripts": {
     "build": "vite build",
+    "build:site": "vite build --config playground/vite.config.ts",
     "check": "bun run test -- --run && bun run typecheck && bun run build",
     "dev:playground": "vite --config playground/vite.config.ts",
     "prepack": "bun run check",
