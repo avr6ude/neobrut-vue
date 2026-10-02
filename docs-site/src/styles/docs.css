@@ -10,6 +10,7 @@
 }
 
 * { box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
 body { margin: 0; color: var(--docs-ink); background: var(--docs-canvas); font: 500 1.125rem/1.6 var(--nb-font-body); }
 button, input { font: inherit; }
 a { color: inherit; }
@@ -30,15 +31,15 @@ a { color: inherit; }
 .search-trigger kbd { margin-left: auto; border: 1px solid var(--docs-ink); border-radius: .15rem; padding: .12rem .26rem; background: var(--docs-blue); box-shadow: none; font: 800 .7rem/1 var(--nb-font-mono); white-space: nowrap; }
 .menu-trigger { display: none !important; width: 2.5rem; padding: .35rem !important; }
 
-.docs-shell { display: grid; grid-template-columns: var(--docs-rail-width) minmax(0, 1fr) var(--docs-rail-width); min-height: calc(100dvh - var(--docs-header-height)); }
-.docs-sidebar, .docs-toc { position: sticky; top: var(--docs-header-height); align-self: start; height: calc(100dvh - var(--docs-header-height)); overflow-y: auto; background: #fff; }
-.docs-sidebar { border-right: 3px solid var(--docs-ink); }
+.docs-shell { display: grid; grid-template-columns: var(--docs-rail-width) minmax(0, 1fr) var(--docs-rail-width); height: calc(100dvh - var(--docs-header-height)); min-height: 0; overflow: hidden; }
+.docs-sidebar, .docs-toc { height: 100%; min-height: 0; background: #fff; }
+.docs-sidebar { overflow-y: auto; border-right: 3px solid var(--docs-ink); }
 .nav-group h2 { margin: 0; border-bottom: 3px solid var(--docs-ink); padding: .75rem 1.25rem; background: var(--nb-color-primary); font: 900 1rem/1.35 var(--nb-font-display); }
 .nav-group ul { margin: 0; padding: 0; list-style: none; }
 .nav-group a { display: flex; align-items: center; min-height: 3.15rem; border-bottom: 2px solid var(--docs-ink); padding: .55rem 1.25rem; font: 800 .98rem/1.3 var(--nb-font-display); text-decoration: none; }
 .nav-group a:hover { background: var(--nb-color-primary); }
 .nav-group a[aria-current='page'] { background: var(--docs-blue); font-weight: 900; }
-.docs-main { min-width: 0; padding: clamp(2.25rem, 5vw, 4rem) clamp(1.25rem, 4vw, 4rem) 5rem; }
+.docs-main { min-width: 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: clamp(2.25rem, 5vw, 4rem) clamp(1.25rem, 4vw, 4rem) 5rem; scrollbar-gutter: stable; }
 .docs-article { width: min(100%, 49rem); margin-inline: auto; }
 .docs-article h1, .docs-content h2, .docs-content h3 { color: var(--docs-ink); font-family: var(--nb-font-display); font-weight: 900; letter-spacing: -.025em; text-wrap: balance; }
 .docs-article h1 { margin: 0 0 2.5rem; font-size: clamp(2.55rem, 4vw, 3.5rem); line-height: 1.08; }
@@ -111,6 +112,16 @@ dialog::backdrop { background: rgb(21 21 21 / .52); }
 .component-directory__links strong { font-family: var(--nb-font-display); font-weight: 900; }
 .component-directory__links span:last-child { font-size: 1.4rem; font-weight: 900; }
 .menu-dialog { position: fixed; top: var(--docs-header-height); left: 0; width: min(20rem, 100vw); max-width: none; height: calc(100dvh - var(--docs-header-height)); max-height: none; margin: 0; border: 3px solid var(--docs-ink); padding: 0; background: #fff; overflow-y: auto; }
+
+:where(.docs-sidebar, .docs-main, .menu-dialog, .search-results, .docs-content table, .docs-content pre.astro-code) {
+  scrollbar-color: var(--docs-blue) #fff;
+  scrollbar-width: thin;
+}
+:where(.docs-sidebar, .docs-main, .menu-dialog, .search-results, .docs-content table, .docs-content pre.astro-code)::-webkit-scrollbar { width: .75rem; height: .75rem; }
+:where(.docs-sidebar, .docs-main, .menu-dialog, .search-results, .docs-content table, .docs-content pre.astro-code)::-webkit-scrollbar-track { background: #fff; }
+:where(.docs-sidebar, .docs-main, .menu-dialog, .search-results, .docs-content table, .docs-content pre.astro-code)::-webkit-scrollbar-thumb { border: 2px solid var(--docs-ink); background: var(--docs-blue); }
+:where(.docs-sidebar, .docs-main, .menu-dialog, .search-results, .docs-content table, .docs-content pre.astro-code)::-webkit-scrollbar-thumb:hover { background: var(--nb-color-primary); }
+:where(.docs-sidebar, .docs-main, .menu-dialog, .search-results, .docs-content table, .docs-content pre.astro-code)::-webkit-scrollbar-corner { background: #fff; }
 
 @media (max-width: 72rem) {
   .docs-shell { grid-template-columns: var(--docs-rail-width) minmax(0, 1fr); }

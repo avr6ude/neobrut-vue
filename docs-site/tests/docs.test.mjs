@@ -99,6 +99,16 @@ test('the docs shell has full navigation, search, and no Starlight markup', () =
   assert.doesNotMatch(html, /starlight/i)
 })
 
+test('only the docs sidebar and component content scroll', () => {
+  const css = readFileSync(new URL('../src/styles/docs.css', import.meta.url), 'utf8')
+  assert.match(css, /html, body \{ height: 100%; overflow: hidden; \}/)
+  assert.match(css, /\.docs-shell \{[^}]*height: calc\(100dvh - var\(--docs-header-height\)\);[^}]*overflow: hidden;/)
+  assert.match(css, /\.docs-sidebar \{ overflow-y: auto;/)
+  assert.match(css, /\.docs-main \{[^}]*overflow-y: auto;/)
+  assert.match(css, /scrollbar-color: var\(--docs-blue\) #fff;/)
+  assert.match(css, /::-webkit-scrollbar-thumb/)
+})
+
 test('the removed demo strip stays removed', () => {
   const html = readFileSync(new URL('../../playground/dist/index.html', import.meta.url), 'utf8')
   const js = readFileSync(new URL(`../../playground/dist${html.match(/src="(\/assets\/[^\"]+\.js)"/)?.[1]}`, import.meta.url), 'utf8')
