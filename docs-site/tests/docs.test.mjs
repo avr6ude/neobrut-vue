@@ -53,3 +53,19 @@ test('the combined site serves branded docs under /docs', () => {
   assert.doesNotMatch(button, /docs\.avrdu\.de/)
   assert.ok(existsSync(new URL('../../playground/dist/docs/favicon.svg', import.meta.url)))
 })
+
+test('the docs shell has full navigation, search, and no Starlight markup', () => {
+  const html = readFileSync(new URL('../../playground/dist/docs/button/index.html', import.meta.url), 'utf8')
+  assert.match(html, /class="docs-shell"/)
+  assert.match(html, /class="docs-sidebar"/)
+  assert.match(html, /class="docs-toc"/)
+  assert.match(html, /id="docs-search"/)
+  assert.match(html, /id="docs-menu"/)
+  assert.doesNotMatch(html, /starlight/i)
+})
+
+test('the removed demo strip stays removed', () => {
+  const html = readFileSync(new URL('../../playground/dist/index.html', import.meta.url), 'utf8')
+  const js = readFileSync(new URL(`../../playground/dist${html.match(/src="(\/assets\/[^\"]+\.js)"/)?.[1]}`, import.meta.url), 'utf8')
+  assert.doesNotMatch(js, /REAL COMPONENTS|REAL INTERACTIONS|ZERO BEIGE/)
+})

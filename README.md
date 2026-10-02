@@ -17,7 +17,7 @@ bun install --frozen-lockfile
 bun run build:site
 ```
 
-Its output is `playground/dist`, including the static Starlight documentation under `/docs`. Cloudflare Pages builds it from this repository with `BUN_VERSION=1.3.4` and serves both at [neobrut.avrdu.de](https://neobrut.avrdu.de/).
+Its output is `playground/dist`, including the static Astro documentation under `/docs`. Cloudflare Pages builds it from this repository with `BUN_VERSION=1.3.4` and serves both at [neobrut.avrdu.de](https://neobrut.avrdu.de/).
 
 ## Requirements
 

@@ -1,0 +1,10 @@
+---
+import { getEntry, render } from 'astro:content'
+import DocsLayout from '../layouts/DocsLayout.astro'
+
+const page = await getEntry('docs', '404')
+if (!page) throw new Error('Missing docs 404 page')
+const { Content } = await render(page)
+---
+
+<DocsLayout page={page} headings={[]}><Content /></DocsLayout>

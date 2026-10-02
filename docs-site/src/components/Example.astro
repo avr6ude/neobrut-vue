@@ -19,7 +19,7 @@ const id = `example-${crypto.randomUUID()}`
     </div>
   </div>
   <div class="nb-doc-example__preview" role="tabpanel" id={`${id}-preview`} aria-labelledby={`${id}-preview-tab`} data-panel="preview">
-    <slot />
+    <div class="nb-doc-example__preview-content"><slot /></div>
   </div>
   <div class="nb-doc-example__code" role="tabpanel" id={`${id}-code`} aria-labelledby={`${id}-code-tab`} data-panel="code" hidden>
     <button type="button" class="nb-doc-example__copy" aria-label={`Copy ${title} code`} data-copy>Copy</button>
