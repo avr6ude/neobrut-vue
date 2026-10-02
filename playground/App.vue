@@ -12,6 +12,8 @@ import {
   NbBreadcrumbs,
   NbButton,
   NbButtonGroup,
+  NbCarousel,
+  NbCarouselSlide,
   NbCard,
   NbCheckbox,
   NbCollapsible,
@@ -25,18 +27,26 @@ import {
   NbContextMenuSeparator,
   NbContextMenuShortcut,
   NbDialog,
+  NbDrawer,
   NbDropdownMenu,
   NbDropdownMenuItem,
   NbDropdownMenuSeparator,
   NbEmptyState,
+  NbField,
   NbFieldset,
   NbHoverCard,
   NbInput,
   NbInputGroup,
   NbKbd,
+  NbLabel,
   NbLink,
   NbMarker,
+  NbMenubar,
+  NbMenubarMenu,
+  NbMenubarItem,
+  NbMenubarSeparator,
   NbMeter,
+  NbNativeSelect,
   NbNavigationMenu,
   NbNumberInput,
   NbPagination,
@@ -97,6 +107,7 @@ const skills = ref(['Vue', 'TypeScript'])
 const verificationCode = ref<number[]>([])
 const experienceRating = ref(3)
 const releaseStep = ref(2)
+const fruit = ref('apple')
 const previewName = ref('Alex')
 const previewAlerts = ref(true)
 const previewSaved = ref(false)
@@ -168,7 +179,7 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
           <code><span>npm install</span> <span>@neobrut-vue/core</span></code>
           <NbCopyButton text="npm install @neobrut-vue/core" label="Copy" copied-label="Copied" aria-label="Copy install command" size="sm" />
         </div>
-        <p class="hero__meta">Vue 3.5+ <span aria-hidden="true">·</span> MIT licensed <span aria-hidden="true">·</span> v0.5.0</p>
+        <p class="hero__meta">Vue 3.5+ <span aria-hidden="true">·</span> MIT licensed <span aria-hidden="true">·</span> v0.6.0</p>
       </div>
 
       <div class="hero__preview" aria-label="Interactive component preview">
@@ -283,6 +294,11 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
                 name="volume"
                 :step="5"
               />
+              <NbNativeSelect v-model="fruit" label="Favorite fruit" hint="A native browser menu, with our field styling.">
+                <option value="apple">Apple</option>
+                <option value="pear">Pear</option>
+                <option value="peach">Peach</option>
+              </NbNativeSelect>
               <NbToggleGroup v-model="alignment" label="Alignment" hint="A composable single-choice group." name="alignment">
                 <NbToggleGroupItem value="left">Left</NbToggleGroupItem>
                 <NbToggleGroupItem value="center">Center</NbToggleGroupItem>
@@ -294,14 +310,16 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
           <div class="form-grid form-grid--extras">
             <NbRadioGroup v-model="plan" label="Pick a plan" hint="The whole card is clickable." :options="plans" />
             <div class="form-stack form-stack--compact">
-              <div class="demo-field">
-                <label class="demo-label" for="handle">Profile handle</label>
+              <NbField label="Profile handle" hint="Input groups keep useful context attached." v-slot="{ inputId, describedBy }">
                 <NbInputGroup>
                   <template #start>@</template>
-                  <input id="handle" v-model="handle" autocomplete="username">
+                  <input :id="inputId" v-model="handle" :aria-describedby="describedBy" autocomplete="username">
                   <template #end>.dev</template>
                 </NbInputGroup>
-                <small>Input groups keep useful context attached.</small>
+              </NbField>
+              <div class="demo-field">
+                <NbLabel for="native-title">Native label</NbLabel>
+                <input id="native-title" class="nb-field__control" placeholder="A title of your own">
               </div>
               <NbSwitch v-model="notifications" label="Launch alerts" description="Send one cheerful ping when the build ships." />
               <NbCheckbox v-model="accepted" label="I accept the chaos" />
@@ -349,6 +367,14 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
 
       <NbTabsContent value="overlays">
         <NbNavigationMenu class="overlay-navigation" label="Component demo navigation" :items="navigationItems" />
+        <NbMenubar label="Editor actions" class="overlay-navigation">
+          <NbMenubarMenu label="File">
+            <NbMenubarItem @select="menuAction = 'New file selected.'">New file</NbMenubarItem>
+            <NbMenubarSeparator />
+            <NbMenubarItem @select="menuAction = 'Export selected.'">Export</NbMenubarItem>
+          </NbMenubarMenu>
+          <NbMenubarMenu label="Edit"><NbMenubarItem @select="menuAction = 'Duplicate selected.'">Duplicate</NbMenubarItem></NbMenubarMenu>
+        </NbMenubar>
         <div class="overlay-grid">
           <section class="overlay-demo overlay-demo--yellow">
             <div>
@@ -413,6 +439,10 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
                 <NbInput label="Component name" model-value="ExplosiveButton" />
                 <template #footer><NbButton variant="accent">Save changes</NbButton></template>
               </NbSheet>
+              <NbDrawer title="Quick edit" description="Swipe down or press Escape to close.">
+                <template #trigger>Open drawer</template>
+                <NbInput label="Project name" placeholder="A loud idea" />
+              </NbDrawer>
               <NbAlertDialog
                 title="Delete component?"
                 description="This removes it from the demo immediately."
@@ -492,6 +522,15 @@ const validateWorkspace = handleSubmit(({ workspace }) => {
             <section class="data-panel data-panel--wide data-panel--paper">
               <h2>One more detail</h2>
               <NbCollapsible title="What is a collapsible?">A single section you can reveal without opening a whole accordion.</NbCollapsible>
+            </section>
+
+            <section class="data-panel data-panel--wide data-panel--paper">
+              <h2>Color in motion</h2>
+              <NbCarousel label="Component colors">
+                <NbCarouselSlide label="Yellow"><div class="color-slide color-slide--yellow">Electric yellow</div></NbCarouselSlide>
+                <NbCarouselSlide label="Mint"><div class="color-slide color-slide--mint">Fresh mint</div></NbCarouselSlide>
+                <NbCarouselSlide label="Coral"><div class="color-slide color-slide--coral">Bold coral</div></NbCarouselSlide>
+              </NbCarousel>
             </section>
 
             <section class="data-panel data-panel--wide data-panel--paper">

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0
+
+- Added `NbLabel`, `NbField`, `NbNativeSelect`, `NbDrawer`, `NbMenubar`, and `NbCarousel` (plus their companion components).
+- Added interactive docs and playground examples for each new component.
+
 ## 0.5.0
 
 - Added `NbStepper`, `NbMeter`, `NbTimeline`, and `NbCopyButton` with accessible examples.

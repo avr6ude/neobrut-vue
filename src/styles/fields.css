@@ -5,10 +5,15 @@
   gap: 0.4rem;
 }
 
-.nb-field__label, .nb-checkbox__label {
+.nb-field__label, .nb-label, .nb-checkbox__label {
   font-family: var(--nb-font-display);
   font-weight: 800;
 }
+
+.nb-native-select { position: relative; display: block; }
+.nb-native-select__control { appearance: none; padding-right: 2.75rem; background: var(--nb-color-primary); cursor: pointer; }
+.nb-native-select__control:disabled { cursor: not-allowed; }
+.nb-native-select svg { position: absolute; top: 50%; right: .85rem; width: 1rem; height: 1rem; transform: translateY(-50%); fill: none; stroke: var(--nb-color-ink); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
 
 .nb-field__control {
   display: block;

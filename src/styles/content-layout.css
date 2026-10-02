@@ -47,3 +47,13 @@
 .nb-scroll-area__thumb { position: relative; flex: 1; border: 2px solid var(--nb-color-ink); border-radius: 999px; background: var(--nb-color-accent); }
 
 @keyframes nb-spin { to { transform: rotate(360deg); } }
+
+.nb-carousel { min-width: 0; border: var(--nb-border-width) solid var(--nb-color-ink); border-radius: var(--nb-radius-sm); box-shadow: 5px 5px 0 var(--nb-shadow-color); background: var(--nb-color-paper); overflow: hidden; }
+.nb-carousel__track { display: grid; grid-auto-columns: 100%; grid-auto-flow: column; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.nb-carousel__track::-webkit-scrollbar { display: none; }
+.nb-carousel__slide { min-width: 0; scroll-snap-align: start; padding: clamp(1rem, 4vw, 2rem); }
+.nb-carousel__controls { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-top: var(--nb-border-width) solid var(--nb-color-ink); background: var(--nb-color-secondary); padding: .5rem .75rem; font: 900 .9rem/1 var(--nb-font-display); }
+.nb-carousel__controls > div { display: flex; gap: .4rem; }
+.nb-carousel__controls button { display: grid; width: 2.3rem; height: 2.3rem; place-items: center; border: 2px solid var(--nb-color-ink); border-radius: var(--nb-radius-sm); background: var(--nb-color-paper); color: var(--nb-color-ink); font: 900 1.25rem/1 var(--nb-font-display); cursor: pointer; }
+.nb-carousel__controls button:hover:not(:disabled) { background: var(--nb-color-primary); }
+.nb-carousel__controls button:disabled { cursor: not-allowed; opacity: .45; }

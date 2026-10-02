@@ -61,10 +61,10 @@ import { NbBadge, NbButton, NbCard } from '@neobrut-vue/core'
 | Group | Components |
 | --- | --- |
 | Actions and surfaces | `NbButton`, `NbButtonGroup`, `NbCopyButton`, `NbToggle`, `NbCard`, `NbAlert`, `NbBadge` |
-| Forms | `NbCheckbox`, `NbCombobox`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbNumberInput`, `NbPinInput`, `NbRadioGroup`, `NbRating`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTagsInput`, `NbTextarea`, `NbToggleGroup`, `NbToggleGroupItem` |
-| Navigation | `NbBreadcrumbs`, `NbNavigationMenu`, `NbPagination`, `NbStepper`, `NbStepperItem`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent` |
-| Overlays | `NbAlertDialog`, `NbCommand`, `NbContextMenu`, `NbDialog`, `NbDropdownMenu`, `NbHoverCard`, `NbPopover`, `NbSheet`, `NbToast`, `NbTooltip` |
-| Data display | `NbAccordion`, `NbAccordionItem`, `NbAvatar`, `NbCollapsible`, `NbEmptyState`, `NbMeter`, `NbProgress`, `NbSkeleton`, `NbSpinner`, `NbTable`, `NbTimeline`, `NbTimelineItem` |
+| Forms | `NbCheckbox`, `NbCombobox`, `NbField`, `NbFieldset`, `NbInput`, `NbInputGroup`, `NbLabel`, `NbNativeSelect`, `NbNumberInput`, `NbPinInput`, `NbRadioGroup`, `NbRating`, `NbSelect`, `NbSelectItem`, `NbSlider`, `NbSwitch`, `NbTagsInput`, `NbTextarea`, `NbToggleGroup`, `NbToggleGroupItem` |
+| Navigation | `NbBreadcrumbs`, `NbMenubar`, `NbMenubarMenu`, `NbMenubarItem`, `NbMenubarSeparator`, `NbNavigationMenu`, `NbPagination`, `NbStepper`, `NbStepperItem`, `NbTabs`, `NbTabsList`, `NbTabsTrigger`, `NbTabsContent` |
+| Overlays | `NbAlertDialog`, `NbCommand`, `NbContextMenu`, `NbDialog`, `NbDrawer`, `NbDropdownMenu`, `NbHoverCard`, `NbPopover`, `NbSheet`, `NbToast`, `NbTooltip` |
+| Data display | `NbAccordion`, `NbAccordionItem`, `NbAvatar`, `NbCarousel`, `NbCarouselSlide`, `NbCollapsible`, `NbEmptyState`, `NbMeter`, `NbProgress`, `NbSkeleton`, `NbSpinner`, `NbTable`, `NbTimeline`, `NbTimelineItem` |
 | Inline and layout | `NbLink`, `NbKbd`, `NbMarker`, `NbAspectRatio`, `NbScrollArea`, `NbSeparator` |
 
 ## Links and actions

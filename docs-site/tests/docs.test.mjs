@@ -31,7 +31,7 @@ test('the docs entry is live and the catalog links to every component page', () 
     .filter(item => item.isDirectory())
   const demo = readFileSync(new URL('../src/examples/CatalogDemo.vue', import.meta.url), 'utf8')
   const demoKinds = new Set([...demo.matchAll(/kind === '([^']+)'/g)].map(match => match[1]))
-  assert.equal(folders.length, 53)
+  assert.equal(folders.length, 59)
   for (const folder of folders) {
     const id = folder.name.replace(/^Nb/, '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
     assert.match(catalog, new RegExp(`href="/docs/${id}/"`), `${folder.name} missing from directory`)
