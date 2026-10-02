@@ -78,6 +78,10 @@ export const componentGroups: { label: string; items: ComponentPage[] }[] = [
   ] },
 ]
 
+const byLabel = (a: { label: string }, b: { label: string }) => a.label.localeCompare(b.label)
+componentGroups.sort(byLabel)
+for (const group of componentGroups) group.items.sort(byLabel)
+
 export const components = componentGroups.flatMap(group => group.items)
 
 export function componentSource(component: ComponentPage) {

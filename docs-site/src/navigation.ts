@@ -13,7 +13,7 @@ export const navigation = [
   { label: 'Resources', items: [
     { id: 'forms', label: 'Forms guide', href: '/docs/forms/' },
     { id: 'accessibility', label: 'Accessibility', href: '/docs/accessibility/' },
-  ] },
+  ].sort((a, b) => a.label.localeCompare(b.label)) },
 ]
 
 export const pages = navigation.flatMap(group => group.items)
