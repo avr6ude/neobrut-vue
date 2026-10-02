@@ -1,76 +1,10 @@
 ---
 title: Components
-description: Try Neobrut Vue components live, then copy the source.
+description: Find every Neobrut Vue component and open its live example.
 ---
 
-import Example from '../../components/Example.astro'
-import ButtonDemo from '../../examples/ButtonDemo.vue'
-import InputDemo from '../../examples/InputDemo.vue'
-import SelectDemo from '../../examples/SelectDemo.vue'
-import SwitchDemo from '../../examples/SwitchDemo.vue'
-import AccordionDemo from '../../examples/AccordionDemo.vue'
-import TabsDemo from '../../examples/TabsDemo.vue'
-import DialogDemo from '../../examples/DialogDemo.vue'
-import FormDemo from '../../examples/FormDemo.vue'
-import buttonSource from '../../examples/ButtonDemo.vue?raw'
-import inputSource from '../../examples/InputDemo.vue?raw'
-import selectSource from '../../examples/SelectDemo.vue?raw'
-import switchSource from '../../examples/SwitchDemo.vue?raw'
-import accordionSource from '../../examples/AccordionDemo.vue?raw'
-import tabsSource from '../../examples/TabsDemo.vue?raw'
-import dialogSource from '../../examples/DialogDemo.vue?raw'
-import formSource from '../../examples/FormDemo.vue?raw'
+import ComponentDirectory from '../../components/ComponentDirectory.astro'
 
-These are live components from `@neobrut-vue/core`. Use them here, switch to **Code**, and open each component page for usage and accessibility details.
+Every component has its own page with a live preview and copyable Vue code. Pick a category or use search.
 
-## Button
-
-Actions in the kit's color variants. [Usage and props →](/docs/button/)
-
-<Example title="Button" source={buttonSource}><ButtonDemo client:only="vue" /></Example>
-
-## Input
-
-Type a name; the text updates immediately. [Usage and details →](/docs/input/)
-
-<Example title="Input" source={inputSource}><InputDemo client:only="vue" /></Example>
-
-## Select
-
-Open the styled menu and choose an option. [Usage and details →](/docs/select/)
-
-<Example title="Select" source={selectSource}><SelectDemo client:only="vue" /></Example>
-
-## Switch
-
-Toggle the setting with a click or Space. [Usage and details →](/docs/switch/)
-
-<Example title="Switch" source={switchSource}><SwitchDemo client:only="vue" /></Example>
-
-## Accordion
-
-Expand a section to see the animated disclosure. [Usage and details →](/docs/accordion/)
-
-<Example title="Accordion" source={accordionSource}><AccordionDemo client:only="vue" /></Example>
-
-## Tabs
-
-Switch panels with a click or arrow keys. [Usage and details →](/docs/tabs/)
-
-<Example title="Tabs" source={tabsSource}><TabsDemo client:only="vue" /></Example>
-
-## Dialog
-
-Open the dialog, then close it with Escape. [Usage and details →](/docs/dialog/)
-
-<Example title="Dialog" source={dialogSource}><DialogDemo client:only="vue" /></Example>
-
-## Forms
-
-Fill and submit a local form; nothing is sent to a server. [Validation and usage →](/docs/forms/)
-
-<Example title="Form" source={formSource}><FormDemo client:only="vue" /></Example>
-
-## More in the kit
-
-The [interactive gallery](https://neobrut.avrdu.de/#gallery) includes the remaining components, from navigation and overlays to data display. Their source is in the [core repository](https://github.com/avr6ude/neobrut-vue/tree/main/src/components).
+<ComponentDirectory />

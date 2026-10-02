@@ -1,19 +1,41 @@
 ---
 import { getCollection, render } from 'astro:content'
 import DocsLayout from '../layouts/DocsLayout.astro'
+import Example from '../components/Example.astro'
+import CatalogDemo from '../examples/CatalogDemo.vue'
+import { components, componentSource } from '../componentCatalog'
 
 export async function getStaticPaths() {
   const entries = await getCollection('docs', entry => entry.id !== '404')
-  return entries.map(page => ({
+  const contentPages = entries.map(page => ({
     params: { slug: page.id === 'index' ? undefined : page.id },
     props: { page },
   }))
+  const existing = new Set(entries.map(page => page.id))
+  return [
+    ...contentPages,
+    ...components.filter(component => !existing.has(component.id)).map(component => ({
+      params: { slug: component.id },
+      props: { component },
+    })),
+  ]
 }
 
-const { page } = Astro.props
-const { Content, headings } = await render(page)
+const { page: contentPage, component } = Astro.props
+const rendered = contentPage ? await render(contentPage) : undefined
+const page = contentPage ?? { id: component.id, data: { title: component.label, description: component.description } }
+const headings = rendered?.headings ?? [
+  { depth: 2, slug: 'preview', text: 'Preview' },
+  { depth: 2, slug: 'usage', text: 'Usage' },
+]
 ---
 
 <DocsLayout page={page} headings={headings}>
-  <Content />
+  {rendered ? <rendered.Content /> : <>
+    <p>{component.description} Try the live example, then switch to Code to copy its Vue source.</p>
+    <h2 id="preview">Preview</h2>
+    <Example title={component.label} source={componentSource(component)}><CatalogDemo client:only="vue" kind={component.id} /></Example>
+    <h2 id="usage">Usage</h2>
+    <p>Import <code>{`Nb${component.label.replaceAll(' ', '')}`}</code> from <code>@neobrut-vue/core</code> and its stylesheet once in your app. The Code tab above contains a complete example.</p>
+  </>}
 </DocsLayout>

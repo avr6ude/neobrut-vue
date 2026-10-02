@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { test } from 'node:test'
 
 for (const page of ['button', 'input', 'select', 'switch', 'accordion', 'tabs', 'dialog', 'forms']) {
@@ -21,15 +21,27 @@ test('the example tablist contains only tabs', () => {
   assert.ok(tabs >= 0 && tabsEnd > tabs && copy > tabsEnd)
 })
 
-test('the docs entry and catalog show live components, not a text-only list', () => {
+test('the docs entry is live and the catalog links to every component page', () => {
   const home = readFileSync(new URL('../../playground/dist/docs/index.html', import.meta.url), 'utf8')
   const catalog = readFileSync(new URL('../../playground/dist/docs/components/index.html', import.meta.url), 'utf8')
   assert.match(home, /<astro-island/)
   assert.match(home, /nb-doc-example not-content/)
-  assert.equal((catalog.match(/nb-doc-example not-content/g) ?? []).length, 8)
-  assert.ok((catalog.match(/<astro-island/g) ?? []).length >= 8)
-  assert.match(catalog, /ButtonDemo/)
-  assert.match(catalog, /FormDemo/)
+  assert.match(catalog, /component-directory__links/)
+  const folders = readdirSync(new URL('../../src/components/', import.meta.url), { withFileTypes: true })
+    .filter(item => item.isDirectory())
+  const demo = readFileSync(new URL('../src/examples/CatalogDemo.vue', import.meta.url), 'utf8')
+  const demoKinds = new Set([...demo.matchAll(/kind === '([^']+)'/g)].map(match => match[1]))
+  assert.equal(folders.length, 53)
+  for (const folder of folders) {
+    const id = folder.name.replace(/^Nb/, '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+    assert.match(catalog, new RegExp(`href="/docs/${id}/"`), `${folder.name} missing from directory`)
+    const html = readFileSync(new URL(`../../playground/dist/docs/${id}/index.html`, import.meta.url), 'utf8')
+    assert.match(html, /nb-doc-example not-content/, `${folder.name} missing live example`)
+    assert.match(html, /class="astro-code github-dark"/, `${folder.name} missing highlighted code`)
+    if (!['button', 'input', 'select', 'switch', 'accordion', 'tabs', 'dialog'].includes(id)) {
+      assert.ok(demoKinds.has(id), `${folder.name} missing interactive demo`)
+    }
+  }
 })
 
 test('copy stays with the code panel', () => {

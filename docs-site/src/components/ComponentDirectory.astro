@@ -1,0 +1,16 @@
+---
+import { componentGroups } from '../componentCatalog'
+---
+
+<div class="component-directory">
+  {componentGroups.map(group => <section class="component-directory__group" aria-label={group.label}>
+    <h2>{group.label}</h2>
+    <div class="component-directory__links">
+      {group.items.map(component => <a href={`/docs/${component.id}/`} data-astro-prefetch>
+        <strong>{component.label}</strong>
+        <span>{component.description}</span>
+        <span aria-hidden="true">↗</span>
+      </a>)}
+    </div>
+  </section>)}
+</div>

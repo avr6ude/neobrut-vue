@@ -1,13 +1,17 @@
+import { componentGroups } from './componentCatalog'
+
 export const navigation = [
   { label: 'Getting started', items: [
     { id: 'index', label: 'Introduction', href: '/docs/' },
     { id: 'getting-started', label: 'Installation', href: '/docs/getting-started/' },
     { id: 'components', label: 'All components', href: '/docs/components/' },
   ] },
-  { label: 'Components', items: [
-    ...['button', 'input', 'select', 'switch', 'accordion', 'tabs', 'dialog', 'forms'].map(id => ({ id, label: id[0].toUpperCase() + id.slice(1), href: `/docs/${id}/` })),
-  ] },
+  ...componentGroups.map(group => ({
+    label: group.label,
+    items: group.items.map(component => ({ id: component.id, label: component.label, href: `/docs/${component.id}/` })),
+  })),
   { label: 'Resources', items: [
+    { id: 'forms', label: 'Forms guide', href: '/docs/forms/' },
     { id: 'accessibility', label: 'Accessibility', href: '/docs/accessibility/' },
   ] },
 ]

@@ -1,15 +1,15 @@
 ---
 import { getCollection } from 'astro:content'
-import type { CollectionEntry } from 'astro:content'
 import SidebarNav from '../components/SidebarNav.astro'
 import { pages } from '../navigation'
+import { components } from '../componentCatalog'
 import { ClientRouter } from 'astro:transitions'
 import { NbButton, NbInput, NbKbd, NbLink } from '@neobrut-vue/core'
 import '@neobrut-vue/core/style.css'
 import '../styles/docs.css'
 
 interface Props {
-  page: CollectionEntry<'docs'>
+  page: { id: string; data: { title: string; description: string } }
   headings: { depth: number; slug: string; text: string }[]
 }
 
@@ -19,12 +19,17 @@ const position = pages.findIndex(item => item.id === page.id)
 const previous = position > 0 ? pages[position - 1] : undefined
 const next = position >= 0 ? pages[position + 1] : undefined
 const entries = await getCollection('docs', entry => entry.id !== '404')
-const searchData = JSON.stringify(entries.map(entry => ({
+const searchData = JSON.stringify([...entries.map(entry => ({
   title: entry.data.title,
   description: entry.data.description,
   href: pages.find(item => item.id === entry.id)?.href,
   content: entry.body,
-}))).replace(/</g, '\\u003c')
+})), ...components.filter(component => !entries.some(entry => entry.id === component.id)).map(component => ({
+  title: component.label,
+  description: component.description,
+  href: `/docs/${component.id}/`,
+  content: component.example,
+}))]).replace(/</g, '\\u003c')
 ---
 
 <!doctype html>
@@ -96,6 +101,14 @@ const searchData = JSON.stringify(entries.map(entry => ({
       document.addEventListener('astro:page-load', () => {
         pageListeners?.abort()
         pageListeners = new AbortController()
+        const sidebar = document.querySelector<HTMLElement>('.docs-sidebar')
+        const activeLink = sidebar?.querySelector<HTMLElement>('[aria-current="page"]')
+        if (sidebar && activeLink) {
+          const top = activeLink.getBoundingClientRect().top - sidebar.getBoundingClientRect().top + sidebar.scrollTop
+          if (top < sidebar.scrollTop || top > sidebar.scrollTop + sidebar.clientHeight - activeLink.clientHeight) {
+            sidebar.scrollTop = Math.max(0, top - sidebar.clientHeight / 3)
+          }
+        }
         const search = document.querySelector<HTMLDialogElement>('#docs-search')!
         const input = search.querySelector<HTMLInputElement>('[data-search-input]')!
         const results = search.querySelector<HTMLElement>('[data-search-results]')!
