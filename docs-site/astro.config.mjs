@@ -8,6 +8,7 @@ export default defineConfig({
   base: '/docs',
   outDir: '../playground/dist/docs',
   trailingSlash: 'always',
+  prefetch: true,
   vite: {
     resolve: {
       alias: [

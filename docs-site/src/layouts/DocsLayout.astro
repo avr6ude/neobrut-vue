@@ -3,6 +3,9 @@ import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 import SidebarNav from '../components/SidebarNav.astro'
 import { pages } from '../navigation'
+import { ClientRouter } from 'astro:transitions'
+import { NbButton, NbInput, NbKbd, NbLink } from '@neobrut-vue/core'
+import '@neobrut-vue/core/style.css'
 import '../styles/docs.css'
 
 interface Props {
@@ -25,7 +28,7 @@ const searchData = JSON.stringify(entries.map(entry => ({
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:name="root" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -33,6 +36,7 @@ const searchData = JSON.stringify(entries.map(entry => ({
     <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href="/docs/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <ClientRouter />
     <title>{page.id === 'index' ? 'Neobrut Vue — Docs' : `${page.data.title} | Neobrut Vue`}</title>
   </head>
   <body>
@@ -40,17 +44,17 @@ const searchData = JSON.stringify(entries.map(entry => ({
     <header class="docs-header">
       <a class="brand" href="/docs/" aria-label="Neobrut Vue documentation home"><span class="brand-mark" aria-hidden="true">N</span><span>Neobrut Vue</span></a>
       <div class="header-actions">
-        <button class="search-trigger" type="button" data-open-search aria-haspopup="dialog" aria-controls="docs-search" aria-label="Search docs">
+        <NbButton variant="ghost" size="sm" class="search-trigger" data-open-search aria-haspopup="dialog" aria-controls="docs-search" aria-label="Search docs">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
-          <span>Search</span><kbd>⌘ K</kbd>
-        </button>
-        <a class="github-link" href="https://github.com/avr6ude/neobrut-vue" aria-label="Neobrut Vue on GitHub">
+          <span>Search</span><NbKbd size="sm">⌘ K</NbKbd>
+        </NbButton>
+        <NbLink class="github-link" href="https://github.com/avr6ude/neobrut-vue" aria-label="Neobrut Vue on GitHub">
           <span>GitHub</span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.2-6-2.6M15 21v-3.4c0-1 .1-1.4-.5-2.1 2.9-.3 5.9-1.4 5.9-6.5 0-1.5-.5-2.7-1.3-3.6.1-.4.6-1.8-.2-3.4 0 0-1.2-.4-3.8 1.4a13.2 13.2 0 0 0-6.8 0C5.7 1.6 4.5 2 4.5 2c-.8 1.6-.3 3-.2 3.4C3.5 6.3 3 7.5 3 9c0 5.1 3 6.2 5.9 6.5-.6.7-.6 1.4-.6 2.1V21"/></svg>
-        </a>
-        <button class="menu-trigger" type="button" data-open-menu aria-haspopup="dialog" aria-controls="docs-menu" aria-label="Open navigation">
+        </NbLink>
+        <NbButton variant="ghost" size="sm" class="menu-trigger" data-open-menu aria-haspopup="dialog" aria-controls="docs-menu" aria-label="Open navigation">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        </button>
+        </NbButton>
       </div>
     </header>
 
@@ -65,8 +69,8 @@ const searchData = JSON.stringify(entries.map(entry => ({
           <h1>{page.data.title}</h1>
           <div class="docs-content"><slot /></div>
           <nav class="pagination-links" aria-label="Pagination">
-            {previous && <a href={previous.href} rel="prev"><span>← Previous</span><strong>{previous.label}</strong></a>}
-            {next && <a href={next.href} rel="next"><span>Next →</span><strong>{next.label}</strong></a>}
+            {previous && <a href={previous.href} rel="prev" data-astro-prefetch><span>← Previous</span><strong>{previous.label}</strong></a>}
+            {next && <a href={next.href} rel="next" data-astro-prefetch><span>Next →</span><strong>{next.label}</strong></a>}
           </nav>
         </div>
       </main>
@@ -77,51 +81,56 @@ const searchData = JSON.stringify(entries.map(entry => ({
     </div>
 
     <dialog id="docs-menu" class="menu-dialog" aria-label="Documentation navigation">
-      <div class="dialog-heading"><strong>Navigation</strong><button type="button" data-close-menu aria-label="Close navigation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5 19 19M19 5 5 19"/></svg></button></div>
+      <div class="dialog-heading"><strong>Navigation</strong><NbButton variant="ghost" size="sm" data-close-menu aria-label="Close navigation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5 19 19M19 5 5 19"/></svg></NbButton></div>
       <SidebarNav current={page.id} />
     </dialog>
 
     <dialog id="docs-search" class="search-dialog" aria-labelledby="search-title">
-      <div class="dialog-heading"><h2 id="search-title">Search docs</h2><button type="button" data-close-search aria-label="Close search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5 19 19M19 5 5 19"/></svg></button></div>
-      <input type="search" aria-label="Search documentation" placeholder="Search components and guides" autocomplete="off" data-search-input />
+      <div class="dialog-heading"><h2 id="search-title">Search docs</h2><NbButton variant="ghost" size="sm" data-close-search aria-label="Close search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5 19 19M19 5 5 19"/></svg></NbButton></div>
+      <NbInput type="search" aria-label="Search documentation" placeholder="Search components and guides" autocomplete="off" data-search-input />
       <div class="search-results" data-search-results aria-live="polite"></div>
     </dialog>
     <script type="application/json" id="docs-search-data" set:html={searchData} />
     <script>
-      const search = document.querySelector<HTMLDialogElement>('#docs-search')!
-      const input = search.querySelector<HTMLInputElement>('[data-search-input]')!
-      const results = search.querySelector<HTMLElement>('[data-search-results]')!
-      const entries = JSON.parse(document.querySelector('#docs-search-data')!.textContent!) as { title: string; description: string; href: string; content: string }[]
-      const menu = document.querySelector<HTMLDialogElement>('#docs-menu')!
+      let pageListeners: AbortController | undefined
+      document.addEventListener('astro:page-load', () => {
+        pageListeners?.abort()
+        pageListeners = new AbortController()
+        const search = document.querySelector<HTMLDialogElement>('#docs-search')!
+        const input = search.querySelector<HTMLInputElement>('[data-search-input]')!
+        const results = search.querySelector<HTMLElement>('[data-search-results]')!
+        const entries = JSON.parse(document.querySelector('#docs-search-data')!.textContent!) as { title: string; description: string; href: string; content: string }[]
+        const menu = document.querySelector<HTMLDialogElement>('#docs-menu')!
 
-      function showResults() {
-        const query = input.value.trim().toLowerCase()
-        const matches = entries.filter(entry => !query || `${entry.title} ${entry.description} ${entry.content}`.toLowerCase().includes(query))
-          .sort((a, b) => Number(b.title.toLowerCase().includes(query)) - Number(a.title.toLowerCase().includes(query)))
-          .slice(0, 8)
-        results.replaceChildren(...matches.map(entry => {
-          const link = document.createElement('a')
-          link.href = entry.href
-          const title = document.createElement('strong')
-          title.textContent = entry.title
-          const description = document.createElement('span')
-          description.textContent = entry.description
-          link.append(title, description)
-          return link
-        }))
-        if (!matches.length) results.textContent = 'No matching pages.'
-      }
-
-      document.querySelector('[data-open-search]')?.addEventListener('click', () => { showResults(); search.showModal(); input.focus() })
-      document.querySelector('[data-close-search]')?.addEventListener('click', () => search.close())
-      input.addEventListener('input', showResults)
-      document.querySelector('[data-open-menu]')?.addEventListener('click', () => menu.showModal())
-      document.querySelector('[data-close-menu]')?.addEventListener('click', () => menu.close())
-      document.addEventListener('keydown', event => {
-        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-          event.preventDefault()
-          search.open ? search.close() : (showResults(), search.showModal(), input.focus())
+        function showResults() {
+          const query = input.value.trim().toLowerCase()
+          const matches = entries.filter(entry => !query || `${entry.title} ${entry.description} ${entry.content}`.toLowerCase().includes(query))
+            .sort((a, b) => Number(b.title.toLowerCase().includes(query)) - Number(a.title.toLowerCase().includes(query)))
+            .slice(0, 8)
+          results.replaceChildren(...matches.map(entry => {
+            const link = document.createElement('a')
+            link.href = entry.href
+            const title = document.createElement('strong')
+            title.textContent = entry.title
+            const description = document.createElement('span')
+            description.textContent = entry.description
+            link.append(title, description)
+            return link
+          }))
+          if (!matches.length) results.textContent = 'No matching pages.'
         }
+
+        document.querySelector('[data-open-search]')?.addEventListener('click', () => { showResults(); search.showModal(); input.focus() })
+        document.querySelector('[data-close-search]')?.addEventListener('click', () => search.close())
+        input.addEventListener('input', showResults)
+        document.querySelector('[data-open-menu]')?.addEventListener('click', () => menu.showModal())
+        document.querySelector('[data-close-menu]')?.addEventListener('click', () => menu.close())
+        document.addEventListener('keydown', event => {
+          if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+            event.preventDefault()
+            search.open ? search.close() : (showResults(), search.showModal(), input.focus())
+          }
+        }, { signal: pageListeners.signal })
       })
     </script>
   </body>

@@ -1,6 +1,7 @@
 ---
 import '@neobrut-vue/core/style.css'
 import { Code } from 'astro:components'
+import DocsExample from './DocsExample.vue'
 
 interface Props {
   source: string
@@ -8,65 +9,9 @@ interface Props {
 }
 
 const { source, title } = Astro.props
-const id = `example-${crypto.randomUUID()}`
 ---
 
-<div class="nb-doc-example not-content" data-example>
-  <div class="nb-doc-example__bar">
-    <div class="nb-doc-example__tabs" role="tablist" aria-label={`${title} example`}>
-      <button type="button" role="tab" id={`${id}-preview-tab`} aria-controls={`${id}-preview`} aria-selected="true" tabindex="0" data-view="preview">Preview</button>
-      <button type="button" role="tab" id={`${id}-code-tab`} aria-controls={`${id}-code`} aria-selected="false" tabindex="-1" data-view="code">Code</button>
-    </div>
-  </div>
-  <div class="nb-doc-example__preview" role="tabpanel" id={`${id}-preview`} aria-labelledby={`${id}-preview-tab`} data-panel="preview">
-    <div class="nb-doc-example__preview-content"><slot /></div>
-  </div>
-  <div class="nb-doc-example__code" role="tabpanel" id={`${id}-code`} aria-labelledby={`${id}-code-tab`} data-panel="code" hidden>
-    <button type="button" class="nb-doc-example__copy" aria-label={`Copy ${title} code`} data-copy>Copy</button>
-    <Code code={source.trim()} lang="vue" embeddedLangs={['typescript', 'css']} theme="github-dark" />
-  </div>
-</div>
-
-<script>
-  for (const example of document.querySelectorAll<HTMLElement>('[data-example]')) {
-    const tabs = [...example.querySelectorAll<HTMLButtonElement>('[role="tab"]')]
-    const panels = [...example.querySelectorAll<HTMLElement>('[role="tabpanel"]')]
-    const activate = (tab: HTMLButtonElement) => {
-      for (const item of tabs) {
-        const selected = item === tab
-        item.setAttribute('aria-selected', String(selected))
-        item.tabIndex = selected ? 0 : -1
-      }
-      for (const panel of panels) panel.hidden = panel.dataset.panel !== tab.dataset.view
-    }
-
-    for (const tab of tabs) {
-      tab.addEventListener('click', () => activate(tab))
-      tab.addEventListener('keydown', (event) => {
-        const next = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
-        if (!next && event.key !== 'Home' && event.key !== 'End') return
-        event.preventDefault()
-        const index = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (tabs.indexOf(tab) + next + tabs.length) % tabs.length
-        activate(tabs[index])
-        tabs[index].focus()
-      })
-    }
-
-    const copy = example.querySelector<HTMLButtonElement>('[data-copy]')!
-    const copyLabel = copy.getAttribute('aria-label')!
-    copy.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(example.querySelector('code')!.textContent ?? '')
-        copy.textContent = 'Copied!'
-        copy.setAttribute('aria-label', `${copyLabel} copied`)
-      } catch {
-        copy.textContent = 'Copy failed'
-        copy.setAttribute('aria-label', `${copyLabel} failed`)
-      }
-      window.setTimeout(() => {
-        copy.textContent = 'Copy'
-        copy.setAttribute('aria-label', copyLabel)
-      }, 2000)
-    })
-  }
-</script>
+<DocsExample client:load source={source} title={title}>
+  <div slot="preview"><slot /></div>
+  <div slot="code"><Code code={source.trim()} lang="vue" embeddedLangs={['typescript', 'css']} theme="github-dark" /></div>
+</DocsExample>
